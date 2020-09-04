@@ -57,9 +57,9 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select id_persona,dni,nombre,apellido,rol,email from personas where email=? and contrasenia=?"
+					"select id_persona,dni,nombre,apellido,rol,email,usuario from personas where email=? and contrasenia=?"
 					);
-			stmt.setString(1, per.getUsuario());
+			stmt.setString(1, per.getEmail());
 			stmt.setString(2, per.getContrasenia());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {

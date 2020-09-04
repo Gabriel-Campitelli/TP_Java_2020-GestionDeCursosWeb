@@ -7,21 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Persona;
-import logic.PersonaLogic;
-
 /**
- * Servlet implementation class Login
+ * Servlet implementation class CrearCuenta
  */
-@WebServlet("/login")
-public class Login extends HttpServlet {
+@WebServlet("/crearcuenta")
+public class CrearCuenta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor. 
      */
-    public Login() {
-        super();
+    public CrearCuenta() {
         // TODO Auto-generated constructor stub
     }
 
@@ -30,31 +26,17 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("WEB-INF/CrearCuenta.jsp").forward(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Persona p = new Persona();
-		p.setUsuario(request.getParameter("user"));
-		p.setContrasenia(request.getParameter("password"));
-		
-		PersonaLogic pL = new PersonaLogic();
-		p = pL.getByUser(p);
-		
-		request.getSession().setAttribute("usuario", p);
-		
-		if(p.getRol() == 1) {
-			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
-		} else
-		{
-			request.getRequestDispatcher("WEB-INF/HomeAdministrador.jsp").forward(request, response);
-		}
-		
-		
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
+
 	}
 
 }

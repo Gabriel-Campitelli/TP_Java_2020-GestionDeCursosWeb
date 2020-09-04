@@ -21,7 +21,9 @@
 </head>
 
 <body>
-
+  <%= session.getAttribute("usuario") %>
+  <%= request.getParameter("user")%>
+  <%= request.getParameter("password") %>
   <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">

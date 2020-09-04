@@ -39,15 +39,19 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Persona p = new Persona();
-		p.setUsuario(request.getParameter("user"));
+		p.setEmail(request.getParameter("user"));
 		p.setContrasenia(request.getParameter("password"));
 		
 		PersonaLogic pL = new PersonaLogic();
 		p = pL.getByUser(p);
 		
 		request.getSession().setAttribute("usuario", p);
-		
-		request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
+		if(p.getRol() == 1) {
+			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
+		}
+		else {
+			request.getRequestDispatcher("WEB-INF/HomeAdministrador.jsp").forward(request, response);
+		}
 		
 		
 		

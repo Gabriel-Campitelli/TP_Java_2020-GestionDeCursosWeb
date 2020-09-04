@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Persona;
 import logic.PersonaLogic;
+import java.util.LinkedList;
 
 /**
  * Servlet implementation class Login
@@ -46,12 +47,7 @@ public class Login extends HttpServlet {
 		
 		request.getSession().setAttribute("usuario", p);
 		
-		if(p.getRol() == 1) {
-			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
-		} else
-		{
-			request.getRequestDispatcher("WEB-INF/HomeAdministrador.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
 		
 		
 		

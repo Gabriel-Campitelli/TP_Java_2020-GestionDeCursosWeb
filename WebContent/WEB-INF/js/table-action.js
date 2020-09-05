@@ -44,3 +44,48 @@ $(document).ready(function () {
 	format: 'DD/MM/YYYY'
 	});
   });
+
+$(document).ready(function () {
+	('#modalEliminar').on('shown.bs.modal', function () {
+  	$('#myInput').trigger('focus')
+	})
+})
+
+
+//ESTO ME SIRVE PARA OBTENER LA INFORMACIÓN DE LAS COLUMNAS DE CADA ROW
+ $(document).on("click", ".btn-editar", function() {
+   $(this).closest('tr').find('td:nth-child(2)').each(function() {
+     var nombre = $(this).html();
+   });
+
+   $(this).closest('tr').find('td:nth-child(3)').each(function() {
+     var descripcion = $(this).html();
+   });
+
+   $(this).closest('tr').find('td:nth-child(4)').each(function() {
+     var fechaInicio = $(this).html();
+   });
+
+   $(this).closest('tr').find('td:nth-child(5)').each(function() {
+     var fechaFin = $(this).html();
+   });
+
+	//buscar el siguinete: row-form
+	var variable = $(this).parents("tr").nextAll(".row-form").eq(0).toggle();
+	
+	//mostrarlo
+	variable(function(){
+		if(!$('#mostrar-panel').is(':visible'))
+		{
+			$("#mostrar-panel").show();
+			$("#boton-panel").text("Cerrar")
+		}
+		else
+		{
+			$("#mostrar-panel").hide();
+			$("#boton-panel").text("Editar")
+
+		}	
+	})
+
+ });

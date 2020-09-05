@@ -181,11 +181,13 @@ public class DataCurso {
 			LinkedList<Curso> cursos = new LinkedList<>();
 			try {
 				stmt=DbConnector.getInstancia().getConn().prepareStatement(
-						"SELECT cursos.id_curso, cursos.descripcion, cursos.fecha_inicio, cursos.fecha_fin, cursos.url_imagen, " + 
-						"cursos.nombre " + 
-						"FROM (select inscripciones.id_curso from inscripciones where id_persona =?) inscripciones " + 
-						"INNER JOIN cursos " + 
-						"ON inscripciones.id_curso = cursos.id_curso;"
+	"SELECT cursos.id_curso, cursos.descripcion, cursos.fecha_inicio, cursos.fecha_fin, cursos.url_imagen,\r\n" + 
+	"cursos.nombre\r\n" + 
+	"FROM (select inscripciones.id_comision from inscripciones where id_persona = ?) inscripciones\r\n" + 
+	"INNER JOIN comisiones\r\n" + 
+	"ON inscripciones.id_comision = comisiones.id_comision\r\n" + 
+	"INNER JOIN cursos\r\n" + 
+	"ON cursos.id_curso = comisiones.id_curso;"
 						);
 				stmt.setInt(1,id);
 				rs=stmt.executeQuery();

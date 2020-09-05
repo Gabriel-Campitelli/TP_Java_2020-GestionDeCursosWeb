@@ -48,8 +48,10 @@ public class Home extends HttpServlet {
 			break;
 		case "mis-cursos":
 			request.setAttribute("pageName", "Mis Cursos");
-			Persona user = (Persona)request.getSession().getAttribute("usuario");
-			cursos = cl.getByIdPersona(user.getId_persona());
+			//Persona user = (Persona)request.getSession().getAttribute("usuario");
+			//cursos = cl.getByIdPersona(user.getId_persona());
+			
+			cursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
 			request.setAttribute("cursos", cursos);
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 			
@@ -73,3 +75,31 @@ public class Home extends HttpServlet {
 	}
 
 }
+public void mostrarComisionesALasQueMePuedoInscribir() {
+	
+}
+/* Agregar id_comision a la inscripcion
+ * 
+public void validarFechas() {
+	for(micurso : miscursos) {
+	if(otrocurso.fini >= micurso.fini && otro.cursofini < otro.cursoffin ||
+			otrocurso.fini < micurs.fini && otrocurso.ffin > micurso.fini) {
+		
+		ME GUARDO MICURSO EN UNA LISTA
+			}
+		}
+	me traigo las comisiones del otrocurso.
+	creo un arreglo identico con las comisiones del otro Curso. Asi voy sacando elementos
+	for(mc : lista) {
+		me traigo las comisiones del mc.
+		for (cada comision de mc) {
+			for (cada comision del otro curso)
+			voy comparando las horas con cada comision como lo hice al principio. si pasa eso saco el elemento de la lista de comisiones
+		}}
+	Al final de todo devuelvo la lista de comisiones
+		
+	}
+		
+	}
+}
+*/

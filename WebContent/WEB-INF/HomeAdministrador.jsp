@@ -120,7 +120,7 @@
 
 <body>
 
-<a href="prueba?param=prueba"></a>
+<a href="prueba?param=cursos">Probando</a>
 
   <div class="container">
     <div id="Nav"></div>

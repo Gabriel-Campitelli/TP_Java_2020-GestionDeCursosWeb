@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Curso;
 import entities.Persona;
+import logic.CursoLogic;
 import logic.PersonaLogic;
 import java.util.LinkedList;
 
@@ -64,6 +66,10 @@ public class Login extends HttpServlet {
 		
 		request.getSession().setAttribute("usuario", p);
 		if(p.getRol() == 1) {
+			CursoLogic cl = new CursoLogic();
+			LinkedList<Curso> userCursos = new LinkedList<>();
+			userCursos = cl.getByIdPersona(p.getId_persona());
+			request.getSession().setAttribute("userCursos", userCursos);
 			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
 		}
 		else {

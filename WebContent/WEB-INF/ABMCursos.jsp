@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entities.Curso" %>
+<%@ page import="logic.CursoLogic" %>
 <%@ page import="java.util.LinkedList" %>
 
 <!DOCTYPE html>
@@ -22,8 +23,8 @@
   <link href="css/modern-business.css" rel="stylesheet">
 
   <!-- jQuery-->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
 
   <!-- Script para MasterPage -->
   <script src="js/masterpage.js"></script>
@@ -38,14 +39,208 @@
   <!-- esto es para poder editar la tabla -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+
+
+	<!-- Script para MasterPage -->
+  <script type="text/javascript" >
+  
+  $(document).ready(function (){
+		
+		AgregarNav();
+		AgregarMenu();
+		AgregarFooter();
+	})
+
+	function AgregarMenu(){
+		
+		var menu = document.getElementById("Menu");
+		menu.innerHTML = 
+		      '<!-- Sidebar Column --> '+
+		      
+		        '<div class="list-group"> '+
+		        '<a class="list-group-item" href="admin-home">Home</a>'+
+				  '<a class="list-group-item" href="admin-home?param=admin-cursos">Cursos</a>'+
+		          '<a class="list-group-item" href="admin-home?param=admin-comisiones">Comisiones</a> '+
+		          '<a class="list-group-item" href="admin-home?param=admin-clientes">Clientes</a> '+
+				'</div>'
+//href="home?param=cursos"
+
+	}
+
+	function AgregarNav(){
+		
+		var nav = document.getElementById("Nav");
+		nav.innerHTML = 
+		
+	  '<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">'+
+	    '<div class="container">'+
+	      '<a class="navbar-brand" href="index.html">Cursos UTN</a>'+
+
+	      '<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">'+
+	        '<span class="navbar-toggler-icon"></span>'+
+	      '</button>'+
+
+	      '<div class="collapse navbar-collapse" id="navbarResponsive">'+
+	        '<ul class="navbar-nav ml-auto">'+
+
+
+	          '<li class="nav-item">'+
+	            '<a class="nav-link" href="contact.html">Link auxiliar</a>'+
+	          '</li>'+
+
+	          '<li class="nav-item active dropdown">'+
+	            '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</a>'+
+	            '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">'+
+	              '<a class="dropdown-item " href="sidebar.html">Configuración de cuenta</a>'+
+	              '<a class="dropdown-item" href="404.html">Salir</a>'+
+	            '</div>'+
+	          '</li>'+
+
+	        '</ul>'+
+
+	      '</div>'+
+	    '</div>'+
+
+	  '</nav>'+
+
+
+		  
+		    '<!-- Page Heading/Breadcrumbs --> '+
+		    '<h1 class="mt-4 mb-3">Inicio</h1> '+
+		
+		    '<ol class="breadcrumb"> '+
+		      '<li class="breadcrumb-item"> '+
+		 
+		        '<a href="admin-home?param=admin-home">Home</a> '+
+		      '</li> '+
+		      '<li class="breadcrumb-item active">About</li> '+
+		    '</ol> '
+
+	}
+
+	function AgregarFooter(){
+		var footer = document.getElementById("Footer");
+		footer.innerHTML = 
+		
+		  '<footer class="py-5 bg-dark border-top"> '+
+				'<div class="container"> '+
+			      '<p class="m-0 text-center text-white">Copyright &copy; UTN-Shops 2020</p> '+
+			    '</div> '+
+		  '</footer>'
+				
+	}
+  
+  </script>
+    <!-- script para la MasterPage -->
+  
+  
+  <!-- script para la tabla -->
+	<script type="text/javascript">
+	//esto es para que me muestre el form para editar en la tabla
+	$(document).ready(function(){
+		$("#boton-panel").click(function (){
+			
+			if(!$('#mostrar-panel').is(':visible'))
+			{
+				$("#mostrar-panel").show();
+				$("#boton-panel").text("Cerrar")
+			}
+			else
+			{
+				$("#mostrar-panel").hide();
+				$("#boton-panel").text("Editar")
+	
+			}	
+		
+		})
+	})
+	
+	//esto es para que me cambie el tamaño del textarea a medida que escribo
+	$(document).ready(function(){
+		var textarea = document.querySelector('textarea');
+	
+		textarea.addEventListener('keydown', autosize);
+		             
+		function autosize(){
+		  var el = this;
+		  setTimeout(function(){
+		    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+		  },0);
+		}
+	})
+	
+	
+	
+	$(document).ready(function () {
+	      $('#datetimepickerFechaInicio').datetimepicker({
+		format: 'DD/MM/YYYY'
+		});
+	  });
+	
+	$(document).ready(function () {
+	      $('#datetimepickerFechaFin').datetimepicker({
+		format: 'DD/MM/YYYY'
+		});
+	  });
+	
+	$(document).ready(function () {
+		('#modalEliminar').on('shown.bs.modal', function () {
+	  	$('#myInput').trigger('focus')
+		})
+	})
+	
+	
+	//ESTO ME SIRVE PARA OBTENER LA INFORMACIÓN DE LAS COLUMNAS DE CADA ROW
+	 $(document).on("click", ".btn-editar", function() {
+	   $(this).closest('tr').find('td:nth-child(2)').each(function() {
+	     var nombre = $(this).html();
+	   });
+	
+	   $(this).closest('tr').find('td:nth-child(3)').each(function() {
+	     var descripcion = $(this).html();
+	   });
+	
+	   $(this).closest('tr').find('td:nth-child(4)').each(function() {
+	     var fechaInicio = $(this).html();
+	   });
+	
+	   $(this).closest('tr').find('td:nth-child(5)').each(function() {
+	     var fechaFin = $(this).html();
+	   });
+	
+		//buscar el siguinete: row-form
+		var variable = $(this).parents("tr").nextAll(".row-form").eq(0).toggle();
+		
+		//mostrarlo
+		variable(function(){
+			if(!$('#mostrar-panel').is(':visible'))
+			{
+				$("#mostrar-panel").show();
+				$("#boton-panel").text("Cerrar")
+			}
+			else
+			{
+				$("#mostrar-panel").hide();
+				$("#boton-panel").text("Editar")
+	
+			}	
+		})
+	
+	 });
+	</script>
+  <!-- script para la tabla -->
+
+
+
+
   <%
-	LinkedList<Curso> cursos = (LinkedList<Curso>)request.getAttribute("cursos");
+  	CursoLogic curL = new CursoLogic();
+	LinkedList<Curso> cursos = curL.getAll();
   %>
 </head>
 
 <body>
-
-
+  <%=cursos%>
 
   <div class="container">
     <div id="Nav"></div>
@@ -54,6 +249,8 @@
     <div class="row" style="min-height: 50vh;"> 
       <!-- Menu de la izquierda-->
       <div id="Menu" class="col-2"></div>
+      
+	
 
       <!-- Content Column -->
       <div class="col-10 " >
@@ -64,67 +261,70 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">InformaciÃ³n del curso a agregar</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Información del curso a agregar</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-
-                <form id="cursoForm">
-
-                  <div class="form-row">
-                    <div class="col">
-                      <label>Nombre del curso</label>
-                      <input type="text" class="form-control" placeholder="Ingrese un nombre para el curso">
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col">
-                      <label>Fecha de inicio</label>
-                      <div class='input-group date' id='datetimepickerFechaInicio'>
-                        <input type='text' class="form-control" />     
-                        <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                      </div>                    
-                    </div>
-
-                    <div class="col">
-                      <label>Fecha de fin</label>
-                      <div class='input-group date' id='datetimepickerFechaFin'>
-                        <input type='text' class="form-control" />     
-                        <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                      <div class="col">
-                        <label>Descripcion</label>
-                        <textarea rows="1" class="form-control" placeholder="Ingrese una descripcion para el curso" maxlength="999"></textarea>
-                      </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col">
-                      <label>URL imagen</label>
-                      <input type="text" class="form-control" placeholder="Ingrese una URL de imagen para el curso">
-                    </div>
-                  </div>
-
-                  <div id="success"></div>
-                  <!-- For success/fail messages -->
-
-              </div>
-              <div class="modal-footer">
+              
+              <form id="cursoForm" method="post" action="alta-curso">
+              
+	              <div class="modal-body">
+	
+	                  <div class="form-row" >
+	                    <div class="col">
+	                      <label>Nombre del curso</label>
+	                      <input name="nombre" type="text" class="form-control" placeholder="Ingrese un nombre para el curso">
+	                    </div>
+	                  </div>
+	
+	                  <div class="form-row">
+	                    <div class="col">
+	                      <label>Fecha de inicio</label>
+	                      <div class='input-group date' id='datetimepickerFechaInicio'>
+	                        <input name="fecha-inicio" type='text' class="form-control" />     
+	                        <span class="input-group-addon">
+	                          <span class="glyphicon glyphicon-calendar"></span>
+	                        </span>
+	                      </div>                    
+	                    </div>
+	
+	                    <div class="col">
+	                      <label>Fecha de fin</label>
+	                      <div class='input-group date' id='datetimepickerFechaFin'>
+	                        <input name="fecha-fin" type='text' class="form-control" />     
+	                        <span class="input-group-addon">
+	                          <span class="glyphicon glyphicon-calendar"></span>
+	                        </span>
+	                      </div>
+	                    </div>
+	                  </div>
+	
+	                  <div class="form-row">
+	                      <div class="col">
+	                        <label>Descripcion</label>
+	                        <textarea name="descripcion" rows="1" class="form-control" placeholder="Ingrese una descripcion para el curso" maxlength="999"></textarea>
+	                      </div>
+	                  </div>
+	
+	                  <div class="form-row">
+	                    <div class="col">
+	                      <label>URL imagen</label>
+	                      <input name="url-imagen" type="text" class="form-control" placeholder="Ingrese una URL de imagen para el curso">
+	                    </div>
+	                  </div>
+	
+	                  <div id="success"></div>
+	                  <!-- For success/fail messages -->
+					
+	              </div>
+	              
+	              <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success" >Agregar curso</button>
+                <button type="submit" class="btn btn-success" name="modo" value="alta-curso" >Agregar curso</button>
               </div>
-            </form>
+            
+              </form>
 
             </div>
           </div>
@@ -132,49 +332,64 @@
         <!--Modal Nuevo Curso-->
 
 
-        <table class="table table-hover table-bordered ">
+        <table class="table table-hover table-bordered table-responsive">
 
           <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Descripcion</th>
-              <th scope="col">Fecha de inicio</th>
-              <th scope="col">Fecha de fin</th>
-              <th scope="col">Opciones</th>
+            <tr class="d-flex">
+              <th class="col-1" scope="row">Id</th>
+              <th class="col-2">Nombre</th>
+              <th class="col-5">Descripcion</th>
+              <th class="col-1">Fecha de inicio</th>
+              <th class="col-1">Fecha de fin</th>
+              <th class="col-3">Opciones</th>
             </tr>
           </thead>
           
           <tbody>
 
-            <tr>
-              <th scope="row">1</th>
-              <td  >Algoritmos genÃ©ticos</td>
-              <td>Este curso es re zarpado</td>
-              <td>25-02-2020</td>
-              <td>09-06-2020</td>
-              <td>
+	<%   for (Curso curso : cursos) 
+			{ 
+	%>
+            <tr class="d-flex">
+              <th class="col-1"  scope="row"><%= curso.getId() %></th>
+              
+              <td class="col-2" ><%= curso.getNombre() %></td>
+              <td class="col-5" ><%= curso.getDescripcion() %></td>
+              <td class="col-1" ><%= curso.getFecha_inicio() %></td>
+              <td class="col-1" ><%= curso.getFecha_fin() %></td>
+              <td class="col-3">
                 <button type="button" id="" class="btn btn-warning btn-editar">Editar</button>
 
 
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button>
+                
+                
                 <!-- Modal Eliminar -->
                 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Â¿Estas seguro de eliminar el siguiente curso?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">¿Estas seguro de eliminar el siguiente curso?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
-                      </div>
-                      <div class="modal-body">
-                        Nombre del curso a eliminar
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger"">Si, eliminar</button>
-                      </div>
+                      </div>    
+                      <form method="post" action="eliminar-curso">
+	                      <div class="modal-body">
+	                        <%= curso.getNombre() %>
+	                        
+	                        <label>Id del curso</label>  
+                        	<input name="id_curso" value="<%=curso.getId()%>" />	
+                        	
+	                      </div>
+	                      
+	                      <div class="modal-footer">
+	                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+         	
+                        	<button name="modo" value="eliminar-curso"  type="submit" class="btn btn-danger">Si, eliminar</button>
+         
+                      	</div>	
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -186,18 +401,26 @@
               <td colspan="6" id="mostrar-panel">
                 <div class="panel panel-default ">
                   <div class="panel-heading">
-                    <h1>Editar curso: aca va el nombre del curso</h1>
+                    <h1>Editar curso: <%=curso.getNombre()%></h1>
                   </div>
 
                   <div class="panel-body">
 
                     <!-- ESTE ES EL FORM -->
-                    <form id="cursoForm">
-
+                    <form id="cursoForm" method="post" action="editar-curso" >
+					
+					 <div class="form-row">
+                       <div class="col">
+                         <label>Id del curso</label>  
+                        	<input name="id_curso" value="<%=curso.getId()%>" />	                        
+                        </div>
+                      </div>
+		
                       <div class="form-row">
                         <div class="col">
                           <label>Nombre del curso</label>
-                          <input type="text" class="form-control" placeholder="Ingrese un nombre para el curso">
+                          <input name="nombre" type="text" class="form-control" placeholder="Ingrese un nombre para el curso" value="<%= curso.getNombre() %>"/>
+                        
                         </div>
                       </div>
 
@@ -205,17 +428,17 @@
                         <div class="col">
                           <label>Fecha de inicio</label>
                           <div class='input-group date' id='datetimepickerFechaInicio'>
-                            <input type='text' class="form-control" />     
+                            <input name="fecha-inicio" type='text' class="form-control" value="<%= curso.getFecha_inicio() %>"/>     
                             <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                           </div>                    
                         </div>
-
+                        
                         <div class="col">
                           <label>Fecha de fin</label>
                           <div class='input-group date' id='datetimepickerFechaFin'>
-                            <input type='text' class="form-control" />     
+                            <input name="fecha-fin" type='text' class="form-control" value="<%= curso.getFecha_fin() %>" />     
                             <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -226,185 +449,42 @@
                       <div class="form-row">
                           <div class="col">
                             <label>Descripcion</label>
-                            <textarea rows="1" class="form-control" placeholder="Ingrese una descripcion para el curso" maxlength="999"></textarea>
+                            <textarea name="descripcion" rows="1" class="form-control" placeholder="Ingrese una descripcion para el curso" maxlength="999" ><%= curso.getDescripcion() %></textarea>
                           </div>
                       </div>
-    
+                      
                       <div class="form-row">
                         <div class="col">
                           <label>URL imagen</label>
-                          <input type="text" class="form-control" placeholder="Ingrese una URL de imagen para el curso">
+                          <input name="url-imagen" type="text" class="form-control" placeholder="Ingrese una URL de imagen para el curso" value="<%= curso.getUrl() %>">
                         </div>
                       </div>
 
                       <div id="success"></div>
                       <!-- For success/fail messages -->
-                      <button type="submit" class="btn btn-success" id="sendMessageButton" style="margin-top: 20px;">Editar</button>
+                      <button name="modo" value="editar-curso" type="submit" class="btn btn-success" id="sendMessageButton" style="margin-top: 20px;">Editar</button>
                     </form>
                     <!-- ESTE ES EL FORM -->
 
                   </div>
                 </div>
               </td>
-            </td>
 
             </tr>
-
-            <tr>
-              <th scope="row">2</th>
-              <td>TTADS</td>
-              <td>Este curso es re zarpado</td>
-              <td>03-05-1990</td>
-              <td>09-02-2001</td>
-              <td>
-                <button type="button" id="" class="btn btn-warning btn-editar">Editar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
-              </td>
-            </tr>
-            
-            <tr class="row-form" style="display:none;" >
-              <td colspan="6" id="mostrar-panel">
-                <div class="panel panel-default ">
-                  <div class="panel-heading">
-                    <h1>Editar curso: aca va el nombre del curso</h1>
-                  </div>
-
-                  <div class="panel-body">
-
-                    <!-- ESTE ES EL FORM -->
-                    <form id="cursoForm">
-
-                      <div class="form-row">
-                        <div class="col">
-                          <label>Nombre del curso</label>
-                          <input type="text" class="form-control" placeholder="Ingrese un nombre para el curso">
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="col">
-                          <label>Fecha de inicio</label>
-                          <div class='input-group date' id='datetimepickerFechaInicio'>
-                            <input type='text' class="form-control" />     
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>                    
-                        </div>
-
-                        <div class="col">
-                          <label>Fecha de fin</label>
-                          <div class='input-group date' id='datetimepickerFechaFin'>
-                            <input type='text' class="form-control" />     
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                          <div class="col">
-                            <label>Descripcion</label>
-                            <textarea rows="1" class="form-control" data-validation-required-message="Please enter your message" maxlength="999"></textarea>
-                          </div>
-                      </div>
-
-                      <div id="success"></div>
-                      <!-- For success/fail messages -->
-                      <button type="submit" class="btn btn-success" id="sendMessageButton" style="margin-top: 20px;">Editar</button>
-                    </form>
-                    <!-- ESTE ES EL FORM -->
-
-                  </div>
-                </div>
-              </td>
-            </td>
-
-            </tr>
-            
-            <tr>
-              <th scope="row">3</th>
-              <td>Sistemas Operativos</td>
-              <td>Este curso NO es re zarpado</td>
-              <td>25-02-2009</td>
-              <td>09-06-2017</td>
-              <td>
-                <button type="button" id="" class="btn btn-warning btn-editar">Editar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
-              </td>
-            </tr>
-            
-            <tr class="row-form" style="display:none;">
-              <td colspan="6" id="mostrar-panel" >
-                <div class="panel panel-default ">
-                  <div class="panel-heading">
-                    <h1>Editar curso: aca va el nombre del curso</h1>
-                  </div>
-
-                  <div class="panel-body">
-
-                    <!-- ESTE ES EL FORM -->
-                    <form id="cursoForm">
-
-                      <div class="form-row">
-                        <div class="col">
-                          <label>Nombre del curso</label>
-                          <input type="text" class="form-control" placeholder="Ingrese un nombre para el curso">
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="col">
-                          <label>Fecha de inicio</label>
-                          <div class='input-group date' id='datetimepickerFechaInicio'>
-                            <input type='text' class="form-control" />     
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>                    
-                        </div>
-
-                        <div class="col">
-                          <label>Fecha de fin</label>
-                          <div class='input-group date' id='datetimepickerFechaFin'>
-                            <input type='text' class="form-control" />     
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                          <div class="col">
-                            <label>Descripcion</label>
-                            <textarea rows="1" class="form-control" data-validation-required-message="Please enter your message" maxlength="999"></textarea>
-                          </div>
-                      </div>
-
-                      <div id="success"></div>
-                      <!-- For success/fail messages -->
-                      <button type="submit" class="btn btn-success" id="sendMessageButton" style="margin-top: 20px;">Editar</button>
-                    </form>
-                    <!-- ESTE ES EL FORM -->
-
-                  </div>
-                </div>
-              </td>
-            </td>
-
-            </tr>
+    <%
+			} 
+	%>
             
           </tbody>
           
         </table>
-        
+
         
       </div>
   
     </div>
     
+
     <!-- Footer de la pagina -->
     <div id="Footer"></div>
 
@@ -420,9 +500,7 @@
   <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
+  
 
 </body>
 

@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import logic.PersonaLogic;
+import logic.ComisionLogic;
+import logic.CursoLogic;
+
+
 import entities.Comision;
 import entities.Curso;
 import entities.Persona;
-import logic.ComisionLogic;
-import logic.CursoLogic;
-import logic.PersonaLogic;
 
 /**
  * Servlet implementation class HomeAdministrador
@@ -22,11 +24,12 @@ import logic.PersonaLogic;
 @WebServlet("/admin-home")
 public class HomeAdministrador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
     public HomeAdministrador() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -34,14 +37,13 @@ public class HomeAdministrador extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
 		CursoLogic curL = new CursoLogic();
 		ComisionLogic comL = new ComisionLogic();
 		PersonaLogic pL = new PersonaLogic();
-
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		/*
+	
 		switch (request.getParameter("param")) {
 		case "admin-home":
 			request.getRequestDispatcher("WEB-INF/HomeAdministrador.jsp").forward(request, response);
@@ -70,7 +72,7 @@ public class HomeAdministrador extends HttpServlet {
 			System.out.println(request.getParameter("param"));
 			System.out.println("Error: opcion no disponible");
 			break;
-		}*/
+		}
 	}
 
 
@@ -79,6 +81,8 @@ public class HomeAdministrador extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.getRequestDispatcher("WEB-INF/HomeAdministrador.jsp").forward(request, response);
+
 		doGet(request, response);
 	}
 

@@ -92,12 +92,14 @@ public class DataCurso {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into cursos(descripcion, fecha_inicio, fecha_fin) values(?,?,?)",
+							"insert into cursos(descripcion, fecha_inicio, fecha_fin, nombre, url_imagen) values(?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, nuevoCurso.getDescripcion());
 			stmt.setTimestamp(2, new java.sql.Timestamp(nuevoCurso.getFecha_inicio().getTime()));
 			stmt.setTimestamp(3, new java.sql.Timestamp(nuevoCurso.getFecha_fin().getTime()));
+			stmt.setString(4, nuevoCurso.getNombre());
+			stmt.setString(5, nuevoCurso.getUrl());
 			stmt.executeUpdate();
 			
 			keyResultSet=stmt.getGeneratedKeys();
@@ -151,12 +153,13 @@ public class DataCurso {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"update cursos set descripcion=?, fecha_inicio=?, fecha_fin=? where id_curso=?"
+							"update cursos set descripcion=?, fecha_inicio=?, fecha_fin=?, nombre=?  where id_curso=?"
 							);
 			stmt.setString(1, curso.getDescripcion());
 			stmt.setTimestamp(2, new java.sql.Timestamp(curso.getFecha_inicio().getTime()));
 			stmt.setTimestamp(3, new java.sql.Timestamp(curso.getFecha_fin().getTime()));
-			stmt.setInt(4, curso.getId());
+			stmt.setString(4, curso.getNombre());
+			stmt.setInt(5, curso.getId());
 			stmt.executeUpdate();
 						
 		}  catch (SQLException e) {

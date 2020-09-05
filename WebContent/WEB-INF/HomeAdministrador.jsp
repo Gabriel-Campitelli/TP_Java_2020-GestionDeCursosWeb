@@ -20,13 +20,13 @@
   <link href="css/modern-business.css" rel="stylesheet">
 
   <!-- jQuery-->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
 
 
   <!-- Script para MasterPage -->
-  <script language="javascript" type="text/javascript" >
+  <script type="text/javascript" >
   
   $(document).ready(function (){
 		
@@ -42,6 +42,7 @@
 		      '<!-- Sidebar Column --> '+
 		      
 		        '<div class="list-group"> '+
+		        '<a class="list-group-item" href="admin-home">Home</a>'+
 				  '<a class="list-group-item" href="admin-home?param=admin-cursos">Cursos</a>'+
 		          '<a class="list-group-item" href="admin-home?param=admin-comisiones">Comisiones</a> '+
 		          '<a class="list-group-item" href="admin-home?param=admin-clientes">Clientes</a> '+
@@ -120,8 +121,6 @@
 
 <body>
 
-<a href="prueba?param=prueba"></a>
-
   <div class="container">
     <div id="Nav"></div>
 
@@ -142,7 +141,7 @@
     <!-- Footer de la pagina -->
     <div id="Footer"></div>
 
-    </div>
+ 
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>

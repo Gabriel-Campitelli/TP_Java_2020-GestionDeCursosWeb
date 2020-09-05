@@ -172,6 +172,56 @@ public class DataCurso {
 		}
 		
 	}
+	
+	public LinkedList<Curso> getByIdPersona(int id) {
+		// TODO Auto-generated method stub
+			
+			PreparedStatement stmt=null;
+			ResultSet rs=null;
+			LinkedList<Curso> cursos = new LinkedList<>();
+			try {
+				stmt=DbConnector.getInstancia().getConn().prepareStatement(
+						"SELECT cursos.id_curso, cursos.descripcion, cursos.fecha_inicio, cursos.fecha_fin, cursos.url_imagen, " + 
+						"cursos.nombre " + 
+						"FROM (select inscripciones.id_curso from inscripciones where id_persona =?) inscripciones " + 
+						"INNER JOIN cursos " + 
+						"ON inscripciones.id_curso = cursos.id_curso;"
+						);
+				stmt.setInt(1,id);
+				rs=stmt.executeQuery();
+				if(rs!=null) {
+					while(rs.next()) {
+						
+						Curso curso =new Curso();
+						curso.setId(rs.getInt("id_curso"));
+						curso.setDescripcion(rs.getString("descripcion"));
+						curso.setFecha_inicio(rs.getDate("fecha_inicio"));
+						curso.setFecha_fin(rs.getDate("fecha_fin"));
+						curso.setUrl(rs.getString("url_imagen"));
+						curso.setNombre(rs.getString("nombre"));
+						
+						cursos.add(curso);
+					}
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			} finally {
+				try {
+					if(rs!=null) {rs.close();}
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+			return cursos;
+		}
+
+	
 }
 	
 

@@ -13,6 +13,11 @@ public class CursoLogic {
 		return dc.getAll();
 	}
 
+	public LinkedList<Curso> getByIdPersona(int id) {
+		dc = new DataCurso();
+		return dc.getByIdPersona(id);
+	}
+	
 	public Curso getById(int id) {
 		// TODO Auto-generated method stub
 		dc = new DataCurso();

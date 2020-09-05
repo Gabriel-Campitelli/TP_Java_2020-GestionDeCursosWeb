@@ -68,7 +68,8 @@
       <li class="breadcrumb-item active"><%= opcion %></li>
     </ol>
 
-    <!-- Project One -->
+<%if (cursos != null) { %>
+    <!-- Cursos -->
 	   <%for (Curso curso : cursos) { %> 
     <div class="row">
       <div class="col-md-7">
@@ -88,7 +89,10 @@
 
     <hr>
     <%  }%>
-
+<% }%>
+<%if(cursos == null) { %> 
+	<h2>No hay Cursos</h2>
+<% } %>
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
       <li class="page-item">

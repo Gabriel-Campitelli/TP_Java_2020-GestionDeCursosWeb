@@ -51,12 +51,9 @@ public class Login extends HttpServlet {
 		default:
 			System.out.println("Error: opcion no disponible");
 			break;
-		}
-		
-		
-		
-		
+		}	
 	}
+	
 	private void ingresar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Persona p = new Persona();
 		p.setEmail(request.getParameter("user"));

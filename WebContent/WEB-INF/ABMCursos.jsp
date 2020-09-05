@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="entities.Curso" %>
+<%@ page import="java.util.LinkedList" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +27,7 @@
 
   <!-- Script para MasterPage -->
   <script src="js/masterpage.js"></script>
+  
   <!-- Script para poder desplegar el container en la tabla-->
   <script src="js/table-action.js"></script>
 
@@ -32,7 +38,9 @@
   <!-- esto es para poder editar la tabla -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-
+  <%
+	LinkedList<Curso> cursos = (LinkedList<Curso>)request.getAttribute("cursos");
+  %>
 </head>
 
 <body>

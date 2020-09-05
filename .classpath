@@ -19,5 +19,6 @@
 			<attribute name="javadoc_location" value="https://docs.oracle.com/javaee/7/api/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/campi/eclipse-workspace/Tomcat/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

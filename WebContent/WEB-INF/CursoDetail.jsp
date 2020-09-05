@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="entities.Curso" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,11 +18,12 @@
 
   <!-- Custom styles for this template -->
   <link href="css/modern-business.css" rel="stylesheet">
-
+	
+  <% Curso curso = (Curso)request.getAttribute("curso"); %>
 </head>
 
 <body>
-
+ <%= curso %>
  <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -63,26 +65,22 @@
     <div class="row">
 
       <div class="col-md-8">
-        <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+        <img class="img-fluid" src="<%= curso.getUrl() %>" alt="">
       </div>
 
       <div class="col-md-4">
-        <h3 class="my-3">Project Description</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-        <h3 class="my-3">Project Details</h3>
-        <ul>
-          <li>Lorem Ipsum</li>
-          <li>Dolor Sit Amet</li>
-          <li>Consectetur</li>
-          <li>Adipiscing Elit</li>
-        </ul>
+        <h3 class="my-3"><%= curso.getNombre() %></h3>
+        <p><%=curso.getDescripcion()%></p>
+        <a class="btn btn-primary" href="cursodetail?curso=<%= curso.getId()%>">Inscribirme
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
       </div>
 
     </div>
     <!-- /.row -->
 
     <!-- Related Projects Row -->
-    <h3 class="my-4">Related Projects</h3>
+    <h3 class="my-4">Cursos Populares</h3>
 
     <div class="row">
 

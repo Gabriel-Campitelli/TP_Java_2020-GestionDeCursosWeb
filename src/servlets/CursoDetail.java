@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Curso;
+import logic.CursoLogic;
+
 /**
  * Servlet implementation class CursoDetail
  */
@@ -27,6 +30,11 @@ public class CursoDetail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		CursoLogic cl = new CursoLogic();
+		Curso curso = new Curso();
+		int id = Integer.parseInt(request.getParameter("curso").trim());
+		curso = cl.getById(id);
+		request.setAttribute("curso", curso);
 		request.getRequestDispatcher("WEB-INF/CursoDetail.jsp").forward(request, response);
 	}
 

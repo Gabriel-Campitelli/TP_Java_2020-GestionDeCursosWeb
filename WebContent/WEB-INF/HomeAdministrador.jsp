@@ -46,7 +46,7 @@
 		          '<a class="list-group-item" href="admin-home?param=admin-comisiones">Comisiones</a> '+
 		          '<a class="list-group-item" href="admin-home?param=admin-clientes">Clientes</a> '+
 				'</div>'
-
+//href="home?param=cursos"
 
 	}
 
@@ -119,6 +119,8 @@
 </head>
 
 <body>
+
+<a href="prueba?param=prueba"></a>
 
   <div class="container">
     <div id="Nav"></div>

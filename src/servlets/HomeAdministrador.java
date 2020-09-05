@@ -39,11 +39,14 @@ public class HomeAdministrador extends HttpServlet {
 		PersonaLogic pL = new PersonaLogic();
 
 		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		/*
 		switch (request.getParameter("param")) {
 		case "admin-home":
 			request.getRequestDispatcher("WEB-INF/HomeAdministrador.jsp").forward(request, response);
 			break;
-		case "admin-cursos":
+		case "admin-cursos":			
 			request.setAttribute("pageName", "Cursos");
 			LinkedList<Curso> cursos = curL.getAll();
 			request.setAttribute("cursos", cursos);
@@ -65,10 +68,9 @@ public class HomeAdministrador extends HttpServlet {
 			break;
 		default:
 			System.out.println(request.getParameter("param"));
-
 			System.out.println("Error: opcion no disponible");
 			break;
-		}
+		}*/
 	}
 
 

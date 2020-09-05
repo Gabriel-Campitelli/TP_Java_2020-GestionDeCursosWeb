@@ -1,11 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import entities.Curso;
+import logic.CursoLogic;
 
 /**
  * Servlet implementation class Home
@@ -27,12 +32,15 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		CursoLogic cl = new CursoLogic();
 		switch (request.getParameter("param")) {
 		case "home":
 			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
 			break;
 		case "cursos":
 			request.setAttribute("pageName", "Cursos");
+			LinkedList<Curso> cursos = cl.getAll();
+			request.setAttribute("cursos", cursos);
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 			break;
 		case "mis-cursos":

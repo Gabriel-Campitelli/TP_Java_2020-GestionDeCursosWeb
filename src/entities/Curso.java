@@ -7,6 +7,8 @@ public class Curso {
 	private String descripcion;
 	private Date fecha_inicio;
 	private Date fecha_fin;
+	private String url;
+	private String nombre;
 	
 	public int getId() {
 		return id;
@@ -37,6 +39,18 @@ public class Curso {
 	public String toString() {
 		return "\nCurso [id=" + id + ", Descripcion=" + descripcion + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + "]"
 				;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 }

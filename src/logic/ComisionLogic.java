@@ -30,6 +30,19 @@ public class ComisionLogic {
 		dc = new DataComision();
 		dc.edit(comision);
 	}
+
+	public LinkedList<Comision> getComisionesByCurso(int id) {
+		dc = new DataComision();
+		
+		return dc.getComisionesByCurso(id);
+	}
+
+	public LinkedList<Comision> getComisionesByIdPersona(int id_persona) {
+		
+		dc = new DataComision();
+		
+		return dc.getComisionesByIdPersona(id_persona);
+	}
 	
 	
 }

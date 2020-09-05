@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entities.Curso" %>
+<%@ page import="entities.Comision" %>
+<%@ page import="java.util.LinkedList" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +21,17 @@
   <!-- Custom styles for this template -->
   <link href="css/modern-business.css" rel="stylesheet">
 	
-  <% Curso curso = (Curso)request.getAttribute("curso"); %>
+  <% Curso curso = (Curso)request.getAttribute("curso"); 
+  	 LinkedList<Comision> lc = (LinkedList<Comision>) request.getAttribute("comisiones");
+     LinkedList<Curso> comActuales = (LinkedList<Curso>) request.getAttribute("probando");
+  	 %>
 </head>
 
 <body>
- <%= curso %>
+ <%= curso.getId()%>
+ <%= lc %>
+ <%= comActuales%>
+ <%= request.getAttribute("probando")%>
  <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -71,9 +79,9 @@
       <div class="col-md-4">
         <h3 class="my-3"><%= curso.getNombre() %></h3>
         <p><%=curso.getDescripcion()%></p>
-        <a class="btn btn-primary" href="cursodetail?curso=<%= curso.getId()%>">Inscribirme
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+	  Inscribirme
+	</button>
       </div>
 
     </div>
@@ -112,7 +120,44 @@
     <!-- /.row -->
 
   </div>
-  <!-- /.container -->
+	
+	<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Inscribirme</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>)
+      <form action="home" method="post">
+      <div class="modal-body">        
+          <div class="form-group">
+          <!--  -->
+          <% if(lc != null) {%>
+            <label for="exampleFormControlSelect2">Example multiple select</label>
+            <select class="form-control" name="comision">
+              <% for(Comision c : lc) { %>
+    			<option value="<%=c.getIdComision()%>">
+        			<%= c.getDiaSemana() + " " + c.getHoraInicio()%>
+    			</option>
+			  <% } //Cerrar FOR %>
+            </select>
+          <% } %>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <% if(lc != null) {%>
+        <button type="submit" name="action" value="inscripcion"class="btn btn-primary">Aceptar</button>
+         <% } %>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+	
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">

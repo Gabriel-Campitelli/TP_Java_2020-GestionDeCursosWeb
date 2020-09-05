@@ -35,7 +35,7 @@
             <a class="nav-link" href="home?param=mis-cursos">Mis Cursos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="home?param=cursos-qpr">Cursos que puedo realizar</a>
+            <a class="nav-link" href="inscripcion?param=asd">Cursos que puedo realizar</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="home?param=cursos">Todos los Cursos</a>

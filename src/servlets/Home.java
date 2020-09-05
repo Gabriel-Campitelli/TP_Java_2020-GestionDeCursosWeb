@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Comision;
 import entities.Curso;
 import entities.Persona;
 import logic.CursoLogic;
@@ -36,6 +37,14 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 		CursoLogic cl = new CursoLogic();
 		LinkedList<Curso> cursos = new LinkedList<Curso>();
+		
+		if(request.getParameter("action") == "inscripcion") {
+			request.setAttribute("pageName", "Cursos");
+			cursos = cl.getAll();
+			request.setAttribute("cursos", cursos);
+			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+		}
+
 		switch (request.getParameter("param")) {
 		case "home":
 			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
@@ -71,35 +80,10 @@ public class Home extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//doGet(request, response);
 	}
-
-}
-public void mostrarComisionesALasQueMePuedoInscribir() {
+	
 	
 }
-/* Agregar id_comision a la inscripcion
- * 
-public void validarFechas() {
-	for(micurso : miscursos) {
-	if(otrocurso.fini >= micurso.fini && otro.cursofini < otro.cursoffin ||
-			otrocurso.fini < micurs.fini && otrocurso.ffin > micurso.fini) {
-		
-		ME GUARDO MICURSO EN UNA LISTA
-			}
-		}
-	me traigo las comisiones del otrocurso.
-	creo un arreglo identico con las comisiones del otro Curso. Asi voy sacando elementos
-	for(mc : lista) {
-		me traigo las comisiones del mc.
-		for (cada comision de mc) {
-			for (cada comision del otro curso)
-			voy comparando las horas con cada comision como lo hice al principio. si pasa eso saco el elemento de la lista de comisiones
-		}}
-	Al final de todo devuelvo la lista de comisiones
-		
-	}
-		
-	}
-}
-*/
+

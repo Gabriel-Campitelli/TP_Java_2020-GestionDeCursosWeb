@@ -1,13 +1,18 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Comision;
 import entities.Curso;
+import entities.Persona;
+import logic.ComisionLogic;
 import logic.CursoLogic;
 
 /**
@@ -31,10 +36,18 @@ public class CursoDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		CursoLogic cl = new CursoLogic();
-		Curso curso = new Curso();
+		Curso curso ;
 		int id = Integer.parseInt(request.getParameter("curso").trim());
 		curso = cl.getById(id);
 		request.setAttribute("curso", curso);
+		
+		//Probando
+		ComisionLogic comlogic = new ComisionLogic();
+		LinkedList<Curso> probando = cl.getAll();
+		request.setAttribute("probando", probando);
+		
+		LinkedList<Comision> comisionesAptas = this.getComisionesALasQueMePuedoInscribir(request, response);
+		request.setAttribute("comisiones", comisionesAptas);
 		request.getRequestDispatcher("WEB-INF/CursoDetail.jsp").forward(request, response);
 	}
 
@@ -45,5 +58,73 @@ public class CursoDetail extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	public LinkedList<Comision> getComisionesALasQueMePuedoInscribir(HttpServletRequest request, HttpServletResponse response) {
+		
+		Persona user = (Persona)request.getSession().getAttribute("usuario");
+		
+		LinkedList<Curso> userCursos = (LinkedList<Curso>)request.getSession().getAttribute("userCursos");
+		Curso cursoActual = (Curso)request.getAttribute("curso");		
+		ComisionLogic comLogic = new ComisionLogic();		
+		LinkedList<Comision> comActuales= comLogic.getComisionesByCurso(cursoActual.getId());
+		LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
+		LinkedList<Curso> listaCursosAComparar = new LinkedList<>();
+		
+		request.setAttribute("prueba", comActuales);
+		request.setAttribute("idCurso", cursoActual.getId());
+		for(Curso c : userCursos) {
+			if( (cursoActual.getFecha_inicio().after(c.getFecha_inicio()) 
+					&& cursoActual.getFecha_inicio().before(cursoActual.getFecha_fin()) ) || 
+					(cursoActual.getFecha_inicio().before(c.getFecha_inicio()) 
+					&& cursoActual.getFecha_fin().after(cursoActual.getFecha_inicio()) ) ) {
+				listaCursosAComparar.add(c);
+			}
+			for(Comision com : userComisiones ) {
+				if(com.getIdCurso() == c.getId()) {
+					for(Comision comActual : comActuales) {
+						int index = 0;
+						int horaInicioComActual = Integer.parseInt(comActual.getHoraInicio().replaceAll("[^0-9.]", ""));
+						int horaFinComActual = Integer.parseInt(comActual.getHoraFin().replaceAll("[^0-9.]", ""));
+						int horaInicioCom = Integer.parseInt(com.getHoraInicio().replaceAll("[^0-9.]", ""));
+						int horaFinCom = Integer.parseInt(com.getHoraFin().replaceAll("[^0-9.]", ""));
+						
+						if( (horaInicioComActual >= horaInicioCom && horaInicioComActual <= horaFinCom) || 
+								(horaInicioComActual < horaInicioCom && horaFinComActual > horaInicioCom)	) {
+							comActuales.remove(index);
+							
+						}
+						index ++;
+					}
+				}
+			}
+		}
+		return comActuales;
+	}
+	/* Agregar id_comision a la inscripcion
+	 * 
+	public void validarFechas() {
+		for(micurso : miscursos) {
+		if(otrocurso.fini >= micurso.fini && otro.cursofini < otro.cursoffin ||
+				otrocurso.fini < micurs.fini && otrocurso.ffin > micurso.fini) {
+			
+			ME GUARDO MICURSO EN UNA LISTA
+				}
+			}
+		me traigo las comisiones del otrocurso.
+		creo un arreglo identico con las comisiones del otro Curso. Asi voy sacando elementos
+		for(mc : lista) {
+			me traigo las comisiones del mc.
+			for (cada comision de mc) {
+				for (cada comision del otro curso)
+				voy comparando las horas con cada comision como lo hice al principio. si pasa eso saco el elemento de la lista de comisiones
+			}}
+		Al final de todo devuelvo la lista de comisiones
+			
+		}
+			
+		}
+	}
+	*/
+
 
 }

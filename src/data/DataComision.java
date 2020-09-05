@@ -146,5 +146,90 @@ public class DataComision {
 			}
 			
 		}
+
+	public LinkedList<Comision> getComisionesByCurso(int id) {
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		LinkedList<Comision> comisiones = new LinkedList<>();
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+				"select * from comisiones where id_curso = ?"
+					);
+			stmt.setInt(1,id);
+			rs=stmt.executeQuery();
+			if(rs!=null) {
+				while(rs.next()) {
+					Comision c =new Comision();
+					c.setIdComision(rs.getInt("id_comision"));
+					c.setIdCurso(rs.getInt("id_curso"));
+					c.setDiaSemana(rs.getString("dia_semana"));
+					c.setCupo(rs.getInt("cupo"));
+					c.setHoraInicio(rs.getTime("hora_inicio").toString());
+					c.setHoraFin(rs.getTime("hora_fin").toString());
+					
+					comisiones.add(c);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return comisiones;
+	}
+	
+	public LinkedList<Comision> getComisionesByIdPersona(int id) {
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		LinkedList<Comision> comisiones = new LinkedList<>();
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+				"SELECT comisiones "  + 
+				"FROM (select inscripciones.id_comision from inscripciones where id_persona = ?) inscripciones " + 
+				"INNER JOIN comisiones " + 
+				"ON inscripciones.id_comision = comisiones.id_comision;"
+					);
+			stmt.setInt(1,id);
+			rs=stmt.executeQuery();
+			if(rs!=null) {
+				while(rs.next()) {
+					Comision c =new Comision();
+					c.setIdComision(rs.getInt("id_comision"));
+					c.setIdCurso(rs.getInt("id_curso"));
+					c.setDiaSemana(rs.getString("dia_semana"));
+					c.setCupo(rs.getInt("cupo"));
+					c.setHoraInicio(rs.getTime("hora_inicio").toString());
+					c.setHoraFin(rs.getTime("hora_fin").toString());
+					
+					comisiones.add(c);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return comisiones;
+	}
 	
 }

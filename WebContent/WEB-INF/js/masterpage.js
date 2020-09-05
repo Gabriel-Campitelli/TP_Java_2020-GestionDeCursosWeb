@@ -13,9 +13,11 @@ function AgregarMenu(){
 	      '<!-- Sidebar Column --> '+
 	      
 	        '<div class="list-group"> '+
-	          '<a href="about.html" class="list-group-item">Cursos</a> '+
-	          '<a href="services.html" class="list-group-item">Clientes</a> '+
-	          '<a href="contact.html" class="list-group-item">Comisiones</a> '
+			  '<a class="list-group-item" href="home?param=admin-cursos">Cursos</a>'+
+	          '<a class="list-group-item" href="home?param=admin-comisiones">Comisiones</a> '+
+	          '<a class="list-group-item" href="home?param=admin-clientes">Clientes</a> '+
+			'</div>'
+
 
 }
 

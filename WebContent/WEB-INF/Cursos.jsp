@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +18,11 @@
   <!-- Custom styles for this template -->
   <link href="css/modern-business.css" rel="stylesheet">
 
+  <%
+	Object opcion = new Object();
+    opcion = request.getAttribute("pageName");
+  %>
+
 </head>
 
 <body>
@@ -23,7 +30,7 @@
 <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">GestiÃ³n de Cursos</a>
+      <a class="navbar-brand" href="home?param=home">Gestión de Cursos</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -47,13 +54,13 @@
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">Cursos
+    <h1 class="mt-4 mb-3"><%= opcion %>
     </h1>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a href="index.html">Home</a>
       </li>
-      <li class="breadcrumb-item active">Portfolio 1</li>
+      <li class="breadcrumb-item active"><%= opcion %></li>
     </ol>
 
     <!-- Project One -->
@@ -66,7 +73,7 @@
       <div class="col-md-5">
         <h3>Project One</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-        <a class="btn btn-primary" href="#">View Project
+        <a class="btn btn-primary" href="cursodetail?">View Project
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>

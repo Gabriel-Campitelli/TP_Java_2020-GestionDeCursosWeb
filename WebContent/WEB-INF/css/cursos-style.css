@@ -1,0 +1,10 @@
+textarea{  
+  overflow:hidden;
+  display:block;
+  resize: none;
+  margin-bottom: 15px;
+}
+
+.form-row{
+	margin-top: 10px;
+}

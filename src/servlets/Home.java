@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Curso;
+import entities.Persona;
 import logic.CursoLogic;
+import logic.InscripcionLogic;
 
 /**
  * Servlet implementation class Home
@@ -33,19 +35,24 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		CursoLogic cl = new CursoLogic();
+		LinkedList<Curso> cursos = new LinkedList<Curso>();
 		switch (request.getParameter("param")) {
 		case "home":
 			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
 			break;
 		case "cursos":
 			request.setAttribute("pageName", "Cursos");
-			LinkedList<Curso> cursos = cl.getAll();
+			cursos = cl.getAll();
 			request.setAttribute("cursos", cursos);
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 			break;
 		case "mis-cursos":
 			request.setAttribute("pageName", "Mis Cursos");
+			Persona user = (Persona)request.getSession().getAttribute("usuario");
+			cursos = cl.getByIdPersona(user.getId_persona());
+			request.setAttribute("cursos", cursos);
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+			
 			break;
 		case "cursos-qpr":
 			request.setAttribute("pageName", "Cursos que puedo realizar");

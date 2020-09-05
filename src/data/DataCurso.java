@@ -26,6 +26,8 @@ public class DataCurso {
 					curso.setDescripcion(rs.getString("descripcion"));
 					curso.setFecha_inicio(rs.getDate("fecha_inicio"));
 					curso.setFecha_fin(rs.getDate("fecha_fin"));
+					curso.setUrl(rs.getString("url_imagen"));
+					curso.setNombre(rs.getString("nombre"));
 					
 					cursos.add(curso);
 				}
@@ -65,6 +67,8 @@ public class DataCurso {
 					curso.setDescripcion(rs.getString("descripcion"));
 					curso.setFecha_inicio(rs.getDate("fecha_inicio"));
 					curso.setFecha_fin(rs.getDate("fecha_fin"));
+					curso.setUrl(rs.getString("url_imagen"));
+					curso.setNombre(rs.getString("nombre"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

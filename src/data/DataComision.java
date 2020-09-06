@@ -194,10 +194,10 @@ public class DataComision {
 		LinkedList<Comision> comisiones = new LinkedList<>();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-				"SELECT comisiones "  + 
-				"FROM (select inscripciones.id_comision from inscripciones where id_persona = ?) inscripciones " + 
-				"INNER JOIN comisiones " + 
-				"ON inscripciones.id_comision = comisiones.id_comision;"
+				"SELECT comisiones.* \r\n" + 
+				"				FROM (select inscripciones.id_comision from inscripciones where id_persona = ?) inscripciones \r\n" + 
+				"				INNER JOIN comisiones comisiones  \r\n" + 
+				"				ON inscripciones.id_comision = comisiones.id_comision;"
 					);
 			stmt.setInt(1,id);
 			rs=stmt.executeQuery();

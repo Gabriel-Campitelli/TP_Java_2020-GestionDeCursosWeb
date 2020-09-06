@@ -22,16 +22,16 @@
   <link href="css/modern-business.css" rel="stylesheet">
 	
   <% Curso curso = (Curso)request.getAttribute("curso"); 
-  	 LinkedList<Comision> lc = (LinkedList<Comision>) request.getAttribute("comisiones");
-     LinkedList<Curso> comActuales = (LinkedList<Curso>) request.getAttribute("probando");
+  	 LinkedList<Comision> lc = null;
+  			 //(LinkedList<Comision>) request.getAttribute("probando");
+
   	 %>
 </head>
 
 <body>
  <%= curso.getId()%>
- <%= lc %>
- <%= comActuales%>
- <%= request.getAttribute("probando")%>
+ <%= lc%>
+ 
  <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -130,13 +130,13 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>)
+      </div>
+      <% if(lc != null) {%>    
       <form action="home" method="post">
-      <div class="modal-body">        
+      <div class="modal-body">
+      	    
           <div class="form-group">
-          <!--  -->
-          <% if(lc != null) {%>
-            <label for="exampleFormControlSelect2">Example multiple select</label>
+            <label for="exampleFormControlSelect2">Comisiones</label>
             <select class="form-control" name="comision">
               <% for(Comision c : lc) { %>
     			<option value="<%=c.getIdComision()%>">
@@ -144,16 +144,23 @@
     			</option>
 			  <% } //Cerrar FOR %>
             </select>
-          <% } %>
+          
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <% if(lc != null) {%>
         <button type="submit" name="action" value="inscripcion"class="btn btn-primary">Aceptar</button>
-         <% } %>
       </div>
     </form>
+    <% } %>
+    <%if(lc == null) {%>  
+    <div class="modal-body">
+		<h3>No hay comisiones disponibles</h3>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+      </div>
+      <% } %>  
     </div>
   </div>
 </div>

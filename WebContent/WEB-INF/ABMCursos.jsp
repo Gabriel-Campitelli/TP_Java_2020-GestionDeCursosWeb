@@ -149,7 +149,6 @@
 			{
 				$("#mostrar-panel").hide();
 				$("#boton-panel").text("Editar")
-	
 			}	
 		
 		})
@@ -183,11 +182,6 @@
 		});
 	  });
 	
-	$(document).ready(function () {
-		('#modalEliminar').on('shown.bs.modal', function () {
-	  	$('#myInput').trigger('focus')
-		})
-	})
 	
 	
 	//ESTO ME SIRVE PARA OBTENER LA INFORMACIÓN DE LAS COLUMNAS DE CADA ROW
@@ -227,6 +221,22 @@
 		})
 	
 	 });
+		 
+	 $(document).ready(function (e) {
+		  $('#modalEliminar').on('show.bs.modal', function(e) {    
+			  var row= $(e.relatedTarget).parent().parent();
+			  var celdas= row.children();
+			  //alert($(celdas[0]).html()); 
+			  $('#id-curso-eliminar').val($(celdas[0]).html())
+			  			 
+		  });
+		});
+	 
+	 function test(row){
+
+
+	 }
+	
 	</script>
   <!-- script para la tabla -->
 
@@ -360,10 +370,8 @@
               <td class="col-3">
                 <button type="button" id="" class="btn btn-warning btn-editar">Editar</button>
 
+                <button type="button" id="btn-eliminar-curso" class="btn btn-danger btn-eliminar" data-toggle="modal" data-target="#modalEliminar">Eliminar</button>   
 
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button>
-                
-                
                 <!-- Modal Eliminar -->
                 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -376,10 +384,9 @@
                       </div>    
                       <form method="post" action="eliminar-curso">
 	                      <div class="modal-body">
-	                        <%= curso.getNombre() %>
 	                        
 	                        <label>Id del curso</label>  
-                        	<input name="id_curso" value="<%=curso.getId()%>" />	
+                        	<input name="id_curso" id="id-curso-eliminar" value="<%=curso.getId()%>" disabled/>	
                         	
 	                      </div>
 	                      

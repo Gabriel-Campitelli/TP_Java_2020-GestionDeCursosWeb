@@ -223,20 +223,20 @@
 	 });
 		 
 	 $(document).ready(function (e) {
-		  $('#modalEliminar').on('show.bs.modal', function(e) {    
+		  $('#modalEliminar').on('show.bs.modal', function(e) {   
+			  			  
 			  var row= $(e.relatedTarget).parent().parent();
 			  var celdas= row.children();
 			  //alert($(celdas[0]).html()); 
-			  $('#id-curso-eliminar').val($(celdas[0]).html())
-			  			 
+			  var idCurso = $(celdas[0]).text();
+			  
+			  $('#id-curso-eliminar').val(idCurso);
+			  $('#nombre-curso-eliminar').val($(celdas[1]).html());
+			  
 		  });
 		});
 	 
-	 function test(row){
 
-
-	 }
-	
 	</script>
   <!-- script para la tabla -->
 
@@ -250,7 +250,8 @@
 </head>
 
 <body>
-  <%=cursos%>
+ <!-- <%=cursos%>
+  <%= request.getParameter("id_curso") %>-->
 
   <div class="container">
     <div id="Nav"></div>
@@ -342,15 +343,15 @@
         <!--Modal Nuevo Curso-->
 
 
-        <table class="table table-hover table-bordered table-responsive">
+        <table class="table table-hover table-bordered">
 
           <thead>
             <tr class="d-flex">
               <th class="col-1" scope="row">Id</th>
               <th class="col-2">Nombre</th>
-              <th class="col-5">Descripcion</th>
-              <th class="col-1">Fecha de inicio</th>
-              <th class="col-1">Fecha de fin</th>
+              <th class="col-2">Descripcion</th>
+              <th class="col-2">Fecha de inicio</th>
+              <th class="col-2">Fecha de fin</th>
               <th class="col-3">Opciones</th>
             </tr>
           </thead>
@@ -364,9 +365,9 @@
               <th class="col-1"  scope="row"><%= curso.getId() %></th>
               
               <td class="col-2" ><%= curso.getNombre() %></td>
-              <td class="col-5" ><%= curso.getDescripcion() %></td>
-              <td class="col-1" ><%= curso.getFecha_inicio() %></td>
-              <td class="col-1" ><%= curso.getFecha_fin() %></td>
+              <td class="col-2" ><%= curso.getDescripcion() %></td>
+              <td class="col-2" ><%= curso.getFecha_inicio() %></td>
+              <td class="col-2" ><%= curso.getFecha_fin() %></td>
               <td class="col-3">
                 <button type="button" id="" class="btn btn-warning btn-editar">Editar</button>
 
@@ -385,8 +386,11 @@
                       <form method="post" action="eliminar-curso">
 	                      <div class="modal-body">
 	                        
-	                        <label>Id del curso</label>  
-                        	<input name="id_curso" id="id-curso-eliminar" value="<%=curso.getId()%>" disabled/>	
+	                        <label>Id: </label>                    
+                        	<input readonly type="text" name="id_curso" id="id-curso-eliminar" value="" />	
+                        	<br>
+                        	<label>Nombre: </label>                    
+                        	<input id="nombre-curso-eliminar" name="nombre" disabled/>	
                         	
 	                      </div>
 	                      
@@ -415,14 +419,14 @@
 
                     <!-- ESTE ES EL FORM -->
                     <form id="cursoForm" method="post" action="editar-curso" >
-					
+		<!--				
 					 <div class="form-row">
                        <div class="col">
                          <label>Id del curso</label>  
                         	<input name="id_curso" value="<%=curso.getId()%>" />	                        
                         </div>
                       </div>
-		
+	 	 -->
                       <div class="form-row">
                         <div class="col">
                           <label>Nombre del curso</label>
@@ -430,7 +434,7 @@
                         
                         </div>
                       </div>
-
+		
                       <div class="form-row">
                         <div class="col">
                           <label>Fecha de inicio</label>
@@ -475,7 +479,7 @@
 
                   </div>
                 </div>
-              </td>
+             
 
             </tr>
     <%
@@ -491,23 +495,27 @@
   
     </div>
     
+   </div>
+   
 
-    <!-- Footer de la pagina -->
-    <div id="Footer"></div>
+    
+ 
+  
+  
+    
+     <!-- Bootstrap core JavaScript -->
 
-    </div>
-
-  <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
-  
     <!-- para el DATETIMEPICKER -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
   
+
+   <!-- Footer de la pagina -->
+   <div id="Footer"></div>
 
 </body>
 

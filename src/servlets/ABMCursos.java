@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import entities.Curso;
 import logic.CursoLogic;
 
-import java.text.SimpleDateFormat;  
+import java.text.SimpleDateFormat;
+import java.util.LinkedList;
 import java.text.ParseException;
   
 
@@ -65,8 +66,8 @@ public class ABMCursos extends HttpServlet {
 		        
 				cL.edit(curso);
 				break;
-			case "alta-curso":
 				
+			case "alta-curso":
 			    curso.setNombre(request.getParameter("nombre"));
 			    curso.setDescripcion(request.getParameter("descripcion"));
 			    curso.setUrl(request.getParameter("url-imagen"));	    
@@ -79,16 +80,22 @@ public class ABMCursos extends HttpServlet {
 				cL.create(curso);
 				break;		
 			case "eliminar-curso":
-			    curso.setId(Integer.parseInt(request.getParameter("id_curso")));
-			    //response.getWriter().append(curso.toString());
+				request.setAttribute("id_curso", 3);
+				response.getWriter().append(request.getParameter("id_curso"));
+				response.getWriter().append(request.getParameter("nombre"));
+
+				curso.setId(Integer.parseInt(request.getParameter("id_curso")));
+			    
 
 				cL.delete(curso);
 				break;	
 			default:
 				break;
 		}
+		
 		//request.setAttribute("modo", "admin-home");
-		request.getRequestDispatcher("WEB-INF/ABMCursos.jsp").forward(request, response);
+		response.sendRedirect("admin-home?param=admin-cursos");
+
     
 	}
 

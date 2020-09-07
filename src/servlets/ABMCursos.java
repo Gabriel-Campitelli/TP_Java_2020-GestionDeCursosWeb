@@ -59,11 +59,9 @@ public class ABMCursos extends HttpServlet {
 			    curso.setUrl(request.getParameter("url-imagen"));	
 			    
 			    //parseo la fecha
-			    java.sql.Date sqlFechaInicio = java.sql.Date.valueOf( "2020-06-01" /*request.getParameter("fecha-inicio")*/ );  
-		        curso.setFecha_inicio(sqlFechaInicio);        
-			    
-		        java.sql.Date sqlFechaFin = java.sql.Date.valueOf( "2020-06-01" /*request.getParameter("fecha-fin")*/ );  
-		        curso.setFecha_fin(sqlFechaFin);
+			    curso.setFecha_inicio(java.sql.Date.valueOf( request.getParameter("fecha-inicio").replaceAll("/","-") ));        
+      
+			    curso.setFecha_fin(java.sql.Date.valueOf( request.getParameter("fecha-fin").replaceAll("/","-") ));
 		        
 				cL.edit(curso);
 				break;
@@ -73,9 +71,10 @@ public class ABMCursos extends HttpServlet {
 			    curso.setDescripcion(request.getParameter("descripcion"));
 			    curso.setUrl(request.getParameter("url-imagen"));	    
 			    //parseo la fecha
-		        curso.setFecha_inicio(java.sql.Date.valueOf( "2020-02-12"/*request.getParameter("fecha-inicio") */));        
-		        curso.setFecha_fin(java.sql.Date.valueOf( "2020-06-11"/*request.getParameter("fecha-fin") */));
-				
+		        
+			    curso.setFecha_inicio(java.sql.Date.valueOf( request.getParameter("fecha-inicio").replaceAll("/","-") ));        
+			    //response.getWriter().append(request.getParameter("fecha-inicio").replaceAll("/","-"));
+			    curso.setFecha_fin(java.sql.Date.valueOf( request.getParameter("fecha-fin").replaceAll("/","-") ));
 			    //response.getWriter().append(curso.toString());
 
 				cL.create(curso);
@@ -90,7 +89,7 @@ public class ABMCursos extends HttpServlet {
 				break;
 		}
 		
-		//request.setAttribute("modo", "admin-home");
+	
 		response.sendRedirect("admin-home?param=admin-cursos");
 
     

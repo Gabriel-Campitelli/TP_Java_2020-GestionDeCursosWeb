@@ -26,8 +26,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
 
-  <!-- Script para MasterPage -->
-  <script src="js/masterpage.js"></script>
   
   <!-- Script para poder desplegar el container en la tabla-->
   <script src="js/table-action.js"></script>
@@ -35,14 +33,23 @@
   <!-- CSS para el form -->
   <link href="css/cursos-style.css" rel="stylesheet">
 
-
   <!-- esto es para poder editar la tabla -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- para el DATETIMEPICKER -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 
 
 	<!-- Script para MasterPage -->
   <script type="text/javascript" >
+  
+  
   
   $(document).ready(function (){
 		
@@ -169,21 +176,6 @@
 	})
 	
 	
-	
-	$(document).ready(function () {
-	      $('#datetimepickerFechaInicio').datetimepicker({
-		format: 'DD/MM/YYYY'
-		});
-	  });
-	
-	$(document).ready(function () {
-	      $('#datetimepickerFechaFin').datetimepicker({
-		format: 'DD/MM/YYYY'
-		});
-	  });
-	
-	
-	
 	//ESTO ME SIRVE PARA OBTENER LA INFORMACIÓN DE LAS COLUMNAS DE CADA ROW
 	 $(document).on("click", ".btn-editar", function() {
 	   $(this).closest('tr').find('td:nth-child(2)').each(function() {
@@ -237,6 +229,34 @@
 		});
 	 
 
+	 
+	 
+	 $(document).ready(function () {
+	      $("#datetimepickerFechaInicio").datetimepicker({
+		format: 'YYYY/MM/DD'
+		});
+	  });
+
+	$(document).ready(function () {
+		
+	      $("#datetimepickerFechaFin").datetimepicker({
+	    	  
+		format: 'YYYY/MM/DD'
+	     
+		});
+	  });
+
+	 $(document).ready(function () {
+	      $("#datetimepickerFechaInicioEdit").datetimepicker({
+		format: 'YYYY/MM/DD'
+		});
+	  });
+
+	$(document).ready(function () {	
+	    $("#datetimepickerFechaFinEdit").datetimepicker({	  
+		format: 'YYYY/MM/DD'     
+		});
+	  });
 	</script>
   <!-- script para la tabla -->
 
@@ -247,6 +267,8 @@
   	CursoLogic curL = new CursoLogic();
 	LinkedList<Curso> cursos = curL.getAll();
   %>
+  
+  
 </head>
 
 <body>
@@ -292,21 +314,22 @@
 	                  <div class="form-row">
 	                    <div class="col">
 	                      <label>Fecha de inicio</label>
-	                      <div class='input-group date' id='datetimepickerFechaInicio'>
-	                        <input name="fecha-inicio" type='text' class="form-control" />     
-	                        <span class="input-group-addon">
+	                      <div  data-provide="datepicker" class="input-group date" id="datetimepickerFechaInicio">
+	                        <input name="fecha-inicio" type="text" class="form-control">     
+	                        <div class="input-group-addon">
 	                          <span class="glyphicon glyphicon-calendar"></span>
-	                        </span>
+	                        </div>
 	                      </div>                    
 	                    </div>
+
 	
 	                    <div class="col">
 	                      <label>Fecha de fin</label>
-	                      <div class='input-group date' id='datetimepickerFechaFin'>
-	                        <input name="fecha-fin" type='text' class="form-control" />     
-	                        <span class="input-group-addon">
-	                          <span class="glyphicon glyphicon-calendar"></span>
-	                        </span>
+	                      <div data-provide="datepicker" class="input-group date" id="datetimepickerFechaFin">
+	                        <input name="fecha-fin" type="text" class="form-control">     
+	                        <div class="input-group-addon">
+	                          <span class="glyphicon glyphicon-calendar glyphicon-th"></span>
+	                        </div>
 	                      </div>
 	                    </div>
 	                  </div>
@@ -438,7 +461,7 @@
                       <div class="form-row">
                         <div class="col">
                           <label>Fecha de inicio</label>
-                          <div class='input-group date' id='datetimepickerFechaInicio'>
+                          <div  data-provide="datepicker"  class='input-group date' id='datetimepickerFechaInicioEdit'>
                             <input name="fecha-inicio" type='text' class="form-control" value="<%= curso.getFecha_inicio() %>"/>     
                             <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
@@ -448,7 +471,7 @@
                         
                         <div class="col">
                           <label>Fecha de fin</label>
-                          <div class='input-group date' id='datetimepickerFechaFin'>
+                          <div  data-provide="datepicker" class='input-group date' id='datetimepickerFechaFinEdit'>
                             <input name="fecha-fin" type='text' class="form-control" value="<%= curso.getFecha_fin() %>" />     
                             <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
@@ -456,6 +479,8 @@
                           </div>
                         </div>
                       </div>
+                      
+                                            
 
                       <div class="form-row">
                           <div class="col">
@@ -503,16 +528,6 @@
   
   
     
-     <!-- Bootstrap core JavaScript -->
-
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- para el DATETIMEPICKER -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-  
 
    <!-- Footer de la pagina -->
    <div id="Footer"></div>

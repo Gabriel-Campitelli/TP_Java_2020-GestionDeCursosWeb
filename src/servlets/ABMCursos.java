@@ -53,15 +53,16 @@ public class ABMCursos extends HttpServlet {
 		
 		switch (request.getParameter("modo")) {
 			case "editar-curso":
-			    curso.setId(Integer.parseInt(request.getParameter("id_curso")));
+				curso.setId(Integer.parseInt(request.getParameter("id_curso")));
 			    curso.setNombre(request.getParameter("nombre"));
 			    curso.setDescripcion(request.getParameter("descripcion"));
-			    curso.setUrl(request.getParameter("url-imagen"));	    
+			    curso.setUrl(request.getParameter("url-imagen"));	
+			    
 			    //parseo la fecha
-			    java.sql.Date sqlFechaInicio = java.sql.Date.valueOf( request.getParameter("fecha-inicio") );  
+			    java.sql.Date sqlFechaInicio = java.sql.Date.valueOf( "2020-06-01" /*request.getParameter("fecha-inicio")*/ );  
 		        curso.setFecha_inicio(sqlFechaInicio);        
 			    
-		        java.sql.Date sqlFechaFin = java.sql.Date.valueOf( request.getParameter("fecha-fin") );  
+		        java.sql.Date sqlFechaFin = java.sql.Date.valueOf( "2020-06-01" /*request.getParameter("fecha-fin")*/ );  
 		        curso.setFecha_fin(sqlFechaFin);
 		        
 				cL.edit(curso);
@@ -80,13 +81,9 @@ public class ABMCursos extends HttpServlet {
 				cL.create(curso);
 				break;		
 			case "eliminar-curso":
-				request.setAttribute("id_curso", 3);
-				response.getWriter().append(request.getParameter("id_curso"));
-				response.getWriter().append(request.getParameter("nombre"));
-
+		
 				curso.setId(Integer.parseInt(request.getParameter("id_curso")));
 			    
-
 				cL.delete(curso);
 				break;	
 			default:

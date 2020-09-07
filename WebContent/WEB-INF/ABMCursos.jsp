@@ -419,14 +419,14 @@
 
                     <!-- ESTE ES EL FORM -->
                     <form id="cursoForm" method="post" action="editar-curso" >
-		<!--				
+						
 					 <div class="form-row">
                        <div class="col">
                          <label>Id del curso</label>  
-                        	<input name="id_curso" value="<%=curso.getId()%>" />	                        
+                        	<input readonly name="id_curso" value="<%=curso.getId()%>" />	                        
                         </div>
                       </div>
-	 	 -->
+	 	
                       <div class="form-row">
                         <div class="col">
                           <label>Nombre del curso</label>

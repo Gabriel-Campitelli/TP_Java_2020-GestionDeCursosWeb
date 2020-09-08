@@ -23,9 +23,13 @@
   <%
 	Object opcion = new Object();
     opcion = request.getAttribute("pageName");
-	
-	LinkedList<Curso> cursos = (LinkedList<Curso>)request.getAttribute("cursos");
-
+    LinkedList<Curso> cursos = new LinkedList<>();
+	if(opcion != "Mis Cursos") {
+	cursos = (LinkedList<Curso>)request.getAttribute("cursos");
+	}
+	else {
+	cursos = (LinkedList<Curso>)request.getSession().getAttribute("userCursos");
+	}
   %>
 
 </head>

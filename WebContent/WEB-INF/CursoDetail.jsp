@@ -22,14 +22,13 @@
   <link href="css/modern-business.css" rel="stylesheet">
 	
   <% Curso curso = (Curso)request.getAttribute("curso"); 
-  	 LinkedList<Comision> lc = null;
-  			 //(LinkedList<Comision>) request.getAttribute("probando");
+  	 LinkedList<Comision> lc = (LinkedList<Comision>) request.getAttribute("probando");
 
   	 %>
 </head>
 
 <body>
- <%= curso.getId()%>
+ <%= curso%>
  <%= lc%>
  
  <!-- Navigation -->
@@ -132,19 +131,24 @@
         </button>
       </div>
       <% if(lc != null) {%>    
-      <form action="home" method="post">
+      <form action="inscripcion" method="post">
       <div class="modal-body">
       	    
           <div class="form-group">
             <label for="exampleFormControlSelect2">Comisiones</label>
-            <select class="form-control" name="comision">
+            <select class="form-control" name="item">
               <% for(Comision c : lc) { %>
     			<option value="<%=c.getIdComision()%>">
         			<%= c.getDiaSemana() + " " + c.getHoraInicio()%>
     			</option>
 			  <% } //Cerrar FOR %>
             </select>
-          
+            <input type="hidden" name="curso.id" value="<%= curso.getId() %>">
+   			<input type="hidden" name="curso.nombre" value="<%= curso.getNombre() %>">
+   			<input type="hidden" name="curso.desc" value="<%= curso.getDescripcion() %>">
+   			<input type="hidden" name="curso.url" value="<%= curso.getUrl() %>">
+            <input type="hidden" name="curso.inicio" value="<%= curso.getFecha_inicio() %>">
+            <input type="hidden" name="curso.fin" value="<%= curso.getFecha_fin() %>">          
           </div>
       </div>
       <div class="modal-footer">

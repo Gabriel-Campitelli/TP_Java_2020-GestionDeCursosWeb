@@ -5,8 +5,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
 </head>
 <body>
-
+<%= request.getAttribute("curso")%>
 </body>
 </html>

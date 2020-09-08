@@ -18,10 +18,10 @@ public class DataInscripcion {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into gestion_cursos.inscripciones(gestion_cursos.inscripciones.id_persona, gestion_cursos.inscripciones.id_curso, gestion_cursos.inscripciones.like) values(?,?,?)"
+							"insert into inscripciones(inscripciones.id_persona, inscripciones.id_comision, inscripciones.like) values(?,?,?)"
 							);
 			stmt.setInt(1, i.getId_persona());
-			stmt.setInt(2, i.getId_curso());
+			stmt.setInt(2, i.getId_comision());
 			stmt.setBoolean(3, i.getLike());
 
 			stmt.executeUpdate();
@@ -51,7 +51,7 @@ public class DataInscripcion {
 
 			stmt.setBoolean(1, i.getLike());
 			stmt.setInt(2, i.getId_persona());
-			stmt.setInt(3, i.getId_curso());
+			stmt.setInt(3, i.getId_comision());
 				
 			stmt.executeUpdate();
 			
@@ -83,7 +83,7 @@ public class DataInscripcion {
 							"delete from inscripciones where id_persona=? and id_curso=?"
 							);
 			stmt.setInt(1, i.getId_persona());
-			stmt.setInt(2, i.getId_curso());
+			stmt.setInt(2, i.getId_comision());
 			
 			stmt.executeUpdate();
 			

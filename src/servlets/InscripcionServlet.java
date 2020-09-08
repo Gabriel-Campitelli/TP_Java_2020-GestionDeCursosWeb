@@ -15,18 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Curso;
 import logic.InscripcionLogic;
+import entities.Inscripcion;
+import entities.Persona;
 
 /**
  * Servlet implementation class Inscripcion
  */
 @WebServlet("/inscripcion")
-public class Inscripcion extends HttpServlet {
+public class InscripcionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Inscripcion() {
+    public InscripcionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,7 +46,7 @@ public class Inscripcion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getParameter("item");
+		
 		Curso c = new Curso();
 		c.setId(Integer.parseInt(request.getParameter("curso.id")));
 		c.setDescripcion(request.getParameter("curso.desc"));
@@ -68,6 +70,13 @@ public class Inscripcion extends HttpServlet {
 		request.getSession().setAttribute("userCursos", userCursos);
 		request.setAttribute("pageName", "Mis Cursos");
 		InscripcionLogic il = new InscripcionLogic();
+		Inscripcion i = new Inscripcion();
+		
+		Persona usuario = new Persona();
+		usuario = (Persona)request.getSession().getAttribute("usuario");
+		i.setId_persona(usuario.getId_persona());
+		i.setId_comision(Integer.parseInt(request.getParameter("item")));
+		il.addInscripcion(i);
 		request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 	}
 

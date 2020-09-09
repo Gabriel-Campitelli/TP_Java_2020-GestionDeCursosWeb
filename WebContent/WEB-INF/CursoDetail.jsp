@@ -23,6 +23,9 @@
 	
   <% Curso curso = (Curso)request.getAttribute("curso"); 
   	 LinkedList<Comision> lc = (LinkedList<Comision>) request.getAttribute("probando");
+     LinkedList<Curso> misCursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
+     boolean ocultar = (boolean) request.getAttribute("ocultar");
+    
 
   	 %>
 </head>
@@ -30,6 +33,7 @@
 <body>
  <%= curso%>
  <%= lc%>
+ <%= ocultar %>
  
  <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -42,9 +46,6 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="home?param=mis-cursos">Mis Cursos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="home?param=cursos-qpr">Cursos que puedo realizar</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="home?param=cursos">Todos los Cursos</a>
@@ -78,9 +79,9 @@
       <div class="col-md-4">
         <h3 class="my-3"><%= curso.getNombre() %></h3>
         <p><%=curso.getDescripcion()%></p>
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-	  Inscribirme
-	</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+		  Inscribirme
+		</button>
       </div>
 
     </div>
@@ -130,32 +131,43 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
+      <%if(ocultar) { %>
+        <div class="modal-body">
+		 	<h6 class="my-3">Usted ya está inscripto en este curso</h3>		 	
+		 </div>
+		 <div class="modal-footer">
+		 	<a class="btn btn-primary" href="home?param=mis-cursos">Ver mis cursos</a>
+		 </div>
+	 <% } %>
+	 
+	 <%if (!ocultar) { %>
       <% if(lc != null) {%>    
-      <form action="inscripcion" method="post">
-      <div class="modal-body">
-      	    
-          <div class="form-group">
-            <label for="exampleFormControlSelect2">Comisiones</label>
-            <select class="form-control" name="item">
-              <% for(Comision c : lc) { %>
-    			<option value="<%=c.getIdComision()%>">
-        			<%= c.getDiaSemana() + " " + c.getHoraInicio()%>
-    			</option>
-			  <% } //Cerrar FOR %>
-            </select>
-            <input type="hidden" name="curso.id" value="<%= curso.getId() %>">
-   			<input type="hidden" name="curso.nombre" value="<%= curso.getNombre() %>">
-   			<input type="hidden" name="curso.desc" value="<%= curso.getDescripcion() %>">
-   			<input type="hidden" name="curso.url" value="<%= curso.getUrl() %>">
-            <input type="hidden" name="curso.inicio" value="<%= curso.getFecha_inicio() %>">
-            <input type="hidden" name="curso.fin" value="<%= curso.getFecha_fin() %>">          
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" name="action" value="inscripcion"class="btn btn-primary">Aceptar</button>
-      </div>
-    </form>
+	      <form action="inscripcion" method="post">
+	      <div class="modal-body">
+	      	    
+	          <div class="form-group">
+	            <label for="exampleFormControlSelect2">Comisiones</label>
+	            <select class="form-control" name="item">
+	              <% for(Comision c : lc) { %>
+	    			<option value="<%=c.getIdComision()%>">
+	        			<%= c.getDiaSemana() + " " + c.getHoraInicio()%>
+	    			</option>
+				  <% } //Cerrar FOR %>
+	            </select>
+	            <input type="hidden" name="curso.id" value="<%= curso.getId() %>">
+	   			<input type="hidden" name="curso.nombre" value="<%= curso.getNombre() %>">
+	   			<input type="hidden" name="curso.desc" value="<%= curso.getDescripcion() %>">
+	   			<input type="hidden" name="curso.url" value="<%= curso.getUrl() %>">
+	            <input type="hidden" name="curso.inicio" value="<%= curso.getFecha_inicio() %>">
+	            <input type="hidden" name="curso.fin" value="<%= curso.getFecha_fin() %>">          
+	          </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        <button type="submit" name="action" value="inscripcion"class="btn btn-primary">Aceptar</button>
+	      </div>
+	    </form>
     <% } %>
     <%if(lc == null) {%>  
     <div class="modal-body">
@@ -165,6 +177,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
       </div>
       <% } %>  
+      <% } %>
     </div>
   </div>
 </div>

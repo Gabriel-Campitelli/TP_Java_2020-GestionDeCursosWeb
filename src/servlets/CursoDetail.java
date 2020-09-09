@@ -46,6 +46,14 @@ public class CursoDetail extends HttpServlet {
 		LinkedList<Curso> probando = cl.getAll();
 		LinkedList<Comision> comActuales=  this.getComisionesALasQueMePuedoInscribir(request, response);
 		request.setAttribute("probando", comActuales);
+		LinkedList<Curso> userCursos = (LinkedList<Curso>)request.getSession().getAttribute("userCursos");
+		 boolean ocultar = false;
+	     for(Curso mc: userCursos) {
+	    	 if(mc.getId() == id) {
+	    	 ocultar = true;
+	    	 }
+	     };
+	     request.setAttribute("ocultar", ocultar);
 		
 	
 		

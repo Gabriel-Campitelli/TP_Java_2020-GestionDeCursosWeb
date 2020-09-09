@@ -10,11 +10,15 @@ public class InscripcionLogic {
 		dI.addInscripcion(i);
     }
 	
-	public void editLike(Inscripcion i) {		
-		dI.editLike(i);
+	public void editLike(Inscripcion i,int idCurso) {		
+		dI.editLike(i,idCurso);
     }
 	
 	public void deleteInscripcion(Inscripcion i) {
 		dI.deleteInscripcion(i);
+    }
+	
+	public Inscripcion getInscripcionBy_Persona_Curso(int idPersona, int idCurso) {
+		return dI.getInscripcionBy_Persona_Curso(idPersona, idCurso);
     }
 }

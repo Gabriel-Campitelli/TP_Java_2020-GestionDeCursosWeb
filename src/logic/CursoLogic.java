@@ -43,7 +43,10 @@ public class CursoLogic {
 		dc.edit(curso);
 		
 	}
-
+	public void countLike(int id_curso, int like) {
+		dc = new DataCurso();
+		dc.countLike(id_curso,like);
+	}
 
 
 }

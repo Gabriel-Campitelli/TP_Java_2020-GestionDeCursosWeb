@@ -12,6 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+
   <title>Modern Business - Start Bootstrap Template</title>
 
   <!-- Bootstrap core CSS -->
@@ -19,6 +20,8 @@
 
   <!-- Custom styles for this template -->
   <link href="css/modern-business.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <%
 	Object opcion = new Object();
@@ -83,7 +86,12 @@
         <p><%= curso.getDescripcion() %></p>
         <a class="btn btn-primary" href="cursodetail?curso=<%= curso.getId()%>">Ver Curso
           <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>  
+        <%if(opcion == "Mis Cursos") { %> 
+        <a href="like?idCurso=<%=curso.getId() %>" class="btn btn-primary" class="btn btn-primary">
+          <i class="fa fa-thumbs-up" style="color:white;" ></i>
         </a>
+        <% } %>
       </div>
     </div>
     <!-- /.row -->
@@ -129,7 +137,7 @@
     </div>
     <!-- /.container -->
   </footer>
-
+  
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

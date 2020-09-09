@@ -22,7 +22,7 @@ public class DataInscripcion {
 							);
 			stmt.setInt(1, i.getId_persona());
 			stmt.setInt(2, i.getId_comision());
-			stmt.setBoolean(3, i.getLike());
+			stmt.setInt(3, i.getLike());
 
 			stmt.executeUpdate();
 			
@@ -39,20 +39,24 @@ public class DataInscripcion {
 		}
     }
 	
-	public void editLike(Inscripcion i) {
+	public void editLike(Inscripcion i, int id_curso) {
 		
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"update inscripciones set inscripciones.like=? where id_persona=? and id_curso=?"
+							"update inscripciones set inscripciones.like=? where id_persona=? and id_comision=?; " 
 							);
-
-			stmt.setBoolean(1, i.getLike());
+			if(i.getLike() == 0) {
+				stmt.setInt(1, 1);
+			}
+			else {
+				stmt.setInt(1, 0);
+			}
 			stmt.setInt(2, i.getId_persona());
 			stmt.setInt(3, i.getId_comision());
-				
+			
 			stmt.executeUpdate();
 			
 		}  catch (SQLException e) {
@@ -99,6 +103,44 @@ public class DataInscripcion {
             }
 		}
     }
+	
+	public Inscripcion getInscripcionBy_Persona_Curso(int idPersona, int idCurso) {
+		// TODO Auto-generated method stub
+			Inscripcion insc = new Inscripcion();
+			PreparedStatement stmt=null;
+			ResultSet rs=null;
+			try {
+				stmt=DbConnector.getInstancia().getConn().prepareStatement(
+						"SELECT inscripciones.* FROM inscripciones\r\n" + 
+						"INNER JOIN\r\n" + 
+						"comisiones ON inscripciones.id_comision = comisiones.id_comision\r\n" + 
+						"WHERE comisiones.id_curso = ? and inscripciones.id_persona =?;"
+						);
+				stmt.setInt(1,idCurso);
+				stmt.setInt(2,idPersona);
+				rs=stmt.executeQuery();
+				if(rs!=null && rs.next()) {
+					
+					insc.setId_comision(rs.getInt("id_comision"));
+					insc.setId_persona(rs.getInt("id_persona"));
+					insc.setLike(rs.getInt("like"));
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rs!=null) {rs.close();}
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return insc;
+		}
+
 	
 	
 }

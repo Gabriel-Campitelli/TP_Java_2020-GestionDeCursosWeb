@@ -173,6 +173,40 @@ public class DataCurso {
 		
 	}
 	
+public void countLike(int id_curso, int like) {
+		
+		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"update cursos set likes = ? + cursos.likes where id_curso=?"
+							);
+			
+			if(like == 1) {
+				stmt.setInt(1, 1);
+			}
+			else {
+				stmt.setInt(1, -1);
+			}
+			stmt.setInt(2, id_curso);
+			stmt.executeUpdate();
+						
+		}  catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+		
+	}
+	
+	
 	public LinkedList<Curso> getByIdPersona(int id) {
 		// TODO Auto-generated method stub
 			

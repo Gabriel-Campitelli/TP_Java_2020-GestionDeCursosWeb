@@ -4,7 +4,7 @@ public class Inscripcion {
 
 	int id_persona;
 	int id_comision;
-	boolean like;
+	int like;
 	
 	
 	public int getId_persona() {
@@ -19,11 +19,17 @@ public class Inscripcion {
 	public void setId_comision(int id_curso) {
 		this.id_comision = id_curso;
 	}
-	public boolean getLike() {
+	public int getLike() {
 		return like;
 	}
-	public void setLike(boolean like) {
+	public void setLike(int like) {
 		this.like = like;
+	}
+	
+	@Override
+	public String toString() {
+		return "\nInscripcion [id=" + id_persona + ", idComision=" + id_comision + ", Like=" + like + "]"
+				;
 	}
 	
 }

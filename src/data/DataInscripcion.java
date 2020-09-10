@@ -141,6 +141,44 @@ public class DataInscripcion {
 			return insc;
 		}
 
+	public LinkedList<Inscripcion> getInscripcionesByPersona(int id_persona) {
+		// TODO Auto-generated method stub
+		LinkedList<Inscripcion> insc = new LinkedList<>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select * from inscripciones where inscripciones.id_persona = ?"
+					);
+			stmt.setInt(1,id_persona);
+
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				
+				Inscripcion i = new Inscripcion();
+				
+				i.setId_comision(rs.getInt("id_comision"));
+				i.setId_persona(rs.getInt("id_persona"));
+				i.setLike(rs.getInt("like"));
+				
+				insc.add(i);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return insc;
+	}
+
 	
 	
 }

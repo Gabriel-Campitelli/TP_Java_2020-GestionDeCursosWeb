@@ -31,10 +31,7 @@
 </head>
 
 <body>
- <%= curso%>
- <%= lc%>
- <%= ocultar %>
- 
+														 
  <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">

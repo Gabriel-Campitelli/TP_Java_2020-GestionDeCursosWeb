@@ -78,6 +78,7 @@ public class CursoDetail extends HttpServlet {
 		Persona user = (Persona)request.getSession().getAttribute("usuario");
 		
 		LinkedList<Curso> userCursos = (LinkedList<Curso>)request.getSession().getAttribute("userCursos");
+		
 		Curso cursoActual = (Curso)request.getAttribute("curso");		
 		ComisionLogic comLogic = new ComisionLogic();		
 		LinkedList<Comision> comActuales= comLogic.getComisionesByCurso(cursoActual.getId());
@@ -87,30 +88,36 @@ public class CursoDetail extends HttpServlet {
 		request.setAttribute("prueba", comActuales);
 		request.setAttribute("idCurso", cursoActual.getId());
 		for(Curso c : userCursos) {
-			if( (cursoActual.getFecha_inicio().after(c.getFecha_inicio()) 
-					&& cursoActual.getFecha_inicio().before(cursoActual.getFecha_fin()) ) || 
+			if( 
+					(cursoActual.getFecha_inicio().after(c.getFecha_inicio()) 
+					&& cursoActual.getFecha_inicio().before(c.getFecha_fin()) ) || 
 					(cursoActual.getFecha_inicio().before(c.getFecha_inicio()) 
-					&& cursoActual.getFecha_fin().after(cursoActual.getFecha_inicio()) ) ) {
-				listaCursosAComparar.add(c);
-			}
-			for(Comision com : userComisiones ) {
-				if(com.getIdCurso() == c.getId()) {
-					for(Comision comActual : comActuales) {
-						int index = 0;
-						int horaInicioComActual = Integer.parseInt(comActual.getHoraInicio().replaceAll("[^0-9.]", ""));
-						int horaFinComActual = Integer.parseInt(comActual.getHoraFin().replaceAll("[^0-9.]", ""));
-						int horaInicioCom = Integer.parseInt(com.getHoraInicio().replaceAll("[^0-9.]", ""));
-						int horaFinCom = Integer.parseInt(com.getHoraFin().replaceAll("[^0-9.]", ""));
+					&& cursoActual.getFecha_fin().after(c.getFecha_inicio()) ) ||
+					(cursoActual.getFecha_inicio().equals(c.getFecha_inicio()) 
+							&& cursoActual.getFecha_fin().equals(c.getFecha_fin()) )
+					) {
+				request.setAttribute("b1", "Pasa el primer if");
+				for(Comision com : userComisiones ) {
+					if(com.getIdCurso() == c.getId()) {
 						
-						if( comActual.getDiaSemana().equals(com.getDiaSemana()) && ((horaInicioComActual >= horaInicioCom && horaInicioComActual <= horaFinCom) || 
-								(horaInicioComActual < horaInicioCom && horaFinComActual > horaInicioCom)	) ) {
-							comActuales.remove(index);
+						for(Comision comActual : comActuales) {
 							
+							int horaInicioComActual = Integer.parseInt(comActual.getHoraInicio().replaceAll("[^0-9.]", ""));
+							int horaFinComActual = Integer.parseInt(comActual.getHoraFin().replaceAll("[^0-9.]", ""));
+							int horaInicioCom = Integer.parseInt(com.getHoraInicio().replaceAll("[^0-9.]", ""));
+							int horaFinCom = Integer.parseInt(com.getHoraFin().replaceAll("[^0-9.]", ""));
+							
+							if( comActual.getDiaSemana().equals(com.getDiaSemana()) && ((horaInicioComActual >= horaInicioCom && horaInicioComActual < horaFinCom) || 
+									(horaInicioComActual < horaInicioCom && horaFinComActual > horaInicioCom)	) ) {
+							
+								comActuales.remove(comActual);								
+								
+								
+							}
 						}
-						index ++;
 					}
 				}
-			}
+			}		
 		}
 		return comActuales;
 	}

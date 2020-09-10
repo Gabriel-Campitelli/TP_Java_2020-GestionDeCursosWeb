@@ -65,6 +65,7 @@ public class Login extends HttpServlet {
 		p = pL.getByUser(p);
 		
 		request.getSession().setAttribute("usuario", p);
+		
 		if(p.getRol() == 1) {
 			CursoLogic cl = new CursoLogic();
 			LinkedList<Curso> userCursos = new LinkedList<>();

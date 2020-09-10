@@ -53,7 +53,8 @@ public class Like extends HttpServlet {
 		CursoLogic cl = new CursoLogic();
 		cl.countLike(idCurso, i.getLike());
 		
-		response.getWriter().append(i.toString());
+		request.getRequestDispatcher("/home").forward(request, response);
+
 	}
 
 	/**

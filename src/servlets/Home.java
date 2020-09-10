@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Comision;
 import entities.Curso;
+import entities.Inscripcion;
 import entities.Persona;
+import logic.ComisionLogic;
 import logic.CursoLogic;
 import logic.InscripcionLogic;
 
@@ -37,14 +39,14 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 		CursoLogic cl = new CursoLogic();
 		LinkedList<Curso> cursos = new LinkedList<Curso>();
-		
+	/*
 		if(request.getParameter("action") == "inscripcion") {
 			request.setAttribute("pageName", "Cursos");
 			cursos = cl.getAll();
 			request.setAttribute("cursos", cursos);
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 		}
-
+	*/
 		switch (request.getParameter("param")) {
 		case "home":
 			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
@@ -57,17 +59,17 @@ public class Home extends HttpServlet {
 			break;
 		case "mis-cursos":
 			request.setAttribute("pageName", "Mis Cursos");
-			//Persona user = (Persona)request.getSession().getAttribute("usuario");
-			//cursos = cl.getByIdPersona(user.getId_persona());
 			
 			cursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
 			request.setAttribute("cursos", cursos);
+			
+			LinkedList<Integer> listaLikes = this.likesSortedByCursos(request, response, cursos);
+			request.setAttribute("likes", listaLikes);
+			
+			
+			
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 			
-			break;
-		case "cursos-qpr":
-			request.setAttribute("pageName", "Cursos que puedo realizar");
-			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 			break;
 		default:
 			System.out.println("Error: opcion no disponible");
@@ -84,6 +86,42 @@ public class Home extends HttpServlet {
 		//doGet(request, response);
 	}
 	
+	public LinkedList<Integer> likesSortedByCursos(HttpServletRequest request, HttpServletResponse response,LinkedList<Curso> cursos) {
+		
 	
+		
+		Persona user = (Persona) request.getSession().getAttribute("usuario");
+		
+		InscripcionLogic il = new InscripcionLogic();
+		LinkedList<Inscripcion> insc = new LinkedList<Inscripcion>();
+		insc = il.getInscripcionesByPersona(user.getId_persona());
+		request.setAttribute("insc", insc);
+		
+		ComisionLogic comLogic = new ComisionLogic();
+		LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
+		request.setAttribute("com", userComisiones);
+		LinkedList<Integer> listaLikes = new LinkedList<>();
+		for(Curso c: cursos) {		
+			for(Comision uc : userComisiones) {
+				if(c.getId() == uc.getIdCurso()) {
+					for(Inscripcion i : insc) {
+						if(i.getId_comision() == uc.getIdComision()) {
+							if(i.getLike()==1) {
+								listaLikes.add(1);
+								request.setAttribute("prueba",1);
+							}
+							else {
+								listaLikes.add(0);
+							}							
+						}						
+					}
+				}
+			}
+		}
+	  return listaLikes;
+	}
+	
+	
+
 }
 

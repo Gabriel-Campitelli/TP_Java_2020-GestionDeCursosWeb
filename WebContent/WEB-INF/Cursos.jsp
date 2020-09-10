@@ -27,6 +27,7 @@
 	Object opcion = new Object();
     opcion = request.getAttribute("pageName");
     LinkedList<Curso> cursos = new LinkedList<>();
+    LinkedList<Integer> likes = (LinkedList<Integer>) request.getAttribute("likes");
 	if(opcion != "Mis Cursos") {
 	cursos = (LinkedList<Curso>)request.getAttribute("cursos");
 	}
@@ -38,7 +39,7 @@
 </head>
 
 <body>
-<%= cursos %>
+
 <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -72,30 +73,40 @@
       <li class="breadcrumb-item active"><%= opcion %></li>
     </ol>
 
-<%if (cursos != null) { %>
-    <!-- Cursos -->
-	   <%for (Curso curso : cursos) { %> 
-    <div class="row">
-      <div class="col-md-7">
-        <a href="#">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="<%= curso.getUrl()%>" alt="">
-        </a>
-      </div>
-      <div class="col-md-5">
-        <h3><%= curso.getNombre()%></h3>
-        <p><%= curso.getDescripcion() %></p>
-        <a class="btn btn-primary" href="cursodetail?curso=<%= curso.getId()%>">Ver Curso
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>  
-        <%if(opcion == "Mis Cursos") { %> 
-        <a href="like?idCurso=<%=curso.getId() %>" class="btn btn-primary" class="btn btn-primary">
-          <i class="fa fa-thumbs-up" style="color:white;" ></i>
-        </a>
-        <% } %>
-      </div>
-    </div>
-    <!-- /.row -->
+<!-- Cursos -->
 
+	<%if (cursos != null) { %>
+    
+   <% for(int i = 0; i <= cursos.size() -1; i++) { %>
+    
+	  
+		   <div class="row">
+			   <div class="col-md-7">
+				   <a href="#">
+				   		<img class="img-fluid rounded mb-3 mb-md-0" src="<%= cursos.get(i).getUrl()%>" alt="">
+				   </a>
+	    	   </div>
+      		   <div class="col-md-5">
+			       <h3><%= cursos.get(i).getNombre()%></h3>
+			       <p><%= cursos.get(i).getDescripcion() %></p>
+			       <a class="btn btn-primary" href="cursodetail?curso=<%= cursos.get(i).getId()%>">Ver Curso
+			         <span class="glyphicon glyphicon-chevron-right"></span>
+			       </a>  			       
+			        <%if(opcion == "Mis Cursos") { %> 
+		        	   <%if(likes.get(i) == 0) { %> 
+		               	   <a href="like?idCurso=<%=cursos.get(i).getId() %>&param=mis-cursos" class="btn btn-primary" >
+		          		    	<i class="fa fa-thumbs-up" style="color:white;" ></i> like
+		       			   </a>
+		       		   <% } %>
+		        	   <%if(likes.get(i) == 1) { %>   
+		        		    <a href="like?idCurso=<%=cursos.get(i).getId() %>&param=mis-cursos" class="btn btn-danger">
+		          		    	<i class="fa fa-thumbs-down" style="color:white;" ></i> dislike		       			   
+		          		    </a>	
+		       		   <% } %>
+        	   <% } %>
+        	  
+      		   </div>
+            </div>    <!-- /.row -->
     <hr>
     <%  }%>
 <% }%>

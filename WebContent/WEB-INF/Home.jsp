@@ -116,7 +116,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
       </div>
       <div class="col-md-4">
-        <a class="btn btn-lg btn-secondary btn-block" href="#">Explorar Cursos</a>
+        <a class="btn btn-lg btn-secondary btn-block" href="home?param=cursos">Explorar Cursos</a>
       </div>
     </div>
 

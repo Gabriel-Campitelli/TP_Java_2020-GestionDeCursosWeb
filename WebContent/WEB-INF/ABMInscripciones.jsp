@@ -14,7 +14,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Administrar cursos</title>
+  <title>Administrar inscripciones</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -273,7 +273,7 @@
 
 <body>
  <!-- <%=cursos%>
-  <%= request.getParameter("id_curso") %>-->
+  <%= request.getParameter("inscripciones") %>-->
   
   
 <div id="Nav"></div>

@@ -20,13 +20,24 @@
   <link href="css/modern-business.css" rel="stylesheet">
 
   <!-- jQuery-->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
+
+  <!-- CSS para el form -->
+  <link href="css/cursos-style.css" rel="stylesheet">
+  
+    <!-- para el DATETIMEPICKER -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 
 
   <!-- Script para MasterPage -->
-  <script language="javascript" type="text/javascript" >
+  <script type="text/javascript" >
   
   $(document).ready(function (){
 		
@@ -36,82 +47,84 @@
 	})
 
 	function AgregarMenu(){
-		
-		var menu = document.getElementById("Menu");
-		menu.innerHTML = 
-		      '<!-- Sidebar Column --> '+
+			
+			var menu = document.getElementById("Menu");
+			menu.innerHTML = 
+			      '<!-- Sidebar Column --> '+
+			      
+			        '<div class="list-group"> '+
+					  '<a class="list-group-item" href="admin-home?param=admin-cursos">Cursos</a>'+
+			          '<a class="list-group-item" href="admin-home?param=admin-comisiones">Comisiones</a> '+
+			          '<a class="list-group-item" href="admin-home?param=admin-inscripciones">Inscripciones</a> '+
+					'</div>'
+	//href="home?param=cursos"
+
+		}
+
+		function AgregarNav(){
+			
+			var nav = document.getElementById("Nav");
+			nav.innerHTML = 
+			
+		  '<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">'+
+		      '<a class="navbar-brand" href="index.html">Cursos UTN</a>'+
+
+		      '<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">'+
+		        '<span class="navbar-toggler-icon"></span>'+
+		      '</button>'+
+
+
+		      '<div class="collapse navbar-collapse" id="navbarResponsive">'+
+		        '<ul class="navbar-nav ml-auto">'+
+
+
+		          '<li class="nav-item">'+
+		            '<a class="nav-link" href="contact.html">Link auxiliar</a>'+
+		          '</li>'+
+
+		          '<li class="nav-item active dropdown">'+
+		            '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</a>'+
+		            '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">'+
+		              '<a class="dropdown-item " href="sidebar.html">Configuración de cuenta</a>'+
+		              '<a class="dropdown-item" href="404.html">Salir</a>'+
+		            '</div>'+
+		          '</li>'+
+
+		        '</ul>'+
+
+		      '</div>'+
 		      
-		        '<div class="list-group"> '+
-				  '<a class="list-group-item" href="admin-home?param=admin-cursos">Cursos</a>'+
-		          '<a class="list-group-item" href="admin-home?param=admin-comisiones">Comisiones</a> '+
-		          '<a class="list-group-item" href="admin-home?param=admin-clientes">Clientes</a> '+
-				'</div>'
-//href="home?param=cursos"
+		  '</nav>'+
 
-	}
 
-	function AgregarNav(){
+	      '<div class="container">'+
+
+			    '<!-- Page Heading/Breadcrumbs --> '+
+			    
+			    '<h1 class="mt-4 mb-3">Inicio</h1> '+
+			
+			    '<ol class="breadcrumb"> '+
+			      '<li class="breadcrumb-item"> '+
+			 
+			        '<a href="admin-home?param=admin-home">Home</a> '+
+			      '</li> '+
+			      '<li class="breadcrumb-item active">About</li> '+
+			    '</ol> '+
+			'</div>'
 		
-		var nav = document.getElementById("Nav");
-		nav.innerHTML = 
-		
-	  '<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">'+
-	    '<div class="container">'+
-	      '<a class="navbar-brand" href="index.html">Cursos UTN</a>'+
+		}
 
-	      '<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">'+
-	        '<span class="navbar-toggler-icon"></span>'+
-	      '</button>'+
-
-	      '<div class="collapse navbar-collapse" id="navbarResponsive">'+
-	        '<ul class="navbar-nav ml-auto">'+
-
-
-	          '<li class="nav-item">'+
-	            '<a class="nav-link" href="contact.html">Link auxiliar</a>'+
-	          '</li>'+
-
-	          '<li class="nav-item active dropdown">'+
-	            '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</a>'+
-	            '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">'+
-	              '<a class="dropdown-item " href="sidebar.html">Configuración de cuenta</a>'+
-	              '<a class="dropdown-item" href="404.html">Salir</a>'+
-	            '</div>'+
-	          '</li>'+
-
-	        '</ul>'+
-
-	      '</div>'+
-	    '</div>'+
-
-	  '</nav>'+
-
-
-		  
-		    '<!-- Page Heading/Breadcrumbs --> '+
-		    '<h1 class="mt-4 mb-3">Inicio</h1> '+
-		
-		    '<ol class="breadcrumb"> '+
-		      '<li class="breadcrumb-item"> '+
-		 
-		        '<a href="admin-home?param=admin-home">Home</a> '+
-		      '</li> '+
-		      '<li class="breadcrumb-item active">About</li> '+
-		    '</ol> '
-
-	}
-
-	function AgregarFooter(){
-		var footer = document.getElementById("Footer");
-		footer.innerHTML = 
-		
-		  '<footer class="py-5 bg-dark border-top"> '+
-				'<div class="container"> '+
-			      '<p class="m-0 text-center text-white">Copyright &copy; UTN-Shops 2020</p> '+
-			    '</div> '+
-		  '</footer>'
-				
-	}
+		function AgregarFooter(){
+			var footer = document.getElementById("Footer");
+			footer.innerHTML = 
+			
+			  '<footer class="py-5 bg-dark border-top"> '+
+					'<div class="container"> '+
+				      '<p class="m-0 text-center text-white">Copyright &copy; UTN-Shops 2020</p> '+
+				    '</div> '+
+			  '</footer>'
+					
+		}
   
   </script>
 
@@ -120,29 +133,28 @@
 
 <body>
 
-<a href="prueba?param=cursos">Probando</a>
 
-  <div class="container">
-    <div id="Nav"></div>
+<div id="Nav"></div>
+  <div class="container" style="min-height: 60vh;">
 
     <!-- Body de la pagina -->
-    <div class="row" style="min-height: 50vh;"> 
+    <div class="row"> 
       <!-- Menu de la izquierda-->
       <div id="Menu" class="col-2"></div>
 
       <!-- Content Column -->
       <div class="col-10 " >
         <h2>Bienvenido</h2>
-        <p>Lorem ipsum dolor sit ame  t, consectetur adipisicing elit. Soluta, et temporibus, facere perferendis veniam beatae non debitis, numquam blanditiis necessitatibus vel mollitia dolorum laudantium, voluptate dolores iure maxime ducimus fugit.</p>
+        <p>Desde aquí podrá gestionar tanto cursos como comisiones e inscripciones de alumnos.</p>
         </div>
       </div>
   
     </div>
-    
+    <!--  -->
     <!-- Footer de la pagina -->
     <div id="Footer"></div>
 
-    </div>
+ 
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>

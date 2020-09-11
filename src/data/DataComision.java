@@ -62,9 +62,12 @@ public class DataComision {
 			stmt.setInt(1, nuevaComision.getIdCurso());
 			stmt.setInt(2, nuevaComision.getCupo());
 			stmt.setString(3, nuevaComision.getDiaSemana());
-			Time horaInicio = Time.valueOf(nuevaComision.getHoraInicio());
+			
+			Time horaInicio = Time.valueOf(nuevaComision.getHoraInicio()+":00");
 			stmt.setTime(4, horaInicio);
-			Time horaFin = Time.valueOf(nuevaComision.getHoraFin());
+			//Time horaFin = Time.valueOf(nuevaComision.getHoraFin());
+			//stmt.setTime(5, horaFin);
+			Time horaFin = Time.valueOf(nuevaComision.getHoraFin()+":00");
 			stmt.setTime(5, horaFin);
 			stmt.executeUpdate();
 			
@@ -125,9 +128,9 @@ public class DataComision {
 				stmt.setInt(1, comision.getIdCurso());
 				stmt.setInt(2, comision.getCupo());
 				stmt.setString(3, comision.getDiaSemana());
-				Time horaInicio = Time.valueOf(comision.getHoraInicio());
-				stmt.setTime(4, horaInicio);
-				Time horaFin = Time.valueOf(comision.getHoraFin());
+				Time horaInicio = Time.valueOf(comision.getHoraInicio()+":00");
+				stmt.setTime(4, horaInicio);	
+				Time horaFin = Time.valueOf(comision.getHoraFin()+":00");
 				stmt.setTime(5, horaFin);
 				stmt.setInt(6, comision.getIdComision());
 				stmt.executeUpdate();

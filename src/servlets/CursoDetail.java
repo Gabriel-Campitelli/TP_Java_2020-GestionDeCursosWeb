@@ -46,7 +46,9 @@ public class CursoDetail extends HttpServlet {
 		LinkedList<Curso> probando = cl.getAll();
 		LinkedList<Comision> comActuales=  this.getComisionesALasQueMePuedoInscribir(request, response);
 		request.setAttribute("probando", comActuales);
-		LinkedList<Curso> userCursos = (LinkedList<Curso>)request.getSession().getAttribute("userCursos");
+		
+		Persona user = (Persona)request.getSession().getAttribute("usuario");
+		LinkedList<Curso> userCursos = cl.getByIdPersona(user.getId_persona());
 		 boolean ocultar = false;
 	     for(Curso mc: userCursos) {
 	    	 if(mc.getId() == id) {
@@ -77,7 +79,9 @@ public class CursoDetail extends HttpServlet {
 		
 		Persona user = (Persona)request.getSession().getAttribute("usuario");
 		
-		LinkedList<Curso> userCursos = (LinkedList<Curso>)request.getSession().getAttribute("userCursos");
+		
+		CursoLogic cl = new CursoLogic();
+		LinkedList<Curso> userCursos = cl.getByIdPersona(user.getId_persona());
 		
 		Curso cursoActual = (Curso)request.getAttribute("curso");		
 		ComisionLogic comLogic = new ComisionLogic();		

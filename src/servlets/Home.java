@@ -59,16 +59,20 @@ public class Home extends HttpServlet {
 			break;
 		case "mis-cursos":
 			request.setAttribute("pageName", "Mis Cursos");
+			LinkedList<Curso> userCursos = new LinkedList<>();
 			
-			cursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
-			request.setAttribute("cursos", cursos);
+			Persona p =(Persona)request.getSession().getAttribute("usuario");
+			
+			userCursos = cl.getByIdPersona(p.getId_persona());
+			
+			request.setAttribute("cursos", userCursos);
 			
 			LinkedList<Integer> listaLikes = this.likesSortedByCursos(request, response, cursos);
 			request.setAttribute("likes", listaLikes);
 			
 			
-			
-			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+			response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString());
+			//request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 			
 			break;
 		default:

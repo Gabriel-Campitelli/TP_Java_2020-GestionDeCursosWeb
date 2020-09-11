@@ -29,13 +29,8 @@
 	Object opcion = new Object();
     opcion = request.getAttribute("pageName");
     LinkedList<Curso> cursos = new LinkedList<>();
+    cursos = (LinkedList<Curso>)request.getAttribute("cursos");
     LinkedList<Integer> likes = (LinkedList<Integer>) request.getAttribute("likes");
-	if(opcion != "Mis Cursos") {
-	cursos = (LinkedList<Curso>)request.getAttribute("cursos");
-	}
-	else {
-	cursos = (LinkedList<Curso>)request.getSession().getAttribute("userCursos");
-	}
   %>
 
 </head>

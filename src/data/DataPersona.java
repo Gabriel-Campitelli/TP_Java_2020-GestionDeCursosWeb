@@ -64,12 +64,12 @@ public class DataPersona {
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				p=new Persona();
-				p.setId_persona((Integer)rs.getInt("id_persona"));
+				p.setId_persona(rs.getInt("id_persona"));
 				p.setDni(rs.getString("dni"));
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
 				p.setUsuario(rs.getString("usuario"));
-				p.setRol((Integer)rs.getInt("rol"));
+				p.setRol(rs.getInt("rol"));
 				p.setEmail(rs.getString("email"));
 							}
 		} catch (SQLException e) {

@@ -14,8 +14,8 @@ public class Curso {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(Integer inte) {
+		this.id = inte;
 	}
 	public String getDescripcion() {
 		return descripcion;

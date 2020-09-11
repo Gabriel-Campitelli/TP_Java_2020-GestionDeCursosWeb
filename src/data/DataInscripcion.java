@@ -154,14 +154,15 @@ public class DataInscripcion {
 
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				
-				Inscripcion i = new Inscripcion();
-				
-				i.setId_comision(rs.getInt("id_comision"));
-				i.setId_persona(rs.getInt("id_persona"));
-				i.setLike(rs.getInt("like"));
-				
-				insc.add(i);
+				while(rs.next()) {
+					Inscripcion i = new Inscripcion();
+					
+					i.setId_comision(rs.getInt("id_comision"));
+					i.setId_persona(rs.getInt("id_persona"));
+					i.setLike(rs.getInt("like"));
+					
+					insc.add(i);
+				}
 
 			}
 		} catch (SQLException e) {

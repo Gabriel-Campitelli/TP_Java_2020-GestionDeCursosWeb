@@ -178,7 +178,7 @@ body {
                   </div>
 
                   <div class="form-label-group">
-                    <input type="usuario" id="inputUsuario" name="usuario" class="form-control" placeholder="Inserte usuario" required>
+                    <input type="text" id="inputUsuario" name="usuario" class="form-control" placeholder="Inserte usuario" required>
                     <label for="inputUsuario">Usuario</label>
                   </div>
                   

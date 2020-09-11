@@ -15,7 +15,7 @@ public class ComisionLogic {
 		return dc.getAll();
 	}
 	
-	public void addComision(Comision nuevaComision) {
+	public void create(Comision nuevaComision) {
 		dc = new DataComision();
 		dc.addComision(nuevaComision);
 	}

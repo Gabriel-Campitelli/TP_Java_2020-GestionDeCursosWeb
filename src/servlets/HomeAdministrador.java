@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import logic.PersonaLogic;
 import logic.ComisionLogic;
 import logic.CursoLogic;
-
-
+import logic.InscripcionLogic;
 import entities.Comision;
 import entities.Curso;
-import entities.Persona;
+import entities.Inscripcion;
 
 /**
  * Servlet implementation class HomeAdministrador
@@ -41,7 +40,7 @@ public class HomeAdministrador extends HttpServlet {
 		
 		CursoLogic curL = new CursoLogic();
 		ComisionLogic comL = new ComisionLogic();
-		PersonaLogic pL = new PersonaLogic();
+		InscripcionLogic iL = new InscripcionLogic();
 		
 	
 		switch (request.getParameter("param")) {
@@ -62,12 +61,13 @@ public class HomeAdministrador extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/ABMComisiones.jsp").forward(request, response);
 			break;
 
-		case "admin-clientes":
-			request.setAttribute("pageName", "Clientes");
-			LinkedList<Persona> clientes = pL.getAll();
-			request.setAttribute("clientes", clientes);
-			request.getRequestDispatcher("WEB-INF/ABMClientes.jsp").forward(request, response);
+		case "admin-inscripciones":
+			request.setAttribute("pageName", "Inscripciones");
+			LinkedList<Inscripcion> inscripciones= iL.getAll();
+			request.setAttribute("inscripciones", inscripciones);
+			request.getRequestDispatcher("WEB-INF/ABMInscripciones.jsp").forward(request, response);
 			break;
+			
 		default:
 			System.out.println(request.getParameter("param"));
 			System.out.println("Error: opcion no disponible");

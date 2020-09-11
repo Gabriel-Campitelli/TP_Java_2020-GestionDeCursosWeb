@@ -76,9 +76,17 @@
       <div class="col-md-4">
         <h3 class="my-3"><%= curso.getNombre() %></h3>
         <p><%=curso.getDescripcion()%></p>
+        <p>Comienza: <%=curso.getFecha_inicio()%></p>
+        <p>Finaliza: <%=curso.getFecha_fin()%></p>
+        <p><%=curso.getLikes()%> Likes</p>
+        <%if(!ocultar) { %>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 		  Inscribirme
 		</button>
+		<% } %>
+		 <%if(ocultar) { %>
+		 	<h5><span class="badge badge-success">Inscripto al curso</span></h5>
+	 <% } %>
       </div>
 
     </div>
@@ -157,7 +165,8 @@
 	   			<input type="hidden" name="curso.desc" value="<%= curso.getDescripcion() %>">
 	   			<input type="hidden" name="curso.url" value="<%= curso.getUrl() %>">
 	            <input type="hidden" name="curso.inicio" value="<%= curso.getFecha_inicio() %>">
-	            <input type="hidden" name="curso.fin" value="<%= curso.getFecha_fin() %>">          
+	            <input type="hidden" name="curso.fin" value="<%= curso.getFecha_fin() %>">       
+	            <input type="hidden" name="curso.likes" value="<%= curso.getLikes() %>">    
 	          </div>
 	      </div>
 	      <div class="modal-footer">

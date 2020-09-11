@@ -52,6 +52,7 @@ public class InscripcionServlet extends HttpServlet {
 		c.setDescripcion(request.getParameter("curso.desc"));
 		c.setNombre(request.getParameter("curso.nombre"));
 		c.setUrl(request.getParameter("curso.url"));
+		c.setLikes(Integer.parseInt(request.getParameter("curso.likes")));
 		SimpleDateFormat formatter =new SimpleDateFormat("yyyy-mm-dd"); 
 		try {
 			Date fecha_fin = formatter.parse(request.getParameter("curso.fin"));

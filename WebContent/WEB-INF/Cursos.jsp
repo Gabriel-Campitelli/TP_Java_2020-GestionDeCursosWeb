@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entities.Curso" %>
 <%@ page import="java.util.LinkedList" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +25,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <%
+  	SimpleDateFormat formatter =new SimpleDateFormat("yyyy-mm-dd"); 
 	Object opcion = new Object();
     opcion = request.getAttribute("pageName");
     LinkedList<Curso> cursos = new LinkedList<>();
@@ -89,6 +91,10 @@
       		   <div class="col-md-5">
 			       <h3><%= cursos.get(i).getNombre()%></h3>
 			       <p><%= cursos.get(i).getDescripcion() %></p>
+			       <p>Comienza: <%= formatter.format(cursos.get(i).getFecha_inicio()) %></p>
+			       <p>Finaliza: <%= formatter.format(cursos.get(i).getFecha_fin()) %></p>
+			       <p><%=cursos.get(i).getLikes() %> Likes</p>
+			       
 			       <a class="btn btn-primary" href="cursodetail?curso=<%= cursos.get(i).getId()%>">Ver Curso
 			         <span class="glyphicon glyphicon-chevron-right"></span>
 			       </a>  			       

@@ -9,6 +9,7 @@ public class Curso {
 	private Date fecha_fin;
 	private String url;
 	private String nombre;
+	private int likes;
 	
 	public int getId() {
 		return id;
@@ -51,6 +52,12 @@ public class Curso {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 	
 }

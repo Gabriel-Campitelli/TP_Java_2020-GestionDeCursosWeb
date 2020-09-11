@@ -1,12 +1,15 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Curso;
 import entities.Inscripcion;
 import entities.Persona;
 import logic.CursoLogic;
@@ -52,6 +55,20 @@ public class Like extends HttpServlet {
 		
 		CursoLogic cl = new CursoLogic();
 		cl.countLike(idCurso, i.getLike());
+		
+		LinkedList<Curso> userCursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
+		for(Curso uc: userCursos) {
+			if(uc.getId() == idCurso) {
+				if(i.getLike() == 1) {
+					uc.setLikes(uc.getLikes()+1);
+				}
+				else {
+					uc.setLikes(uc.getLikes()-1);
+				}
+				
+			}
+		}
+		
 		
 		request.getRequestDispatcher("/home").forward(request, response);
 

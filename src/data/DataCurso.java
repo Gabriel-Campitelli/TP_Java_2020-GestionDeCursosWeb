@@ -28,6 +28,7 @@ public class DataCurso {
 					curso.setFecha_fin(rs.getDate("fecha_fin"));
 					curso.setUrl(rs.getString("url_imagen"));
 					curso.setNombre(rs.getString("nombre"));
+					curso.setLikes(rs.getInt("likes"));
 					
 					cursos.add(curso);
 				}
@@ -69,6 +70,7 @@ public class DataCurso {
 					curso.setFecha_fin(rs.getDate("fecha_fin"));
 					curso.setUrl(rs.getString("url_imagen"));
 					curso.setNombre(rs.getString("nombre"));
+					curso.setLikes(rs.getInt("likes"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -216,7 +218,7 @@ public void countLike(int id_curso, int like) {
 			try {
 				stmt=DbConnector.getInstancia().getConn().prepareStatement(
 	"SELECT cursos.id_curso, cursos.descripcion, cursos.fecha_inicio, cursos.fecha_fin, cursos.url_imagen,\r\n" + 
-	"cursos.nombre\r\n" + 
+	"cursos.nombre, cursos.likes \r\n" + 
 	"FROM (select inscripciones.id_comision from inscripciones where id_persona = ?) inscripciones\r\n" + 
 	"INNER JOIN comisiones\r\n" + 
 	"ON inscripciones.id_comision = comisiones.id_comision\r\n" + 
@@ -235,6 +237,7 @@ public void countLike(int id_curso, int like) {
 						curso.setFecha_fin(rs.getDate("fecha_fin"));
 						curso.setUrl(rs.getString("url_imagen"));
 						curso.setNombre(rs.getString("nombre"));
+						curso.setLikes(rs.getInt("likes"));
 						
 						cursos.add(curso);
 					}

@@ -53,7 +53,7 @@ public class InscripcionServlet extends HttpServlet {
 		c.setNombre(request.getParameter("curso.nombre"));
 		c.setUrl(request.getParameter("curso.url"));
 		c.setLikes(Integer.parseInt(request.getParameter("curso.likes")));
-		SimpleDateFormat formatter =new SimpleDateFormat("yyyy-mm-dd"); 
+		SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd"); 
 		try {
 			Date fecha_fin = formatter.parse(request.getParameter("curso.fin"));
 			Date fecha_ini =  formatter.parse(request.getParameter("curso.inicio"));
@@ -65,10 +65,6 @@ public class InscripcionServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("curso", c);
-		
-		LinkedList<Curso> userCursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
-		userCursos.add(c);
-		request.getSession().setAttribute("userCursos", userCursos);
 		request.setAttribute("pageName", "Mis Cursos");
 		InscripcionLogic il = new InscripcionLogic();
 		Inscripcion i = new Inscripcion();
@@ -78,7 +74,9 @@ public class InscripcionServlet extends HttpServlet {
 		i.setId_persona(usuario.getId_persona());
 		i.setId_comision(Integer.parseInt(request.getParameter("item")));
 		il.addInscripcion(i);
-		request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+		
+		request.setAttribute("inscripcion","inscripcion");
+		request.getRequestDispatcher("home").forward(request, response);
 	}
 
 }

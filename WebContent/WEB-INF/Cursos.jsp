@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <%
-  	SimpleDateFormat formatter =new SimpleDateFormat("yyyy-mm-dd"); 
+  	SimpleDateFormat formatter =new SimpleDateFormat("yyyy-MM-dd"); 
 	Object opcion = new Object();
     opcion = request.getAttribute("pageName");
     LinkedList<Curso> cursos = new LinkedList<>();

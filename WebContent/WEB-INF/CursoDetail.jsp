@@ -136,18 +136,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
-      <%if(ocultar) { %>
-        <div class="modal-body">
-		 	<h6 class="my-3">Usted ya está inscripto en este curso</h3>		 	
-		 </div>
-		 <div class="modal-footer">
-		 	<a class="btn btn-primary" href="home?param=mis-cursos">Ver mis cursos</a>
-		 </div>
-	 <% } %>
-	 
+    <%if(lc.isEmpty()) {%>  
+    <div class="modal-body">
+		<h3>No hay comisiones disponibles</h3>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+      </div>
+      <% } %>  
+      	 
 	 <%if (!ocultar) { %>
-      <% if(lc != null) {%>    
+      <% if(!lc.isEmpty()) {%>    
 	      <form action="inscripcion" method="post">
 	      <div class="modal-body">
 	      	    
@@ -156,7 +155,7 @@
 	            <select class="form-control" name="item">
 	              <% for(Comision c : lc) { %>
 	    			<option value="<%=c.getIdComision()%>">
-	        			<%= c.getDiaSemana() + " " + c.getHoraInicio()%>
+	        			<%= c.getDiaSemana() + " " + c.getHoraInicio() + " a " + c.getHoraFin()%>
 	    			</option>
 				  <% } //Cerrar FOR %>
 	            </select>
@@ -175,15 +174,7 @@
 	      </div>
 	    </form>
     <% } %>
-    <%if(lc == null) {%>  
-    <div class="modal-body">
-		<h3>No hay comisiones disponibles</h3>
-    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
-      </div>
-      <% } %>  
-      <% } %>
+    <% } %>
     </div>
   </div>
 </div>

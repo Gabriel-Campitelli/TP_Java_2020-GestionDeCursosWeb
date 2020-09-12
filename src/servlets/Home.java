@@ -40,44 +40,34 @@ public class Home extends HttpServlet {
 		CursoLogic cl = new CursoLogic();
 		LinkedList<Curso> cursos = new LinkedList<Curso>();
 	
-		if(request.getParameter("action") == "inscripcion") {
-			request.setAttribute("pageName", "Cursos");
-			cursos = cl.getAll();
-			request.setAttribute("cursos", cursos);
+		if(request.getAttribute("inscripcion") == "inscripcion") {
+			
+			this.mostrarMisCursos(request, response, cl);
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 		}
-	
-		switch (request.getParameter("param")) {
-		case "home":
-			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
-			break;
-		case "cursos":
-			request.setAttribute("pageName", "Cursos");
-			cursos = cl.getAll();
-			request.setAttribute("cursos", cursos);
-			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
-			break;
-		case "mis-cursos":
-			request.setAttribute("pageName", "Mis Cursos");
-			LinkedList<Curso> userCursos = new LinkedList<>();
-			
-			Persona p =(Persona)request.getSession().getAttribute("usuario");
-			
-			userCursos = cl.getByIdPersona(p.getId_persona());
-			
-			request.setAttribute("cursos", userCursos);
-			
-			LinkedList<Integer> listaLikes = this.likesSortedByCursos(request, response, userCursos);
-			request.setAttribute("likes", listaLikes);
-			
-			
-			//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
-			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
-			
-			break;
-		default:
-			System.out.println("Error: opcion no disponible");
-			break;
+		else {
+		
+			switch (request.getParameter("param")) {
+			case "home":
+				request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
+				break;
+			case "cursos":
+				request.setAttribute("pageName", "Cursos");
+				cursos = cl.getAll();
+				request.setAttribute("cursos", cursos);
+				request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+				break;
+			case "mis-cursos":
+				this.mostrarMisCursos(request, response, cl);
+				
+				//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
+				request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+				
+				break;
+			default:
+				System.out.println("Error: opcion no disponible");
+				break;
+			}
 		}
 	}
 
@@ -86,8 +76,7 @@ public class Home extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		//doGet(request, response);
+		doGet(request, response);
 	}
 	
 	public LinkedList<Integer> likesSortedByCursos(HttpServletRequest request, HttpServletResponse response,LinkedList<Curso> cursos) {
@@ -125,7 +114,19 @@ public class Home extends HttpServlet {
 	  return listaLikes;
 	}
 	
-	
+	public void mostrarMisCursos(HttpServletRequest request, HttpServletResponse response,CursoLogic cl) {
+		request.setAttribute("pageName", "Mis Cursos");
+		LinkedList<Curso> userCursos = new LinkedList<>();
+		
+		Persona p =(Persona)request.getSession().getAttribute("usuario");
+		
+		userCursos = cl.getByIdPersona(p.getId_persona());
+		
+		request.setAttribute("cursos", userCursos);
+		
+		LinkedList<Integer> listaLikes = this.likesSortedByCursos(request, response, userCursos);
+		request.setAttribute("likes", listaLikes);
+	}
 
 }
 

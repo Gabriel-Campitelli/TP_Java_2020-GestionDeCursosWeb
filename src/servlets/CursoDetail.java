@@ -41,9 +41,6 @@ public class CursoDetail extends HttpServlet {
 		curso = cl.getById(id);
 		request.setAttribute("curso", curso);
 		
-		//Probando
-		ComisionLogic comlogic = new ComisionLogic();
-		LinkedList<Curso> probando = cl.getAll();
 		LinkedList<Comision> comActuales=  this.getComisionesALasQueMePuedoInscribir(request, response);
 		request.setAttribute("probando", comActuales);
 		
@@ -56,14 +53,6 @@ public class CursoDetail extends HttpServlet {
 	    	 }
 	     };
 	     request.setAttribute("ocultar", ocultar);
-		
-	
-		
-		
-	    
-		
-		//LinkedList<Comision> comisionesAptas = this.getComisionesALasQueMePuedoInscribir(request, response);
-		//request.setAttribute("comisiones", comisionesAptas);
 		request.getRequestDispatcher("WEB-INF/CursoDetail.jsp").forward(request, response);
 	}
 
@@ -113,8 +102,7 @@ public class CursoDetail extends HttpServlet {
 							if( 
 								comActual.getDiaSemana().equals(com.getDiaSemana()) && (
 									(horaInicioComActual >= horaInicioCom && horaInicioComActual < horaFinCom) || 
-									(horaInicioComActual < horaInicioCom && horaFinComActual > horaInicioCom)  ||
-									(horaInicioComActual == horaInicioCom && horaFinComActual == horaFinCom)
+									(horaInicioComActual < horaInicioCom && horaFinComActual > horaInicioCom) 
 									) 
 								) {
 							

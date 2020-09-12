@@ -22,7 +22,7 @@
   <link href="css/modern-business.css" rel="stylesheet">
 	
   <% Curso curso = (Curso)request.getAttribute("curso"); 
-  	 LinkedList<Comision> lc = (LinkedList<Comision>) request.getAttribute("probando");
+  	 LinkedList<Comision> lc = (LinkedList<Comision>) request.getAttribute("comisionesAInscribirme");
      LinkedList<Curso> misCursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
      boolean ocultar = (boolean) request.getAttribute("ocultar");
     
@@ -31,7 +31,7 @@
 </head>
 
 <body>
-														 
+<%= lc %>											 
  <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">

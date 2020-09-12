@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -42,7 +45,7 @@ public class CursoDetail extends HttpServlet {
 		request.setAttribute("curso", curso);
 		
 		LinkedList<Comision> comActuales=  this.getComisionesALasQueMePuedoInscribir(request, response);
-		request.setAttribute("probando", comActuales);
+		request.setAttribute("comisionesAInscribirme", comActuales);
 		
 		Persona user = (Persona)request.getSession().getAttribute("usuario");
 		LinkedList<Curso> userCursos = cl.getByIdPersona(user.getId_persona());
@@ -76,6 +79,7 @@ public class CursoDetail extends HttpServlet {
 		ComisionLogic comLogic = new ComisionLogic();		
 		LinkedList<Comision> comActuales= comLogic.getComisionesByCurso(cursoActual.getId());
 		LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
+		LinkedList<Comision> aux = new LinkedList<>();
 		
 		request.setAttribute("prueba", comActuales);
 		request.setAttribute("idCurso", cursoActual.getId());
@@ -88,35 +92,61 @@ public class CursoDetail extends HttpServlet {
 					(cursoActual.getFecha_inicio().equals(c.getFecha_inicio()) 
 							&& cursoActual.getFecha_fin().equals(c.getFecha_fin()) )
 					) {
-				request.setAttribute("b1", "Pasa el primer if");
-				for(Comision com : userComisiones ) {
-					if(com.getIdCurso() == c.getId()) {
-						
-						for(Comision comActual : comActuales) {
-							
-							int horaInicioComActual = Integer.parseInt(comActual.getHoraInicio().replaceAll("[^0-9.]", ""));
-							int horaFinComActual = Integer.parseInt(comActual.getHoraFin().replaceAll("[^0-9.]", ""));
-							int horaInicioCom = Integer.parseInt(com.getHoraInicio().replaceAll("[^0-9.]", ""));
-							int horaFinCom = Integer.parseInt(com.getHoraFin().replaceAll("[^0-9.]", ""));
-							
-							if( 
-								comActual.getDiaSemana().equals(com.getDiaSemana()) && (
-									(horaInicioComActual >= horaInicioCom && horaInicioComActual < horaFinCom) || 
-									(horaInicioComActual < horaInicioCom && horaFinComActual > horaInicioCom) 
-									) 
-								) {
-							
-								comActuales.remove(comActual);								
-								
-								
+							request.setAttribute("b1", "Pasa el primer if");
+							for(Comision com : userComisiones ) {
+								if(com.getIdCurso() == c.getId()) {
+									
+									for( int i=0; i < comActuales.size();i++) {
+										
+										SimpleDateFormat parser = new SimpleDateFormat("HH:mm:ss");
+										
+
+																						
+										Date horaInicioComActual;
+										Date horaFinComActual;
+										Date horaInicioCom;
+										Date horaFinCom;
+										try {
+											horaInicioComActual = parser.parse(comActuales.get(i).getHoraInicio());
+											horaFinComActual = parser.parse(comActuales.get(i).getHoraFin());
+											horaInicioCom = parser.parse(com.getHoraInicio());
+											horaFinCom = parser.parse(com.getHoraFin());
+											if( 
+													comActuales.get(i).getDiaSemana().equals(com.getDiaSemana()) && (
+													(
+															horaInicioComActual.after(horaInicioCom) && horaInicioComActual.before(horaFinCom)
+															) 
+													|| (
+															horaInicioComActual.before(horaInicioCom) && horaFinComActual.after(horaInicioCom)
+															
+															) 
+													|| (	
+															horaInicioComActual.equals(horaInicioCom)
+															
+															)
+													) 
+												) {
+														
+											}
+											else {
+												aux.add(comActuales.get(i));
+											}
+										} catch (ParseException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										
+										
+										
+									}
+								}
 							}
-						}
-					}
-				}
 			}		
 		}
-		return comActuales;
+		return aux;
 	}
+	
+
 	/* Agregar id_comision a la inscripcion
 	 * 
 	public void validarFechas() {

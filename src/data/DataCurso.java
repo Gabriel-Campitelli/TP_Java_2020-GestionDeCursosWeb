@@ -263,6 +263,51 @@ public void countLike(int id_curso, int like) {
 			
 			return cursos;
 		}
+	
+	public LinkedList<Curso> getByLikes() {
+		// TODO Auto-generated method stub
+			
+			PreparedStatement stmt=null;
+			ResultSet rs=null;
+			LinkedList<Curso> cursos = new LinkedList<>();
+			try {
+				stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select * from cursos\r\n" + 
+					"order by likes desc LIMIT 4"
+						);
+				rs=stmt.executeQuery();
+				if(rs!=null) {
+					while(rs.next()) {
+						
+						Curso curso =new Curso();
+						curso.setId(rs.getInt("id_curso"));
+						curso.setDescripcion(rs.getString("descripcion"));
+						curso.setFecha_inicio(rs.getDate("fecha_inicio"));
+						curso.setFecha_fin(rs.getDate("fecha_fin"));
+						curso.setUrl(rs.getString("url_imagen"));
+						curso.setNombre(rs.getString("nombre"));
+						curso.setLikes(rs.getInt("likes"));
+						
+						cursos.add(curso);
+					}
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			} finally {
+				try {
+					if(rs!=null) {rs.close();}
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+			return cursos;
+		}
 
 	
 }

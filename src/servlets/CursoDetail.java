@@ -56,6 +56,12 @@ public class CursoDetail extends HttpServlet {
 	    	 }
 	     };
 	     request.setAttribute("ocultar", ocultar);
+	     
+	     LinkedList<Curso> cursosRecomendados = cl.getByLikes();
+	     request.setAttribute("cursosRecomendados", cursosRecomendados);
+	     
+	     
+	     
 		request.getRequestDispatcher("WEB-INF/CursoDetail.jsp").forward(request, response);
 	}
 

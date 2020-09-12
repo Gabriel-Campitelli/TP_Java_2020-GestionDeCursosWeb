@@ -24,14 +24,14 @@
   <% Curso curso = (Curso)request.getAttribute("curso"); 
   	 LinkedList<Comision> lc = (LinkedList<Comision>) request.getAttribute("comisionesAInscribirme");
      LinkedList<Curso> misCursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
+     LinkedList<Curso> cursosRecomendados =   (LinkedList<Curso>) request.getAttribute("cursosRecomendados");
      boolean ocultar = (boolean) request.getAttribute("ocultar");
     
 
   	 %>
 </head>
 
-<body>
-<%= lc %>											 
+<body>							 
  <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -93,34 +93,17 @@
     <!-- /.row -->
 
     <!-- Related Projects Row -->
-    <h3 class="my-4">Cursos Populares</h3>
-
+	    <h3 class="my-4">Cursos Populares</h3>
+	<% if(! cursosRecomendados.isEmpty()) {%>
     <div class="row">
-
+		<% for(Curso cr : cursosRecomendados) { %>
       <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+        <a href="cursodetail?curso=<%= cr.getId()%>">
+          <img class="img-fluid" src="<%=cr.getUrl()%>" alt="">
         </a>
       </div>
-
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-        </a>
-      </div>
-
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-        </a>
-      </div>
-
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-        </a>
-      </div>
-
+       <% } %> 
+	<% } %> 
     </div>
     <!-- /.row -->
 

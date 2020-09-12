@@ -18,6 +18,11 @@ public class CursoLogic {
 		return dc.getByIdPersona(id);
 	}
 	
+	public LinkedList<Curso> getByLikes() {
+		dc = new DataCurso();
+		return dc.getByLikes();
+	}
+	
 	public Curso getById(int id) {
 		// TODO Auto-generated method stub
 		dc = new DataCurso();

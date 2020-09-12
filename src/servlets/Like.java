@@ -56,7 +56,7 @@ public class Like extends HttpServlet {
 		CursoLogic cl = new CursoLogic();
 		cl.countLike(idCurso, i.getLike());
 		
-		LinkedList<Curso> userCursos = (LinkedList<Curso>) request.getSession().getAttribute("userCursos");
+		LinkedList<Curso> userCursos = cl.getByIdPersona(user.getId_persona());
 		for(Curso uc: userCursos) {
 			if(uc.getId() == idCurso) {
 				if(i.getLike() == 1) {

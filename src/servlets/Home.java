@@ -39,14 +39,14 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 		CursoLogic cl = new CursoLogic();
 		LinkedList<Curso> cursos = new LinkedList<Curso>();
-	/*
+	
 		if(request.getParameter("action") == "inscripcion") {
 			request.setAttribute("pageName", "Cursos");
 			cursos = cl.getAll();
 			request.setAttribute("cursos", cursos);
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 		}
-	*/
+	
 		switch (request.getParameter("param")) {
 		case "home":
 			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
@@ -67,12 +67,12 @@ public class Home extends HttpServlet {
 			
 			request.setAttribute("cursos", userCursos);
 			
-			LinkedList<Integer> listaLikes = this.likesSortedByCursos(request, response, cursos);
+			LinkedList<Integer> listaLikes = this.likesSortedByCursos(request, response, userCursos);
 			request.setAttribute("likes", listaLikes);
 			
 			
-			response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString());
-			//request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+			//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
+			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 			
 			break;
 		default:

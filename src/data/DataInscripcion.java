@@ -153,7 +153,8 @@ public class DataInscripcion {
 			stmt.setInt(1,id_persona);
 
 			rs=stmt.executeQuery();
-			if(rs!=null && rs.next()) {
+			
+			if(rs!=null) {
 				while(rs.next()) {
 					Inscripcion i = new Inscripcion();
 					

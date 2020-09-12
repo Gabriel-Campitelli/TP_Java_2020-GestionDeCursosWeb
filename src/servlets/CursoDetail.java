@@ -87,7 +87,6 @@ public class CursoDetail extends HttpServlet {
 		ComisionLogic comLogic = new ComisionLogic();		
 		LinkedList<Comision> comActuales= comLogic.getComisionesByCurso(cursoActual.getId());
 		LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
-		LinkedList<Curso> listaCursosAComparar = new LinkedList<>();
 		
 		request.setAttribute("prueba", comActuales);
 		request.setAttribute("idCurso", cursoActual.getId());
@@ -111,8 +110,13 @@ public class CursoDetail extends HttpServlet {
 							int horaInicioCom = Integer.parseInt(com.getHoraInicio().replaceAll("[^0-9.]", ""));
 							int horaFinCom = Integer.parseInt(com.getHoraFin().replaceAll("[^0-9.]", ""));
 							
-							if( comActual.getDiaSemana().equals(com.getDiaSemana()) && ((horaInicioComActual >= horaInicioCom && horaInicioComActual < horaFinCom) || 
-									(horaInicioComActual < horaInicioCom && horaFinComActual > horaInicioCom)	) ) {
+							if( 
+								comActual.getDiaSemana().equals(com.getDiaSemana()) && (
+									(horaInicioComActual >= horaInicioCom && horaInicioComActual < horaFinCom) || 
+									(horaInicioComActual < horaInicioCom && horaFinComActual > horaInicioCom)  ||
+									(horaInicioComActual == horaInicioCom && horaFinComActual == horaFinCom)
+									) 
+								) {
 							
 								comActuales.remove(comActual);								
 								

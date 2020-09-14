@@ -40,15 +40,14 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("param1") == "1") {
-			request.getRequestDispatcher("WEB-INF/CrearCuenta.jsp").forward(request, response);
-		}
-		switch (request.getParameter("action")) {
+
+	switch (request.getParameter("action")) {
 		case "ingresar":
 			this.ingresar(request,response);
 			break;
 		case "crear":
-			request.getRequestDispatcher("WEB-INF/CrearCuenta.jsp").forward(request, response);
+			request.setAttribute("inputEmailError","false");
+			request.getRequestDispatcher("WEB-INF/CrearCuenta.jsp").forward(request,response);
 			break;
 		default:
 			System.out.println("Error: opcion no disponible");

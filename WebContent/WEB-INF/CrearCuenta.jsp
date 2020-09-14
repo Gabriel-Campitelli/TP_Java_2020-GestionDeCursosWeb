@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="utf-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entities.Persona" %>
+<%@ page import="logic.PersonaLogic" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,9 +152,13 @@ body {
 </style>
 <!-- Custom styles for this template -->
 <link href="signin.css" rel="stylesheet">
-
-
+ 
+  
+  <%
+	String opError; 
+  %>
 </head>
+
 <body>
 
     <div class="container">
@@ -158,9 +166,9 @@ body {
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
               <div class="card-body">
-                <h5 class="card-title text-center">�Vamos a crear tu cuenta!</h5>
+                <h5 class="card-title text-center">¡Vamos a crear tu cuenta!</h5>
                 
-                <form class="form-signin" method="post" action="login">
+                <form class="form-signin" method="post" action="crear-cuenta">
 
                   <div class="form-label-group">
                     <input type="text" id="inputDni" name="dni" class="form-control" placeholder="Inserte DNI" required>
@@ -176,14 +184,14 @@ body {
                     <input type="text" id="inputApellido" name="apellido" class="form-control" placeholder="Inserte apellido" required>
                     <label for="inputApellido">Apellido</label>
                   </div>
-
+<!-- 
                   <div class="form-label-group">
                     <input type="text" id="inputUsuario" name="usuario" class="form-control" placeholder="Inserte usuario" required>
                     <label for="inputUsuario">Usuario</label>
                   </div>
-                  
+      -->             
                   <div class="form-label-group">
-                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Inserte contraseña" required>
+                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Inserte contraseÃ±a" required>
                     <label for="inputPassword">Contraseña</label>
                   </div>
 
@@ -191,16 +199,21 @@ body {
                     <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Inserte email" required>
                     <label for="inputEmail">Email</label>
                   </div>
-    
-                  <div class="form-label-group">
-                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Inserte contraseña" required>
-                    <label for="inputPassword">Password</label>
-                  </div>
+                  
+                  <%
+                  opError = (String)request.getAttribute("inputEmailError");
 
-                  <h1> acordarme de ponerle ROL: usuario</h1>
+                 if(opError == "true"){
+                	 %>
+                	    <label style="color:red;">* Error al crear cuenta, ya existe un usuario con el mail ingresado.</label>
+	 				<% 
+                 }       
+                  %>
 
-                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Crear mi cuenta</button>
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase" name="action" type="submit">Crear mi cuenta</button>
+                 
                 </form>
+                
               </div>
             </div>
           </div>

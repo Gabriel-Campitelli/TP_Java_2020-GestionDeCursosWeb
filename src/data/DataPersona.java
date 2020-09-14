@@ -87,25 +87,25 @@ public class DataPersona {
 		return p;
 	}
 	
-	public Persona getByDocumento(Persona per) {
+	public Persona getByMail(Persona per) {
 		Persona p=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select id_persona,usuario,nombre,apellido,rol,email from personas where dni=?"
+					"select id_persona,usuario,nombre,apellido,rol,dni from personas where email=?"
 					);
-			stmt.setString(1, per.getDni());
+			stmt.setString(1, per.getEmail());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				p=new Persona();
-				p.setDni(per.getDni());
+				p.setDni(rs.getString("dni"));
 				p.setId_persona((Integer)rs.getInt("id_persona"));
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
 				p.setUsuario(rs.getString("usuario"));
 				p.setRol((Integer)rs.getInt("rol"));
-				p.setEmail(rs.getString("email"));
+				p.setEmail(per.getEmail());
 				
 			}
 		} catch (SQLException e) {
@@ -129,16 +129,16 @@ public class DataPersona {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into gestion_cursos.personas(dni, nombre, apellido, usuario, contrasenia, rol, email) values(?,?,?,?,?,?,?)"
+							"insert into gestion_cursos.personas(dni, nombre, apellido , contrasenia, rol, email) values(?,?,?,?,?,?)"
 							, PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getDni());
 			stmt.setString(2, p.getNombre());
 			stmt.setString(3, p.getApellido());
-			stmt.setString(4, p.getUsuario());
-			stmt.setString(5, p.getContrasenia());
-			stmt.setInt(6, p.getRol());
-			stmt.setString(7, p.getEmail());
+			//stmt.setString(4, p.getUsuario());
+			stmt.setString(4, p.getContrasenia());
+			stmt.setInt(5, p.getRol());
+			stmt.setString(6, p.getEmail());
 
 			stmt.executeUpdate();
 

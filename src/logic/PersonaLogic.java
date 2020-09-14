@@ -16,8 +16,20 @@ public class PersonaLogic {
 		return dp.getAll();
 	}
 	
-	public Persona getByDocumento(Persona per) {
-		return dp.getByDocumento(per);
+	public Persona getByMail(Persona per) {
+		Persona pAux = new Persona();
+		
+		per = dp.getByMail(per);
+		
+		if(per != null ) 
+		{
+			return per;
+		}
+		else {
+			pAux.setId_persona(0);
+			return pAux;
+		}
+		
 	}
 	
 	public Persona getByUser(Persona per){

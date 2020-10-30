@@ -12,6 +12,13 @@ public class DbConnector {
 	private String user="java";
 	private String password="Himitsu88";
 	private String db="gestion_cursos";
+/*	
+	private String host="db4free.net";
+	private String port="3306";
+	private String user="java";
+	private String password="Himitsu88";
+
+	private String db="gestion_cursos";
 	
 	//private String host="db4free.net";
 	//private String port="3306";
@@ -19,6 +26,10 @@ public class DbConnector {
 	//private String password="Himitsu88";
 	//private String db="java_gest_cursos";
 	
+
+	private String db="java_gest_cursos";
+*/	
+
 	private int conectados=0;
 	private Connection conn=null;
 	

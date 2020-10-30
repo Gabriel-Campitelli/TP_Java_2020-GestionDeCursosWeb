@@ -61,16 +61,23 @@ public class Login extends HttpServlet {
 		p.setContrasenia(request.getParameter("password"));
 		
 		PersonaLogic pL = new PersonaLogic();
-		p = pL.getByUser(p);
-		
-		request.getSession().setAttribute("usuario", p);
-		
-		if(p.getRol() == 1) {
+		try {
+				p = pL.getByUser(p);
+				request.getSession().setAttribute("usuario", p);
+				
+				if(p.getRol() == 1) {
 
-			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
-		}
-		else {
-			request.getRequestDispatcher("WEB-INF/HomeAdministrador.jsp").forward(request, response);
-		}
+					request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
+				}
+				else {
+					request.getRequestDispatcher("WEB-INF/HomeAdministrador.jsp").forward(request, response);
+				}
+			}
+			catch(Exception e) {
+				request.getRequestDispatcher("loginError.html").forward(request, response);
+			}
+	
+		
+		
 	}
 }

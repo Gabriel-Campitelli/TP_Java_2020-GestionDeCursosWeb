@@ -13,7 +13,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Modern Business - Start Bootstrap Template</title>
+  <title>Cursos Web</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -166,7 +166,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Cursos Web 2020</p>
     </div>
     <!-- /.container -->
   </footer>

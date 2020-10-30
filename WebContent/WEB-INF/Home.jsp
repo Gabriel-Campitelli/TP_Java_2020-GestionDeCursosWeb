@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Modern Business - Start Bootstrap Template</title>
+  <title>Cursos Web</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -51,23 +51,14 @@
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
         <div class="carousel-item active" style="background-image: url('https://ncn-nuevacarteya.com/wp-content/uploads/2018/07/cursos-gratis.jpg')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>First Slide</h3>
-            <p>This is a description for the first slide.</p>
-          </div>
         </div>
         <!-- Slide Two - Set the background image for this slide in the line below -->
         <div class="carousel-item" style="background-image: url('https://www.cader.org.ar/wp-content/uploads/curso-para-socios.jpg')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Second Slide</h3>
-            <p>This is a description for the second slide.</p>
           </div>
         </div>
         <!-- Slide Three - Set the background image for this slide in the line below -->
         <div class="carousel-item" style="background-image: url('https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/21/2018/07/04131848/organizar-cursos-y-talleres.jpg')">
           <div class="carousel-caption d-none d-md-block">
-            <h3>Third Slide</h3>
-            <p>This is a description for the third slide.</p>
           </div>
         </div>
       </div>
@@ -99,7 +90,10 @@
           <li>Arte</li>
           <li>Y muchos más!</li>
         </ul>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+        <p>
+	        En esta página web podrás formarte en lo que desees. Tenemos cursos de todo tipo para ofrecerte, con diferentes opciones de horarios
+	        y días para que puedas adaptar tus tiempos a tu plan de formación.
+        </p>
       </div>
       <div class="col-lg-6">
         <img class="img-fluid rounded" src="https://www.zaplo.es/blog/wp-content/uploads/2019/06/cursos-online-gratis.jpeg" alt="">
@@ -112,7 +106,7 @@
     <!-- Call to Action Section -->
     <div class="row mb-4">
       <div class="col-md-8">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+        <p>Te invitamos a conocer nuestra gran variedad de cursos, tu capacitación será nuestro mayor logro!</p>
       </div>
       <div class="col-md-4">
         <a class="btn btn-lg btn-secondary btn-block" href="home?param=cursos">Explorar Cursos</a>
@@ -125,7 +119,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Cursos Web 2020</p>
     </div>
     <!-- /.container -->
   </footer>

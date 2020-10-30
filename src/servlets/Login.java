@@ -74,8 +74,13 @@ public class Login extends HttpServlet {
 				}
 			}
 			catch(Exception e) {
-				request.getRequestDispatcher("loginError.html").forward(request, response);
-			}
+				
+				request.setAttribute("mensaje","El usuario y/o contraseña ingresados son incorrectos.");
+				request.setAttribute("direccion-volver","index.html");
+				request.setAttribute("mensaje-volver", "Volver al Login");
+
+		    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				}
 	
 		
 		

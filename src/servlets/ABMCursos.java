@@ -49,7 +49,6 @@ public class ABMCursos extends HttpServlet {
 		Curso curso = new Curso();
 		
 	    //response.getWriter().append(request.getParameter("modo"));
-
 		
 		switch (request.getParameter("modo")) {
 			case "editar-curso":
@@ -77,7 +76,14 @@ public class ABMCursos extends HttpServlet {
 			    curso.setFecha_fin(java.sql.Date.valueOf( request.getParameter("fecha-fin").replaceAll("/","-") ));
 			    //response.getWriter().append(curso.toString());
 
-				cL.create(curso);
+			    if(curso.getFecha_inicio().before(curso.getFecha_fin())) {
+			    	cL.create(curso);
+			    }
+			    else {
+			    	request.getRequestDispatcher("error-fechas.html").forward(request, response);
+			    }
+			    
+			    
 				break;		
 			case "eliminar-curso":
 		
@@ -89,7 +95,6 @@ public class ABMCursos extends HttpServlet {
 				break;
 		}
 		
-	
 		response.sendRedirect("admin-home?param=admin-cursos");
 
     

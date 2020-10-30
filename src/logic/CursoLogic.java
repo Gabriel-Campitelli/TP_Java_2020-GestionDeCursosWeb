@@ -30,10 +30,8 @@ public class CursoLogic {
 	}
 
 	public void create(Curso nuevoCurso) {
-		
 		dc = new DataCurso();
 		dc.create(nuevoCurso);
-		
 	}
 
 	public void delete(Curso curso) {

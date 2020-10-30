@@ -147,12 +147,9 @@
 		});
 	  });
 
-	$(document).ready(function () {
-		
-	      $("#datetimepickerFechaFin").datetimepicker({
-	    	  
-		format: 'YYYY/MM/DD'
-	     
+	$(document).ready(function () {	
+	      $("#datetimepickerFechaFin").datetimepicker({ 
+			format: 'YYYY/MM/DD'     
 		});
 	  });
 
@@ -219,7 +216,7 @@
 	                  <div class="form-row" >
 	                    <div class="col">
 	                      <label>Nombre del curso</label>
-	                      <input name="nombre" type="text" class="form-control" placeholder="Ingrese un nombre para el curso">
+	                      <input required name="nombre" type="text" class="form-control" placeholder="Ingrese un nombre para el curso">
 	                    </div>
 	                  </div>
 	
@@ -227,7 +224,7 @@
 	                    <div class="col">
 	                      <label>Fecha de inicio</label>
 	                      <div  data-provide="datepicker" class="input-group date" id="datetimepickerFechaInicio">
-	                        <input name="fecha-inicio" type="text" class="form-control">     
+	                        <input required name="fecha-inicio" type="text" class="form-control">     
 	                        <div class="input-group-addon">
 	                          <span class="glyphicon glyphicon-calendar"></span>
 	                        </div>
@@ -238,7 +235,7 @@
 	                    <div class="col">
 	                      <label>Fecha de fin</label>
 	                      <div data-provide="datepicker" class="input-group date" id="datetimepickerFechaFin">
-	                        <input name="fecha-fin" type="text" class="form-control">     
+	                        <input required name="fecha-fin" type="text" class="form-control">     
 	                        <div class="input-group-addon">
 	                          <span class="glyphicon glyphicon-calendar glyphicon-th"></span>
 	                        </div>
@@ -249,14 +246,14 @@
 	                  <div class="form-row">
 	                      <div class="col">
 	                        <label>Descripcion</label>
-	                        <textarea name="descripcion" id="textarea" rows="1" class="form-control" placeholder="Ingrese una descripcion para el curso" maxlength="999"></textarea>
+	                        <textarea required name="descripcion" id="textarea" rows="1" class="form-control" placeholder="Ingrese una descripcion para el curso" maxlength="999"></textarea>
 	                      </div>
 	                  </div>
 	
 	                  <div class="form-row">
 	                    <div class="col">
 	                      <label>URL imagen</label>
-	                      <input name="url-imagen" type="text" class="form-control" placeholder="Ingrese una URL de imagen para el curso">
+	                      <input required name="url-imagen" type="text" class="form-control" placeholder="Ingrese una URL de imagen para el curso">
 	                    </div>
 	                  </div>
 	
@@ -365,7 +362,7 @@
                       <div class="form-row">
                         <div class="col">
                           <label>Nombre del curso</label>
-                          <input name="nombre" type="text" class="form-control" placeholder="Ingrese un nombre para el curso" value="<%= curso.getNombre() %>"/>
+                          <input required name="nombre" type="text" class="form-control" placeholder="Ingrese un nombre para el curso" value="<%= curso.getNombre() %>"/>
                         
                         </div>
                       </div>
@@ -374,7 +371,7 @@
                         <div class="col">
                           <label>Fecha de inicio</label>
                           <div  data-provide="datepicker"  class='input-group date' id='datetimepickerFechaInicioEdit'>
-                            <input name="fecha-inicio" type='text' class="form-control" value="<%= curso.getFecha_inicio() %>"/>     
+                            <input required name="fecha-inicio" type='text' class="form-control" value="<%= curso.getFecha_inicio() %>"/>     
                             <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -384,7 +381,7 @@
                         <div class="col">
                           <label>Fecha de fin</label>
                           <div  data-provide="datepicker" class='input-group date' id='datetimepickerFechaFinEdit'>
-                            <input name="fecha-fin" type='text' class="form-control" value="<%= curso.getFecha_fin() %>" />     
+                            <input required name="fecha-fin" type='text' class="form-control" value="<%= curso.getFecha_fin() %>" />     
                             <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -397,14 +394,14 @@
                       <div class="form-row">
                           <div class="col">
                             <label>Descripcion</label>
-                            <textarea name="descripcion" rows="1" id="textarea" class="form-control" placeholder="Ingrese una descripcion para el curso" maxlength="999" ><%= curso.getDescripcion() %></textarea>
+                            <textarea required name="descripcion" rows="1" id="textarea" class="form-control" placeholder="Ingrese una descripcion para el curso" maxlength="999" ><%= curso.getDescripcion() %></textarea>
                           </div>
                       </div>
                       
                       <div class="form-row">
                         <div class="col">
                           <label>URL imagen</label>
-                          <input name="url-imagen" type="text" class="form-control" placeholder="Ingrese una URL de imagen para el curso" value="<%= curso.getUrl() %>">
+                          <input required name="url-imagen" type="text" class="form-control" placeholder="Ingrese una URL de imagen para el curso" value="<%= curso.getUrl() %>">
                         </div>
                       </div>
 

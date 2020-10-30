@@ -224,8 +224,8 @@
 	                    <div class="col">
 	                      <label>Curso al que pertenece la comision</label>
 	                    
-	                      <select class="form-control" name="idCurso" >
-					      	<option>Seleccione un curso</option>
+	                      <select required class="form-control" name="idCurso" >
+					      	<option selected disabled hidden value="">Seleccione un curso</option>
 					        <%   for (Curso curso : cursos) 
 									{ 
 							%>
@@ -242,8 +242,8 @@
 	                    <div class="col">
 	                      <label>Dia de dictado: </label>
 	                    
-	                      <select name="dia" class="form-control" >
-					      	<option value="">Seleccione un día de la semana</option>
+	                      <select required name="dia" class="form-control" >
+					      	<option selected disabled hidden value="">Seleccione un día de la semana</option>
 						<%   for(int i = 0; i < diasSemana.size(); ++i)
 								{ 
 						%>
@@ -259,7 +259,7 @@
 		              <div class="form-row">
 	                   <div class="col">
 	                   	<label>Cupo: </label>	                   
-	                   <input type="text" name="cupo" class="form-control" placeholder="Ingrese el cupo">
+	                   <input required type="text" name="cupo" class="form-control" placeholder="Ingrese el cupo">
 	                   </div>
 	                 </div>
 	                    
@@ -267,7 +267,7 @@
 	                    <div class="col">
 	                      <label>Hora de inicio</label>
 	                      <div  data-provide="datepicker" class="input-group date" id="datetimepickerHoraInicio">
-	                        <input name="hora-inicio" type="text" class="form-control">     
+	                        <input required name="hora-inicio" type="text" class="form-control">     
 	                        <div class="input-group-addon">
 	                          <span class="glyphicon glyphicon-time"></span>
 	                        </div>
@@ -278,7 +278,7 @@
 	                    <div class="col">
 	                      <label>Hora de fin</label>
 	                      <div data-provide="datepicker" class="input-group date" id="datetimepickerHoraFin">
-	                        <input name="hora-fin" type="text" class="form-control">     
+	                        <input required name="hora-fin" type="text" class="form-control">     
 	                        <div class="input-group-addon">
 	                          <span class="glyphicon glyphicon-time"></span>
 	                        </div>
@@ -409,7 +409,7 @@
 	                 <div class="form-row" >
 	                    <div class="col">
 	                      <label>Curso al que pertenece la comision</label>
-	                      <select name="idCurso" id="dropdownCurso" class="form-control">      
+	                      <select required name="idCurso" id="dropdownCurso" class="form-control">      
 	                        			                      
 					        <%   
 					        for (Curso curso : cursos) {
@@ -436,7 +436,7 @@
 	                    <div class="col">
 	                      <label>Dia de dictado: </label>
 	                    
-	                      <select name="dia" class="form-control">
+	                      <select required name="dia" class="form-control">
 							<%
 						   for(int i = 0; i < diasSemana.size(); ++i)
 							{ 
@@ -465,7 +465,7 @@
 		             <div class="form-row">
 	                   <div class="col">
 	                   	<label>Cupo: </label>
-	                   <input type="text" name="cupo" class="form-control" placeholder="Ingrese el cupo" value="<%= comision.getCupo() %>">
+	                   <input required type="text" name="cupo" class="form-control" placeholder="Ingrese el cupo" value="<%= comision.getCupo() %>">
 	                   </div>
 	                 </div>
 	                    
@@ -473,7 +473,7 @@
 	                    <div class="col">
 	                      <label>Hora de inicio</label>
 	                      <div  data-provide="datepicker" class="input-group date" id="datetimepickerHoraInicioEdit">
-	                        <input name="hora-inicio" type="text" class="form-control" value="<%= comision.getHoraInicio() %>">     
+	                        <input required name="hora-inicio" type="text" class="form-control" value="<%= comision.getHoraInicio() %>">     
 	                        <div class="input-group-addon">
 	                          <span class="glyphicon glyphicon-time"></span>
 	                        </div>
@@ -484,7 +484,7 @@
 	                    <div class="col">
 	                      <label>Hora de fin</label>
 	                      <div data-provide="datepicker" class="input-group date" id="datetimepickerHoraFinEdit">
-	                        <input name="hora-fin" type="text" class="form-control" value="<%= comision.getHoraFin()%>">     
+	                        <input required name="hora-fin" type="text" class="form-control" value="<%= comision.getHoraFin()%>">     
 	                        <div class="input-group-addon">
 	                          <span class="glyphicon glyphicon-time glyphicon-th"></span>
 	                        </div>

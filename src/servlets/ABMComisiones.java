@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.time.LocalTime;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,7 +55,14 @@ public class ABMComisiones extends HttpServlet {
 				comision.setHoraInicio(request.getParameter("hora-inicio"));
 				comision.setHoraFin(request.getParameter("hora-fin"));
 
-				comL.edit(comision);
+				//comL.edit(comision);
+				
+			    if(LocalTime.parse(comision.getHoraInicio()).compareTo(LocalTime.parse(comision.getHoraFin()))<0) {
+			    	comL.edit(comision);
+			    }
+			    else {
+			    	request.getRequestDispatcher("error-horario.html").forward(request, response);
+			    }
 				
 				break;
 				
@@ -64,7 +73,14 @@ public class ABMComisiones extends HttpServlet {
 				comision.setHoraInicio(request.getParameter("hora-inicio"));
 				comision.setHoraFin(request.getParameter("hora-fin"));
 			
-				comL.create(comision);
+				//comL.create(comision);
+				
+			    if(LocalTime.parse(comision.getHoraInicio()).compareTo(LocalTime.parse(comision.getHoraFin()))<0) {
+					comL.create(comision);
+			    }
+			    else {
+			    	request.getRequestDispatcher("error-horario.html").forward(request, response);
+			    }
 				
 				break;		
 				

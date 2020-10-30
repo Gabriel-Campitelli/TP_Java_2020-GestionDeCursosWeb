@@ -62,7 +62,14 @@ public class ABMCursos extends HttpServlet {
       
 			    curso.setFecha_fin(java.sql.Date.valueOf( request.getParameter("fecha-fin").replaceAll("/","-") ));
 		        
-				cL.edit(curso);
+				
+			    if(curso.getFecha_inicio().before(curso.getFecha_fin())) {
+					cL.edit(curso);
+			    }
+			    else {
+			    	request.getRequestDispatcher("error-fechas.html").forward(request, response);
+			    }
+			    
 				break;
 				
 			case "alta-curso":

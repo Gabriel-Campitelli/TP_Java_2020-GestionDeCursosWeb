@@ -42,8 +42,17 @@ public class Home extends HttpServlet {
 	
 		if(request.getAttribute("inscripcion") == "inscripcion") {
 			
+			try {
 			this.mostrarMisCursos(request, response, cl);
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+			}
+			catch (Exception e) {
+				request.setAttribute("mensaje","No se han podido obtener los cursos del usuario, por favor vuelva a loguearse!");
+				request.setAttribute("direccion-volver","WEB-INF/Home.jsp");
+				request.setAttribute("mensaje-volver", "Volver al Home");
+
+		    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
 		}
 		else {
 		
@@ -58,7 +67,12 @@ public class Home extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 				break;
 			case "mis-cursos":
-				this.mostrarMisCursos(request, response, cl);
+				try {
+					this.mostrarMisCursos(request, response, cl);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
 				
 				//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
 				request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
@@ -79,7 +93,7 @@ public class Home extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public LinkedList<Integer> likesSortedByCursos(HttpServletRequest request, HttpServletResponse response,LinkedList<Curso> cursos) throws IOException, ServletException  {
+	public LinkedList<Integer> likesSortedByCursos(HttpServletRequest request, HttpServletResponse response,LinkedList<Curso> cursos) throws Exception  {
 		
 	
 		
@@ -91,59 +105,41 @@ public class Home extends HttpServlet {
 		//Código para generar una lista con los likes que puso el usuario en cada curso.
 		//El orden en que se agregan a la lista se corresponde con el orden en que se obtienen los cursos del usuario.
 		
-		LinkedList<Integer> listaLikes = new LinkedList<>();
-		
-		try	{
+		LinkedList<Integer> listaLikes = new LinkedList<>();			
+		insc = il.getInscripcionesByPersona(user.getId_persona());
+		request.setAttribute("insc", insc);
 			
-			insc = il.getInscripcionesByPersona(user.getId_persona());
-			request.setAttribute("insc", insc);
+		ComisionLogic comLogic = new ComisionLogic();
+		LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
+		request.setAttribute("com", userComisiones);
 			
-			ComisionLogic comLogic = new ComisionLogic();
-			LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
-			request.setAttribute("com", userComisiones);
-			
-			for(Curso c: cursos) {		
-				for(Comision uc : userComisiones) {
-					if(c.getId() == uc.getIdCurso()) {
-						for(Inscripcion i : insc) {
-							if(i.getId_comision() == uc.getIdComision()) {
-								if(i.getLike()==1) {
-									listaLikes.add(1);
-									request.setAttribute("prueba",1);
-								}
-								else {
-									listaLikes.add(0);
-								}							
-							}						
-						}
+		for(Curso c: cursos) {		
+			for(Comision uc : userComisiones) {
+				if(c.getId() == uc.getIdCurso()) {
+					for(Inscripcion i : insc) {
+						if(i.getId_comision() == uc.getIdComision()) {
+							if(i.getLike()==1) {
+								listaLikes.add(1);
+								request.setAttribute("prueba",1);
+							}
+							else {
+								listaLikes.add(0);
+							}							
+						}						
 					}
 				}
 			}
 		}
-		catch (Exception e){
-			
-			request.setAttribute("mensaje","No se han podido obtener los cursos del usuario, por favor vuelva a loguearse!");
-			request.setAttribute("direccion-volver","index.html");
-			request.setAttribute("mensaje-volver", "Volver al Login");
-
-	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-
-		}
-		  return listaLikes;
-		
-		
+        return listaLikes;	
 	}
 	
-	public void mostrarMisCursos(HttpServletRequest request, HttpServletResponse response,CursoLogic cl) throws IOException, ServletException {
+	public void mostrarMisCursos(HttpServletRequest request, HttpServletResponse response,CursoLogic cl) throws Exception {
 		request.setAttribute("pageName", "Mis Cursos");
 		LinkedList<Curso> userCursos = new LinkedList<>();
 		
 		Persona p =(Persona)request.getSession().getAttribute("usuario");
-		
-		userCursos = cl.getByIdPersona(p.getId_persona());
-		
-		request.setAttribute("cursos", userCursos);
-		
+		userCursos = cl.getByIdPersona(p.getId_persona());		
+		request.setAttribute("cursos", userCursos);		
 		LinkedList<Integer> listaLikes = this.likesSortedByCursos(request, response, userCursos);
 		request.setAttribute("likes", listaLikes);
 	}

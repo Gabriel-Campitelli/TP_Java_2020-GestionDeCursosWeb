@@ -56,21 +56,30 @@ public class Like extends HttpServlet {
 		CursoLogic cl = new CursoLogic();
 		cl.countLike(idCurso, i.getLike());
 		
-		LinkedList<Curso> userCursos = cl.getByIdPersona(user.getId_persona());
-		for(Curso uc: userCursos) {
-			if(uc.getId() == idCurso) {
-				if(i.getLike() == 1) {
-					uc.setLikes(uc.getLikes()+1);
+		LinkedList<Curso> userCursos;
+		try {
+				userCursos = cl.getByIdPersona(user.getId_persona());
+				for(Curso uc: userCursos) {
+					if(uc.getId() == idCurso) {
+						if(i.getLike() == 1) {
+							uc.setLikes(uc.getLikes()+1);
+						}
+						else {
+							uc.setLikes(uc.getLikes()-1);
+						}						
+					}
 				}
-				else {
-					uc.setLikes(uc.getLikes()-1);
-				}
-				
-			}
+				request.getRequestDispatcher("/home").forward(request, response);
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			request.setAttribute("mensaje","Oops, no se ha podido registrar su like");
+			request.setAttribute("direccion-volver","index.html");
+			request.setAttribute("mensaje-volver", "Volver al Login");
+
+	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
-		
-		request.getRequestDispatcher("/home").forward(request, response);
 
 	}
 

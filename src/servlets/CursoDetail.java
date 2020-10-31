@@ -44,21 +44,30 @@ public class CursoDetail extends HttpServlet {
 		curso = cl.getById(id);
 		request.setAttribute("curso", curso);
 		
-		LinkedList<Comision> comActuales=  this.getComisionesALasQueMePuedoInscribir(request, response);
-		request.setAttribute("comisionesAInscribirme", comActuales);
+		try {
+			LinkedList<Comision> comActuales=  this.getComisionesALasQueMePuedoInscribir(request, response);
+			request.setAttribute("comisionesAInscribirme", comActuales);
+			
+			Persona user = (Persona)request.getSession().getAttribute("usuario");
+			LinkedList<Curso> userCursos;
+			userCursos = cl.getByIdPersona(user.getId_persona());
+			boolean ocultar = false;
+			for(Curso mc: userCursos) {
+			    if(mc.getId() == id) {
+			    	ocultar = true;
+			    	 }
+			     };
+			request.setAttribute("ocultar", ocultar);
+			LinkedList<Curso> cursosRecomendados = cl.getByLikes();
+			request.setAttribute("cursosRecomendados", cursosRecomendados);				
+		} 
+		catch (Exception e) {			
+			request.setAttribute("mensaje","No se han podido obtener los datos del curso!");
+			request.setAttribute("direccion-volver","WEB-INF/Home.jsp");
+			request.setAttribute("mensaje-volver", "Volver al Home");
+	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 		
-		Persona user = (Persona)request.getSession().getAttribute("usuario");
-		LinkedList<Curso> userCursos = cl.getByIdPersona(user.getId_persona());
-		 boolean ocultar = false;
-	     for(Curso mc: userCursos) {
-	    	 if(mc.getId() == id) {
-	    	 ocultar = true;
-	    	 }
-	     };
-	     request.setAttribute("ocultar", ocultar);
-	     
-	     LinkedList<Curso> cursosRecomendados = cl.getByLikes();
-	     request.setAttribute("cursosRecomendados", cursosRecomendados);
 	     
 	     
 	     
@@ -73,7 +82,7 @@ public class CursoDetail extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public LinkedList<Comision> getComisionesALasQueMePuedoInscribir(HttpServletRequest request, HttpServletResponse response) {
+	public LinkedList<Comision> getComisionesALasQueMePuedoInscribir(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		Persona user = (Persona)request.getSession().getAttribute("usuario");
 		

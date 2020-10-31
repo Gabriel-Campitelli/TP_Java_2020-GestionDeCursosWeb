@@ -211,7 +211,7 @@ public void countLike(int id_curso, int like) {
 	}
 	
 	
-	public LinkedList<Curso> getByIdPersona(int id) {
+	public LinkedList<Curso> getByIdPersona (int id) throws Exception {
 		// TODO Auto-generated method stub
 			
 			PreparedStatement stmt=null;
@@ -246,7 +246,7 @@ public void countLike(int id_curso, int like) {
 				}
 				
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 				
 			} finally {
 				try {
@@ -254,7 +254,7 @@ public void countLike(int id_curso, int like) {
 					if(stmt!=null) {stmt.close();}
 					DbConnector.getInstancia().releaseConn();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			}
 			

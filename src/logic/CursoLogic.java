@@ -13,7 +13,7 @@ public class CursoLogic {
 		return dc.getAll();
 	}
 
-	public LinkedList<Curso> getByIdPersona(int id) {
+	public LinkedList<Curso> getByIdPersona(int id) throws Exception {
 		dc = new DataCurso();
 		return dc.getByIdPersona(id);
 	}

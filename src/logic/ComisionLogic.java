@@ -31,7 +31,7 @@ public class ComisionLogic {
 		dc.edit(comision);
 	}
 
-	public LinkedList<Comision> getComisionesByCurso(int id) {
+	public LinkedList<Comision> getComisionesByCurso(int id) throws Exception {
 		dc = new DataComision();
 		
 		return dc.getComisionesByCurso(id);

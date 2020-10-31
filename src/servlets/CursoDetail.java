@@ -38,13 +38,15 @@ public class CursoDetail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		CursoLogic cl = new CursoLogic();
-		Curso curso ;
-		int id = Integer.parseInt(request.getParameter("curso").trim());
-		curso = cl.getById(id);
-		request.setAttribute("curso", curso);
+		
 		
 		try {
+			
+			CursoLogic cl = new CursoLogic();
+			Curso curso ;
+			int id = Integer.parseInt(request.getParameter("curso").trim());
+			curso = cl.getById(id);
+			request.setAttribute("curso", curso);
 			LinkedList<Comision> comActuales=  this.getComisionesALasQueMePuedoInscribir(request, response);
 			request.setAttribute("comisionesAInscribirme", comActuales);
 			
@@ -63,14 +65,11 @@ public class CursoDetail extends HttpServlet {
 		} 
 		catch (Exception e) {			
 			request.setAttribute("mensaje","No se han podido obtener los datos del curso!");
-			request.setAttribute("direccion-volver","WEB-INF/Home.jsp");
+			request.setAttribute("direccion-volver","home?param=home");
 			request.setAttribute("mensaje-volver", "Volver al Home");
 	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
-		
-	     
-	     
-	     
+			     	    	     
 		request.getRequestDispatcher("WEB-INF/CursoDetail.jsp").forward(request, response);
 	}
 

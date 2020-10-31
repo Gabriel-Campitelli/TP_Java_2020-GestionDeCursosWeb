@@ -23,7 +23,7 @@ public class CursoLogic {
 		return dc.getByLikes();
 	}
 	
-	public Curso getById(int id) {
+	public Curso getById(int id) throws Exception {
 		// TODO Auto-generated method stub
 		dc = new DataCurso();
 		return dc.getById(id);

@@ -50,7 +50,7 @@ public class DataCurso {
 		return cursos;
 	}
 
-	public Curso getById(int id) {
+	public Curso getById(int id) throws Exception {
 		// TODO Auto-generated method stub
 			Curso curso =new Curso();
 			PreparedStatement stmt=null;
@@ -71,14 +71,14 @@ public class DataCurso {
 					curso.setNombre(rs.getString("nombre"));
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}finally {
 				try {
 					if(rs!=null) {rs.close();}
 					if(stmt!=null) {stmt.close();}
 					DbConnector.getInstancia().releaseConn();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			}
 			

@@ -9,7 +9,7 @@ import entities.*;
 
 public class DataCurso {
 	
-	public LinkedList<Curso> getAll(){
+	public LinkedList<Curso> getAll() throws Exception{
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Curso> cursos = new LinkedList<>();
@@ -34,7 +34,7 @@ public class DataCurso {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -42,7 +42,7 @@ public class DataCurso {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		

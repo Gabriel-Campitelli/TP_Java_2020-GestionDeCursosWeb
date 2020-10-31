@@ -49,9 +49,16 @@ public class HomeAdministrador extends HttpServlet {
 			break;
 		case "admin-cursos":			
 			request.setAttribute("pageName", "Cursos");
-			LinkedList<Curso> cursos = curL.getAll();
-			request.setAttribute("cursos", cursos);
-			request.getRequestDispatcher("WEB-INF/ABMCursos.jsp").forward(request, response);
+			LinkedList<Curso> cursos;
+			try {
+				cursos = curL.getAll();
+				request.setAttribute("cursos", cursos);
+				request.getRequestDispatcher("WEB-INF/ABMCursos.jsp").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				//CAMPI REDIRIGILO DONDE QUIERAS
+			}
+			
 			break;
 			
 		case "admin-comisiones":

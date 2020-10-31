@@ -58,35 +58,41 @@ public class Home extends HttpServlet {
 		else {
 		
 			switch (request.getParameter("param")) {
-			case "home":
-				request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
-				break;
-			case "cursos":
-				request.setAttribute("pageName", "Cursos");
-				cursos = cl.getAll();
-				request.setAttribute("cursos", cursos);
-				request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
-				break;
-			case "mis-cursos":
-				try {
-					this.mostrarMisCursos(request, response, cl);
-				} catch (Exception e) {
-					request.setAttribute("mensaje","No se han podido obtener los cursos del usuario, por favor vuelva a loguearse!");
-					request.setAttribute("direccion-volver","index.html");
-					request.setAttribute("mensaje-volver", "Volver al Login");
-
-			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				case "cursos":
+					request.setAttribute("pageName", "Cursos");
+					try {
+						cursos = cl.getAll();
+						request.setAttribute("cursos", cursos);
+						request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						request.setAttribute("mensaje","No se han podido obtener los Cursos");
+						request.setAttribute("direccion-volver","home?param=home");
+						request.setAttribute("mensaje-volver", "Volver al Home");
+						request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+					}
 					
+					break;
+				case "mis-cursos":
+					try {
+						this.mostrarMisCursos(request, response, cl);
+					} catch (Exception e) {
+						request.setAttribute("mensaje","No se han podido obtener los cursos del usuario, por favor vuelva a loguearse!");
+						request.setAttribute("direccion-volver","index.html");
+						request.setAttribute("mensaje-volver", "Volver al Login");
+	
+				    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+						
+					}
+					
+					//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
+					request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+					
+					break;
+				default:
+					request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
+					break;
 				}
-				
-				//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
-				request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
-				
-				break;
-			default:
-				System.out.println("Error: opcion no disponible");
-				break;
-			}
 		}
 	}
 

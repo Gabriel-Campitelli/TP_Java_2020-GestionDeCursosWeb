@@ -8,7 +8,7 @@ public class CursoLogic {
 	
 	private DataCurso dc;
 
-	public LinkedList<Curso> getAll() {
+	public LinkedList<Curso> getAll() throws Exception {
 		dc = new DataCurso();
 		return dc.getAll();
 	}

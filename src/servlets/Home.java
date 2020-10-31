@@ -47,9 +47,10 @@ public class Home extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
 			}
 			catch (Exception e) {
+				
 				request.setAttribute("mensaje","No se han podido obtener los cursos del usuario, por favor vuelva a loguearse!");
-				request.setAttribute("direccion-volver","WEB-INF/Home.jsp");
-				request.setAttribute("mensaje-volver", "Volver al Home");
+				request.setAttribute("direccion-volver","index.html");
+				request.setAttribute("mensaje-volver", "Volver al Login");
 
 		    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
@@ -70,7 +71,11 @@ public class Home extends HttpServlet {
 				try {
 					this.mostrarMisCursos(request, response, cl);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					request.setAttribute("mensaje","No se han podido obtener los cursos del usuario, por favor vuelva a loguearse!");
+					request.setAttribute("direccion-volver","index.html");
+					request.setAttribute("mensaje-volver", "Volver al Login");
+
+			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 					
 				}
 				

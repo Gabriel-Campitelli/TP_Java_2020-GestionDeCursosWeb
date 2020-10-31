@@ -83,12 +83,11 @@ public class Home extends HttpServlet {
 	
 				    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 						
-					}
-					
+					}					
 					//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
-					request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
-					
+					request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);					
 					break;
+					
 				default:
 					request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
 					break;

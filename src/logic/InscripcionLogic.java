@@ -20,7 +20,7 @@ public class InscripcionLogic {
 		dI.deleteInscripcion(i);
     }
 	
-	public Inscripcion getInscripcionBy_Persona_Curso(int idPersona, int idCurso) {
+	public Inscripcion getInscripcionBy_Persona_Curso(int idPersona, int idCurso) throws Exception {
 		return dI.getInscripcionBy_Persona_Curso(idPersona, idCurso);
     }
 

@@ -1,18 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
+<meta charset="ISO-8859-1">
+<title>Ha ocurrido un error</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
- <title>Cursos Web</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
-
-    <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <style>
@@ -154,27 +148,28 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
-  </head>
 
+
+</head>
 <body>
-  <div class="container">
+
+<div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
                 <h5 class="card-title text-center">
-                	El horario de inicio del curso en esa comisión es posterior a su horario de fin.
+                	<%=request.getAttribute("mensaje")%>
                 </h5>            
                 
-                <a class="btn btn-lg btn-primary btn-block text-uppercase" href="admin-home?param=admin-comisiones" >
-                	Volver a editar Comisiones
+                <a class="btn btn-lg btn-primary btn-block text-uppercase" href="<%=request.getAttribute("direccion-volver")%>" >
+                	<%=request.getAttribute("mensaje-volver")%>
                 </a> 
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </body>
-
-
 </html>

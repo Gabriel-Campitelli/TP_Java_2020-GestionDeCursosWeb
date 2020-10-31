@@ -67,7 +67,11 @@ public class ABMCursos extends HttpServlet {
 					cL.edit(curso);
 			    }
 			    else {
-			    	request.getRequestDispatcher("error-fechas.html").forward(request, response);
+					request.setAttribute("mensaje","La fecha de inicio del curso es posterior a su fecha de fin.");
+					request.setAttribute("direccion-volver","admin-home?param=admin-cursos");
+					request.setAttribute("mensaje-volver", "Volver a editar cursos");
+					
+			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			    }
 			    
 				break;
@@ -87,7 +91,11 @@ public class ABMCursos extends HttpServlet {
 			    	cL.create(curso);
 			    }
 			    else {
-			    	request.getRequestDispatcher("error-fechas.html").forward(request, response);
+					request.setAttribute("mensaje","La fecha de inicio del curso es posterior a su fecha de fin.");
+					request.setAttribute("direccion-volver","admin-home?param=admin-cursos");
+					request.setAttribute("mensaje-volver", "Volver a alta cursos");
+
+			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			    }
 			    
 			    

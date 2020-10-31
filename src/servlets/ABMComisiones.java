@@ -61,7 +61,11 @@ public class ABMComisiones extends HttpServlet {
 			    	comL.edit(comision);
 			    }
 			    else {
-			    	request.getRequestDispatcher("error-horario.html").forward(request, response);
+					request.setAttribute("mensaje","El horario de inicio del curso en esa comisión es posterior a su horario de fin.");
+					request.setAttribute("direccion-volver","admin-home?param=admin-comisiones");
+					request.setAttribute("mensaje-volver", "Volver a editar comisiones");
+
+			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			    }
 				
 				break;
@@ -79,7 +83,11 @@ public class ABMComisiones extends HttpServlet {
 					comL.create(comision);
 			    }
 			    else {
-			    	request.getRequestDispatcher("error-horario.html").forward(request, response);
+					request.setAttribute("mensaje","El horario de inicio del curso en esa comisión es posterior a su horario de fin.");
+					request.setAttribute("direccion-volver","admin-home?param=admin-comisiones");
+					request.setAttribute("mensaje-volver", "Volver a alta comisiones");
+
+			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			    }
 				
 				break;		

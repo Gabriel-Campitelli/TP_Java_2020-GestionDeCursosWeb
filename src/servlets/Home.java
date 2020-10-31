@@ -79,7 +79,7 @@ public class Home extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public LinkedList<Integer> likesSortedByCursos(HttpServletRequest request, HttpServletResponse response,LinkedList<Curso> cursos) {
+	public LinkedList<Integer> likesSortedByCursos(HttpServletRequest request, HttpServletResponse response,LinkedList<Curso> cursos) throws IOException, ServletException  {
 		
 	
 		
@@ -87,34 +87,54 @@ public class Home extends HttpServlet {
 		
 		InscripcionLogic il = new InscripcionLogic();
 		LinkedList<Inscripcion> insc = new LinkedList<Inscripcion>();
-		insc = il.getInscripcionesByPersona(user.getId_persona());
-		request.setAttribute("insc", insc);
 		
-		ComisionLogic comLogic = new ComisionLogic();
-		LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
-		request.setAttribute("com", userComisiones);
+		//Código para generar una lista con los likes que puso el usuario en cada curso.
+		//El orden en que se agregan a la lista se corresponde con el orden en que se obtienen los cursos del usuario.
+		
 		LinkedList<Integer> listaLikes = new LinkedList<>();
-		for(Curso c: cursos) {		
-			for(Comision uc : userComisiones) {
-				if(c.getId() == uc.getIdCurso()) {
-					for(Inscripcion i : insc) {
-						if(i.getId_comision() == uc.getIdComision()) {
-							if(i.getLike()==1) {
-								listaLikes.add(1);
-								request.setAttribute("prueba",1);
-							}
-							else {
-								listaLikes.add(0);
-							}							
-						}						
+		
+		try	{
+			
+			insc = il.getInscripcionesByPersona(user.getId_persona());
+			request.setAttribute("insc", insc);
+			
+			ComisionLogic comLogic = new ComisionLogic();
+			LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
+			request.setAttribute("com", userComisiones);
+			
+			for(Curso c: cursos) {		
+				for(Comision uc : userComisiones) {
+					if(c.getId() == uc.getIdCurso()) {
+						for(Inscripcion i : insc) {
+							if(i.getId_comision() == uc.getIdComision()) {
+								if(i.getLike()==1) {
+									listaLikes.add(1);
+									request.setAttribute("prueba",1);
+								}
+								else {
+									listaLikes.add(0);
+								}							
+							}						
+						}
 					}
 				}
 			}
 		}
-	  return listaLikes;
+		catch (Exception e){
+			
+			request.setAttribute("mensaje","No se han podido obtener los cursos del usuario, por favor vuelva a loguearse!");
+			request.setAttribute("direccion-volver","index.html");
+			request.setAttribute("mensaje-volver", "Volver al Login");
+
+	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
+		}
+		  return listaLikes;
+		
+		
 	}
 	
-	public void mostrarMisCursos(HttpServletRequest request, HttpServletResponse response,CursoLogic cl) {
+	public void mostrarMisCursos(HttpServletRequest request, HttpServletResponse response,CursoLogic cl) throws IOException, ServletException {
 		request.setAttribute("pageName", "Mis Cursos");
 		LinkedList<Curso> userCursos = new LinkedList<>();
 		

@@ -141,7 +141,7 @@ public class DataInscripcion {
 			return insc;
 		}
 
-	public LinkedList<Inscripcion> getInscripcionesByPersona(int id_persona) {
+	public LinkedList<Inscripcion> getInscripcionesByPersona (int id_persona) throws Exception  {
 		// TODO Auto-generated method stub
 		LinkedList<Inscripcion> insc = new LinkedList<>();
 		PreparedStatement stmt=null;
@@ -167,14 +167,14 @@ public class DataInscripcion {
 
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		

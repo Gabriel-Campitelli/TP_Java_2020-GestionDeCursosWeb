@@ -32,7 +32,7 @@ public class PersonaLogic {
 		
 	}
 	
-	public Persona getByUser(Persona per){
+	public Persona getByUser(Persona per) throws Exception{
 		return dp.getByUser(per);
 	}
 	

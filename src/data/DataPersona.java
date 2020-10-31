@@ -51,7 +51,7 @@ public class DataPersona {
 		return pers;
 	}
 	
-	public Persona getByUser(Persona per) {
+	public Persona getByUser(Persona per) throws Exception {
 		Persona p=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -73,7 +73,7 @@ public class DataPersona {
 				p.setEmail(rs.getString("email"));
 							}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}

@@ -178,7 +178,7 @@ public class DataCurso {
 		
 	}
 	
-public void countLike(int id_curso, int like) {
+public void countLike(int id_curso, int like) throws Exception {
 		
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
@@ -198,14 +198,14 @@ public void countLike(int id_curso, int like) {
 			stmt.executeUpdate();
 						
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		
@@ -263,7 +263,7 @@ public void countLike(int id_curso, int like) {
 			return cursos;
 		}
 	
-	public LinkedList<Curso> getByLikes() {
+	public LinkedList<Curso> getByLikes() throws Exception {
 		// TODO Auto-generated method stub
 			
 			PreparedStatement stmt=null;
@@ -292,7 +292,7 @@ public void countLike(int id_curso, int like) {
 				}
 				
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 				
 			} finally {
 				try {
@@ -300,7 +300,7 @@ public void countLike(int id_curso, int like) {
 					if(stmt!=null) {stmt.close();}
 					DbConnector.getInstancia().releaseConn();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			}
 			

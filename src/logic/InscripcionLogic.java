@@ -12,7 +12,7 @@ public class InscripcionLogic {
 		dI.addInscripcion(i);
     }
 	
-	public void editLike(Inscripcion i,int idCurso) {		
+	public void editLike(Inscripcion i,int idCurso) throws Exception {		
 		dI.editLike(i,idCurso);
     }
 	

@@ -191,7 +191,7 @@ public class DataComision {
 		return comisiones;
 	}
 	
-	public LinkedList<Comision> getComisionesByIdPersona(int id) {
+	public LinkedList<Comision> getComisionesByIdPersona(int id) throws Exception {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Comision> comisiones = new LinkedList<>();
@@ -219,7 +219,7 @@ public class DataComision {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -227,7 +227,7 @@ public class DataComision {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		

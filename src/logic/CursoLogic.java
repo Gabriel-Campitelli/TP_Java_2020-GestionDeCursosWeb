@@ -18,7 +18,7 @@ public class CursoLogic {
 		return dc.getByIdPersona(id);
 	}
 	
-	public LinkedList<Curso> getByLikes() {
+	public LinkedList<Curso> getByLikes() throws Exception {
 		dc = new DataCurso();
 		return dc.getByLikes();
 	}
@@ -46,7 +46,7 @@ public class CursoLogic {
 		dc.edit(curso);
 		
 	}
-	public void countLike(int id_curso, int like) {
+	public void countLike(int id_curso, int like) throws Exception {
 		dc = new DataCurso();
 		dc.countLike(id_curso,like);
 	}

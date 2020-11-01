@@ -61,7 +61,8 @@ public class CursoDetail extends HttpServlet {
 			     };
 			request.setAttribute("ocultar", ocultar);
 			LinkedList<Curso> cursosRecomendados = cl.getByLikes();
-			request.setAttribute("cursosRecomendados", cursosRecomendados);				
+			request.setAttribute("cursosRecomendados", cursosRecomendados);		
+			request.getRequestDispatcher("WEB-INF/CursoDetail.jsp").forward(request, response);
 		} 
 		catch (Exception e) {			
 			request.setAttribute("mensaje","No se han podido obtener los datos del curso!");
@@ -70,7 +71,7 @@ public class CursoDetail extends HttpServlet {
 	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 			     	    	     
-		request.getRequestDispatcher("WEB-INF/CursoDetail.jsp").forward(request, response);
+		
 	}
 
 	/**

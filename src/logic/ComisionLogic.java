@@ -37,7 +37,7 @@ public class ComisionLogic {
 		return dc.getComisionesByCurso(id);
 	}
 
-	public LinkedList<Comision> getComisionesByIdPersona(int id_persona) {
+	public LinkedList<Comision> getComisionesByIdPersona(int id_persona) throws Exception {
 		
 		dc = new DataComision();
 		

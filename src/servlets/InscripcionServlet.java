@@ -59,9 +59,11 @@ public class InscripcionServlet extends HttpServlet {
 			Date fecha_ini =  formatter.parse(request.getParameter("curso.inicio"));
 			c.setFecha_fin(fecha_fin);
 			c.setFecha_inicio(fecha_ini);
-		} catch (ParseException e) {
-			System.out.append("No anda");
-			e.printStackTrace();
+		} catch (ParseException e) {			
+			request.setAttribute("mensaje","No se ha podido realizar la inscripción");
+			request.setAttribute("direccion-volver","home?param=home");
+			request.setAttribute("mensaje-volver", "Volver al Home");
+	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 		request.setAttribute("curso", c);
@@ -73,10 +75,19 @@ public class InscripcionServlet extends HttpServlet {
 		usuario = (Persona)request.getSession().getAttribute("usuario");
 		i.setId_persona(usuario.getId_persona());
 		i.setId_comision(Integer.parseInt(request.getParameter("item")));
-		il.addInscripcion(i);
+		try {
+			il.addInscripcion(i);
+			
+			request.setAttribute("inscripcion","inscripcion");
+			request.getRequestDispatcher("home").forward(request, response);
+		}
+		catch (Exception e1) {
+			request.setAttribute("mensaje","No se ha podido realizar la inscripción");
+			request.setAttribute("direccion-volver","home?param=home");
+			request.setAttribute("mensaje-volver", "Volver al Home");
+	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 		
-		request.setAttribute("inscripcion","inscripcion");
-		request.getRequestDispatcher("home").forward(request, response);
 	}
 
 }

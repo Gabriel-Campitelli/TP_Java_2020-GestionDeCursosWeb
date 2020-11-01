@@ -76,6 +76,7 @@ public class Home extends HttpServlet {
 				case "mis-cursos":
 					try {
 						this.mostrarMisCursos(request, response, cl);
+						request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);	
 					} catch (Exception e) {
 						request.setAttribute("mensaje","No se han podido obtener los cursos del usuario, por favor vuelva a loguearse!");
 						request.setAttribute("direccion-volver","index.html");
@@ -85,7 +86,7 @@ public class Home extends HttpServlet {
 						
 					}					
 					//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
-					request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);					
+									
 					break;
 					
 				default:

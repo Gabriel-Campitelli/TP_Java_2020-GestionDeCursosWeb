@@ -95,6 +95,13 @@ public class CursoDetail extends HttpServlet {
 		LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
 		LinkedList<Comision> aux = new LinkedList<>();
 		
+		/*
+		 	Defino la siguiente para variable, que será cambiada a false si existe algún curso donde las fechas coincidan
+		 	con el actual. Esto me permitirá saber si tengo que devolver todas sus comisiones. 
+		 	
+		 	*/
+		Boolean b = true;
+		
 		request.setAttribute("prueba", comActuales);
 		request.setAttribute("idCurso", cursoActual.getId());
 		for(Curso c : userCursos) {
@@ -106,7 +113,7 @@ public class CursoDetail extends HttpServlet {
 					(cursoActual.getFecha_inicio().equals(c.getFecha_inicio()) 
 							&& cursoActual.getFecha_fin().equals(c.getFecha_fin()) )
 					) {
-							request.setAttribute("b1", "Pasa el primer if");
+							b = false;
 							for(Comision com : userComisiones ) {
 								if(com.getIdCurso() == c.getId()) {
 									
@@ -155,9 +162,15 @@ public class CursoDetail extends HttpServlet {
 									}
 								}
 							}
-			}		
+			}
+
 		}
-		return aux;
+		if(b) {
+			return comActuales;
+		}
+		else {
+			return aux;
+		}
 	}
 	
 

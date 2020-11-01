@@ -8,7 +8,7 @@ import entities.Inscripcion;
 public class InscripcionLogic {
 	private DataInscripcion dI = new DataInscripcion();
 	
-	public void addInscripcion(Inscripcion i) {
+	public void addInscripcion(Inscripcion i) throws Exception {
 		dI.addInscripcion(i);
     }
 	

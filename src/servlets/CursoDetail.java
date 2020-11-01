@@ -94,7 +94,8 @@ public class CursoDetail extends HttpServlet {
 		ComisionLogic comLogic = new ComisionLogic();		
 		LinkedList<Comision> comActuales= comLogic.getComisionesByCurso(cursoActual.getId());
 		LinkedList<Comision> userComisiones = comLogic.getComisionesByIdPersona(user.getId_persona());
-		LinkedList<Comision> aux = new LinkedList<>();
+		LinkedList<Comision> comisionesFiltradas = new LinkedList<Comision> ();
+		
 		
 		/*
 		 	Defino la siguiente para variable, que será cambiada a false si existe algún curso donde las fechas coincidan
@@ -115,54 +116,7 @@ public class CursoDetail extends HttpServlet {
 							&& cursoActual.getFecha_fin().equals(c.getFecha_fin()) )
 					) {
 							b = false;
-							for(Comision com : userComisiones ) {
-								if(com.getIdCurso() == c.getId()) {
-									
-									for( int i=0; i < comActuales.size();i++) {
-										
-										SimpleDateFormat parser = new SimpleDateFormat("HH:mm:ss");
-										
-
-																						
-										Date horaInicioComActual;
-										Date horaFinComActual;
-										Date horaInicioCom;
-										Date horaFinCom;
-										try {
-											horaInicioComActual = parser.parse(comActuales.get(i).getHoraInicio());
-											horaFinComActual = parser.parse(comActuales.get(i).getHoraFin());
-											horaInicioCom = parser.parse(com.getHoraInicio());
-											horaFinCom = parser.parse(com.getHoraFin());
-											if( 
-													comActuales.get(i).getDiaSemana().equals(com.getDiaSemana()) && (
-													(
-															horaInicioComActual.after(horaInicioCom) && horaInicioComActual.before(horaFinCom)
-															) 
-													|| (
-															horaInicioComActual.before(horaInicioCom) && horaFinComActual.after(horaInicioCom)
-															
-															) 
-													|| (	
-															horaInicioComActual.equals(horaInicioCom)
-															
-															)
-													) 
-												) {
-														
-											}
-											else {
-												aux.add(comActuales.get(i));
-											}
-										} catch (ParseException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										
-										
-										
-									}
-								}
-							}
+							comisionesFiltradas= this.validarDiaHoraComisiones(comActuales, userComisiones, cursoActual);
 			}
 
 		}
@@ -170,36 +124,63 @@ public class CursoDetail extends HttpServlet {
 			return comActuales;
 		}
 		else {
-			return aux;
+			return comisionesFiltradas;
 		}
 	}
 	
 
-	/* Agregar id_comision a la inscripcion
-	 * 
-	public void validarFechas() {
-		for(micurso : miscursos) {
-		if(otrocurso.fini >= micurso.fini && otro.cursofini < otro.cursoffin ||
-				otrocurso.fini < micurs.fini && otrocurso.ffin > micurso.fini) {
-			
-			ME GUARDO MICURSO EN UNA LISTA
+	public LinkedList<Comision> validarDiaHoraComisiones (LinkedList<Comision> comActuales, LinkedList<Comision> userComisiones, Curso c) 
+			throws ParseException {
+		
+		LinkedList<Comision> aux = new LinkedList<>();
+		for(Comision com : userComisiones ) {
+			if(com.getIdCurso() == c.getId()) {
+				
+				for( int i=0; i < comActuales.size();i++) {
+					
+					SimpleDateFormat parser = new SimpleDateFormat("HH:mm:ss");
+																						
+					Date horaInicioComActual;
+					Date horaFinComActual;
+					Date horaInicioCom;
+					Date horaFinCom;
+					try {
+						horaInicioComActual = parser.parse(comActuales.get(i).getHoraInicio());
+						horaFinComActual = parser.parse(comActuales.get(i).getHoraFin());
+						horaInicioCom = parser.parse(com.getHoraInicio());
+						horaFinCom = parser.parse(com.getHoraFin());
+						if( 
+								comActuales.get(i).getDiaSemana().equals(com.getDiaSemana()) && (
+								(
+										horaInicioComActual.after(horaInicioCom) && horaInicioComActual.before(horaFinCom)
+										) 
+								|| (
+										horaInicioComActual.before(horaInicioCom) && horaFinComActual.after(horaInicioCom)
+										
+										) 
+								|| (	
+										horaInicioComActual.equals(horaInicioCom)
+										
+										)
+								) 
+							) {
+									
+						}
+						else {
+							aux.add(comActuales.get(i));
+						}
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						throw e;
+					}
+					
+					
+					
 				}
 			}
-		me traigo las comisiones del otrocurso.
-		creo un arreglo identico con las comisiones del otro Curso. Asi voy sacando elementos
-		for(mc : lista) {
-			me traigo las comisiones del mc.
-			for (cada comision de mc) {
-				for (cada comision del otro curso)
-				voy comparando las horas con cada comision como lo hice al principio. si pasa eso saco el elemento de la lista de comisiones
-			}}
-		Al final de todo devuelvo la lista de comisiones
-			
 		}
-			
-		}
+		return aux;
 	}
-	*/
 
 
 }

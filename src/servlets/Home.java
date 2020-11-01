@@ -88,6 +88,20 @@ public class Home extends HttpServlet {
 					//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
 									
 					break;
+				case "search-cursos":
+					try {
+						cursos = cl.getByNombre(request.getParameter("nombreCurso"));
+						request.setAttribute("pageName", "Cursos");
+						request.setAttribute("cursos", cursos);
+						request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+					}
+					catch (Exception e) {
+						request.setAttribute("mensaje","No se han podido obtener los Cursos");
+						request.setAttribute("direccion-volver","home?param=home");
+						request.setAttribute("mensaje-volver", "Volver al Home");
+						request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+					}
+					break;
 					
 				default:
 					request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);

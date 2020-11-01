@@ -307,7 +307,43 @@ public void countLike(int id_curso, int like) throws Exception {
 			
 			return cursos;
 		}
-
+	
+	public LinkedList<Curso> getByNombre (String nombre) throws Exception {
+		// TODO Auto-generated method stub
+			PreparedStatement stmt=null;
+			ResultSet rs=null;
+			LinkedList<Curso> cursos = new LinkedList<>();
+			nombre="%"+nombre+"%";
+			try {
+				stmt=DbConnector.getInstancia().getConn().prepareStatement(
+						"select * from cursos where nombre like ?"
+						);
+				stmt.setString(1,nombre);
+				rs=stmt.executeQuery();
+				while(rs!=null && rs.next()) {
+					Curso curso = new Curso();					
+					curso.setId(rs.getInt("id_curso"));
+					curso.setDescripcion(rs.getString("descripcion"));
+					curso.setFecha_inicio(rs.getDate("fecha_inicio"));
+					curso.setFecha_fin(rs.getDate("fecha_fin"));
+					curso.setUrl(rs.getString("url_imagen"));
+					curso.setNombre(rs.getString("nombre"));
+					cursos.add(curso);
+				}
+			} catch (SQLException e) {
+				throw e;
+			}finally {
+				try {
+					if(rs!=null) {rs.close();}
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					throw e;
+				}
+			}
+			
+			return cursos;
+		}
 	
 }
 	

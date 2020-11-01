@@ -28,6 +28,11 @@ public class CursoLogic {
 		dc = new DataCurso();
 		return dc.getById(id);
 	}
+	
+	public LinkedList<Curso> getByNombre (String nombre) throws Exception {
+		dc = new DataCurso();
+		return dc.getByNombre(nombre);
+	}
 
 	public void create(Curso nuevoCurso) {
 		dc = new DataCurso();

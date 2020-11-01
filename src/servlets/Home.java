@@ -37,6 +37,7 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		CursoLogic cl = new CursoLogic();
 		LinkedList<Curso> cursos = new LinkedList<Curso>();
 	

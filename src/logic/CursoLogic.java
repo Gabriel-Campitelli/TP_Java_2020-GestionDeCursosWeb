@@ -29,19 +29,19 @@ public class CursoLogic {
 		return dc.getById(id);
 	}
 
-	public void create(Curso nuevoCurso) {
+	public void create(Curso nuevoCurso) throws Exception {
 		dc = new DataCurso();
 		dc.create(nuevoCurso);
 	}
 
-	public void delete(Curso curso) {
+	public void delete(Curso curso) throws Exception {
 		
 		dc = new DataCurso();
 		dc.delete(curso);
 		
 	}
 
-	public void edit(Curso curso) {
+	public void edit(Curso curso) throws Exception{
 		dc = new DataCurso();
 		dc.edit(curso);
 		

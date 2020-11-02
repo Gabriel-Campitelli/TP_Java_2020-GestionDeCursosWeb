@@ -13,23 +13,23 @@ public class ComisionLogic {
 	public ComisionLogic() {
 		dc = new DataComision();
 	}
-	public LinkedList<Comision> getAll() {
+	public LinkedList<Comision> getAll() throws Exception{
 		
 		return dc.getAll();
 	}
 	
-	public void create(Comision nuevaComision) {
+	public void create(Comision nuevaComision) throws Exception {
 		
 		dc.addComision(nuevaComision);
 	}
 	
-	public void delete(Comision comision) {
+	public void delete(Comision comision) throws Exception {
 		
 		dc.delete(comision);
 	}
 	
 	
-	public void edit(Comision comision) {
+	public void edit(Comision comision) throws Exception{
 		
 		dc.edit(comision);
 	}

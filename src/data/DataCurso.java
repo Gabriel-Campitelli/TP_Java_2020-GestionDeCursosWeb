@@ -86,7 +86,7 @@ public class DataCurso {
 			return curso;
 		}
 
-	public void create(Curso nuevoCurso) {
+	public void create(Curso nuevoCurso) throws Exception {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
@@ -110,19 +110,19 @@ public class DataCurso {
 
 			
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 	}
 
-	public void delete(Curso curso) {
+	public void delete(Curso curso) throws Exception {
 		
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
@@ -134,20 +134,20 @@ public class DataCurso {
 			stmt.executeUpdate();
 						
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		
 	}
 
-	public void edit(Curso curso) {
+	public void edit(Curso curso) throws Exception {
 		
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
@@ -165,14 +165,14 @@ public class DataCurso {
 			stmt.executeUpdate();
 						
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		

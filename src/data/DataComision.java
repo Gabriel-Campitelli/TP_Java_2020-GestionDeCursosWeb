@@ -8,7 +8,7 @@ import entities.*;
 
 public class DataComision {
 	
-	public LinkedList<Comision> getAll() {
+	public LinkedList<Comision> getAll() throws Exception {
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Comision> comisiones = new LinkedList<>();
@@ -33,7 +33,7 @@ public class DataComision {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -41,7 +41,7 @@ public class DataComision {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -49,7 +49,7 @@ public class DataComision {
 		return comisiones;
 	}
 	
-	public void addComision(Comision nuevaComision) {
+	public void addComision(Comision nuevaComision) throws Exception {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
@@ -78,19 +78,19 @@ public class DataComision {
 
 			
 		}  catch (SQLException e) {
-            e.printStackTrace();
+			throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 	}
 	
-	public void delete(Comision comision) {
+	public void delete(Comision comision) throws Exception {
 		
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
@@ -102,21 +102,20 @@ public class DataComision {
 			stmt.executeUpdate();
 						
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		
 	}
-	
 
-	public void edit(Comision comision) {
+	public void edit(Comision comision) throws Exception{
 			
 			PreparedStatement stmt= null;
 			ResultSet keyResultSet=null;
@@ -137,14 +136,14 @@ public class DataComision {
 
 							
 			}  catch (SQLException e) {
-	            e.printStackTrace();
+	            throw e;
 			} finally {
 	            try {
 	                if(keyResultSet!=null)keyResultSet.close();
 	                if(stmt!=null)stmt.close();
 	                DbConnector.getInstancia().releaseConn();
 	            } catch (SQLException e) {
-	            	e.printStackTrace();
+	            	throw e;
 	            }
 			}
 			

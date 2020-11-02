@@ -28,37 +28,29 @@ public class CursoLogic {
 	}
 	
 	public Curso getById(int id) throws Exception {
-		// TODO Auto-generated method stub
 		
 		return dc.getById(id);
 	}
 	
 	public LinkedList<Curso> getByNombre (String nombre) throws Exception {
-		
+
 		return dc.getByNombre(nombre);
 	}
 
-	public void create(Curso nuevoCurso) {
-		
+	public void create(Curso nuevoCurso) throws Exception {	
 		dc.create(nuevoCurso);
 	}
 
-	public void delete(Curso curso) {
-		
-		
+	public void delete(Curso curso) throws Exception{
 		dc.delete(curso);
-		
 	}
 
-	public void edit(Curso curso) {
-	
+	public void edit(Curso curso) throws Exception{
 		dc.edit(curso);
 		
 	}
 	public void countLike(int id_curso, int like) throws Exception {
-		
 		dc.countLike(id_curso,like);
 	}
-
 
 }

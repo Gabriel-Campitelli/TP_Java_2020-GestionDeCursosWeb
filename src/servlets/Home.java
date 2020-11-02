@@ -37,6 +37,7 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		CursoLogic cl = new CursoLogic();
 		LinkedList<Curso> cursos = new LinkedList<Curso>();
 	
@@ -87,6 +88,20 @@ public class Home extends HttpServlet {
 					}					
 					//response.getWriter().append(listaLikes.toString()).append(userCursos.toString()).append(p.toString()).append(request.getAttribute("insc").toString());
 									
+					break;
+				case "search-cursos":
+					try {
+						cursos = cl.getByNombre(request.getParameter("nombreCurso"));
+						request.setAttribute("pageName", "Cursos");
+						request.setAttribute("cursos", cursos);
+						request.getRequestDispatcher("WEB-INF/Cursos.jsp").forward(request, response);
+					}
+					catch (Exception e) {
+						request.setAttribute("mensaje","No se han podido obtener los Cursos");
+						request.setAttribute("direccion-volver","home?param=home");
+						request.setAttribute("mensaje-volver", "Volver al Home");
+						request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+					}
 					break;
 					
 				default:

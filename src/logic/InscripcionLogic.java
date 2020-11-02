@@ -6,7 +6,12 @@ import data.DataInscripcion;
 import entities.Inscripcion;
 
 public class InscripcionLogic {
-	private DataInscripcion dI = new DataInscripcion();
+	
+	private DataInscripcion  dI;
+	
+	public InscripcionLogic() {
+		dI = new DataInscripcion();
+	}
 	
 	public void addInscripcion(Inscripcion i) throws Exception {
 		dI.addInscripcion(i);

@@ -30,6 +30,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+        <li>
+          	<form id="searchCurso" method="post" action="home?param=search-cursos">
+          		<div class="md-form mt-0">
+  					<input name="nombreCurso" class="form-control" type="text" placeholder="Search" aria-label="Search" required>
+				</div>
+          	</form>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="home?param=mis-cursos">Mis Cursos</a>
           </li>
@@ -70,7 +77,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div>
+ 
   </header>
 
   <!-- Page Content -->

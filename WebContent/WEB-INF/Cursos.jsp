@@ -46,6 +46,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+         <li class="nav-item">
+	         <form id="searchCurso" method="post" action="home?param=search-cursos">
+	          	<div class="md-form mt-0">
+	  				<input name="nombreCurso" class="form-control" type="text" placeholder="Search" aria-label="Search" required>
+				</div>
+	         </form>
+         </li>
           <li class="nav-item">
             <a class="nav-link" href="home?param=mis-cursos">Mis Cursos</a>
           </li>
@@ -58,7 +65,7 @@
   </nav>
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container" style="min-height: 100vh">
 
     <!-- Page Heading/Breadcrumbs -->
     <h1 class="mt-4 mb-3"><%= opcion %>
@@ -72,7 +79,7 @@
 
 <!-- Cursos -->
 
-	<%if (cursos != null) { %>
+	<%if (!cursos.isEmpty()) { %>
     
    <% for(int i = 0; i <= cursos.size() -1; i++) { %>
     
@@ -111,7 +118,7 @@
     <hr>
     <%  }%>
 <% }%>
-<%if(cursos == null) { %> 
+<%if(cursos.isEmpty()) { %> 
 	<h2>No hay Cursos</h2>
 <% } %>
   </div>

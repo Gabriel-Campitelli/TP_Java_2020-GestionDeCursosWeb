@@ -45,15 +45,13 @@ public class CursoLogic {
 	}
 
 	public void delete(Curso curso) throws Exception {
-		
-		
 		dc.delete(curso);
 		
 	}
 
-
 	public void edit(Curso curso) throws Exception{
 		dc = new DataCurso();
+
 		dc.edit(curso);
 		
 	}

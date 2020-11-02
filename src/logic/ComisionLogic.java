@@ -6,7 +6,6 @@ import entities.Comision;
 import java.util.LinkedList;
 
 
-
 public class ComisionLogic {
 	private DataComision dc;
 	
@@ -31,10 +30,12 @@ public class ComisionLogic {
 	}
 
 	public LinkedList<Comision> getComisionesByCurso(int id) throws Exception {
+
 		return dc.getComisionesByCurso(id);
 	}
 
 	public LinkedList<Comision> getComisionesByIdPersona(int id_persona) throws Exception {
+
 		return dc.getComisionesByIdPersona(id_persona);
 	}
 	

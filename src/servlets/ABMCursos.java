@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import entities.Curso;
 import logic.CursoLogic;
 
+import java.text.SimpleDateFormat;
+import java.util.LinkedList;
+import java.text.ParseException;
   
 
 /**
@@ -47,93 +51,61 @@ public class ABMCursos extends HttpServlet {
 	    //response.getWriter().append(request.getParameter("modo"));
 		
 		switch (request.getParameter("modo")) {
-		
 			case "editar-curso":
-				try {
-					curso.setId(Integer.parseInt(request.getParameter("id_curso")));
-				    curso.setNombre(request.getParameter("nombre"));
-				    curso.setDescripcion(request.getParameter("descripcion"));
-				    curso.setUrl(request.getParameter("url-imagen"));	
-				    
-				    //parseo la fecha
-				    curso.setFecha_inicio(java.sql.Date.valueOf( request.getParameter("fecha-inicio").replaceAll("/","-") ));        
-	      
-				    curso.setFecha_fin(java.sql.Date.valueOf( request.getParameter("fecha-fin").replaceAll("/","-") ));
-			        
-					
-				    if(curso.getFecha_inicio().before(curso.getFecha_fin())) {
-						cL.edit(curso);
-				    }
-				    else {
-						request.setAttribute("mensaje","La fecha de inicio del curso es posterior a su fecha de fin.");
-						request.setAttribute("direccion-volver","admin-home?param=admin-cursos");
-						request.setAttribute("mensaje-volver", "Volver a editar cursos");
-						
-				    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				    }
+				curso.setId(Integer.parseInt(request.getParameter("id_curso")));
+			    curso.setNombre(request.getParameter("nombre"));
+			    curso.setDescripcion(request.getParameter("descripcion"));
+			    curso.setUrl(request.getParameter("url-imagen"));	
+			    
+			    //parseo la fecha
+			    curso.setFecha_inicio(java.sql.Date.valueOf( request.getParameter("fecha-inicio").replaceAll("/","-") ));        
+      
+			    curso.setFecha_fin(java.sql.Date.valueOf( request.getParameter("fecha-fin").replaceAll("/","-") ));
+		        
+				
+			    if(curso.getFecha_inicio().before(curso.getFecha_fin())) {
+					cL.edit(curso);
 			    }
-				catch (Exception e) {
+			    else {
+					request.setAttribute("mensaje","La fecha de inicio del curso es posterior a su fecha de fin.");
+					request.setAttribute("direccion-volver","admin-home?param=admin-cursos");
+					request.setAttribute("mensaje-volver", "Volver a editar cursos");
 					
-					request.setAttribute("mensaje","No se ha podido editar el curso, por favor vuelva a intentarlo mas tarde.");
-					request.setAttribute("direccion-volver","WEB-INF/ABMCursos.jsp");
-					request.setAttribute("mensaje-volver", "Volver a cursos");
-
 			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				}
+			    }
+			    
 				break;
 				
 			case "alta-curso":
-			    try {
-				
-					curso.setNombre(request.getParameter("nombre"));
-				    curso.setDescripcion(request.getParameter("descripcion"));
-				    curso.setUrl(request.getParameter("url-imagen"));	    
-				    //parseo la fecha
-			        
-				    curso.setFecha_inicio(java.sql.Date.valueOf( request.getParameter("fecha-inicio").replaceAll("/","-") ));        
-				    //response.getWriter().append(request.getParameter("fecha-inicio").replaceAll("/","-"));
-				    curso.setFecha_fin(java.sql.Date.valueOf( request.getParameter("fecha-fin").replaceAll("/","-") ));
-				    //response.getWriter().append(curso.toString());
-	
-				    if(curso.getFecha_inicio().before(curso.getFecha_fin())) {
-				    	cL.create(curso);
-				    }
-				    else {
-						request.setAttribute("mensaje","La fecha de inicio del curso es posterior a su fecha de fin.");
-						request.setAttribute("direccion-volver","admin-home?param=admin-cursos");
-						request.setAttribute("mensaje-volver", "Volver a alta cursos");
-	
-				    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				    }
+			    curso.setNombre(request.getParameter("nombre"));
+			    curso.setDescripcion(request.getParameter("descripcion"));
+			    curso.setUrl(request.getParameter("url-imagen"));	    
+			    //parseo la fecha
+		        
+			    curso.setFecha_inicio(java.sql.Date.valueOf( request.getParameter("fecha-inicio").replaceAll("/","-") ));        
+			    //response.getWriter().append(request.getParameter("fecha-inicio").replaceAll("/","-"));
+			    curso.setFecha_fin(java.sql.Date.valueOf( request.getParameter("fecha-fin").replaceAll("/","-") ));
+			    //response.getWriter().append(curso.toString());
+
+			    if(curso.getFecha_inicio().before(curso.getFecha_fin())) {
+			    	cL.create(curso);
 			    }
-				catch (Exception e) {
-					
-					request.setAttribute("mensaje","No se ha podido dar de alta el curso, por favor vuelva a intentarlo mas tarde.");
-					request.setAttribute("direccion-volver","WEB-INF/ABMCursos.jsp");
-					request.setAttribute("mensaje-volver", "Volver a cursos");
+			    else {
+					request.setAttribute("mensaje","La fecha de inicio del curso es posterior a su fecha de fin.");
+					request.setAttribute("direccion-volver","admin-home?param=admin-cursos");
+					request.setAttribute("mensaje-volver", "Volver a alta cursos");
 
 			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				}
+			    }
 			    
 			    
-				break;	
-			
+				break;		
 			case "eliminar-curso":
-				try {
-					curso.setId(Integer.parseInt(request.getParameter("id_curso")));
-				    
-					cL.delete(curso);
-			    }
-				catch (Exception e) {
-					
-					request.setAttribute("mensaje","No se ha podido eliminar el curso, por favor vuelva a intentarlo mas tarde.");
-					request.setAttribute("direccion-volver","WEB-INF/ABMCursos.jsp");
-					request.setAttribute("mensaje-volver", "Volver a cursos");
-
-			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				}
-				break;
-				
+		
+				curso.setId(Integer.parseInt(request.getParameter("id_curso")));
+			    
+				cL.delete(curso);
+				break;	
 			default:
 				break;
 		}

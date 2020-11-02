@@ -38,20 +38,20 @@ public class CursoLogic {
 		return dc.getByNombre(nombre);
 	}
 
-
-	public void create(Curso nuevoCurso) throws Exception {
-		dc = new DataCurso();
+	public void create(Curso nuevoCurso) {
+		
 		dc.create(nuevoCurso);
 	}
 
-	public void delete(Curso curso) throws Exception {
+	public void delete(Curso curso) {
+		
+		
 		dc.delete(curso);
 		
 	}
 
-	public void edit(Curso curso) throws Exception{
-		dc = new DataCurso();
-
+	public void edit(Curso curso) {
+	
 		dc.edit(curso);
 		
 	}

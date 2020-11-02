@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import logic.CursoLogic;
 import logic.ComisionLogic;
+import entities.Curso;
 import entities.Comision;
 
 /**
@@ -46,84 +48,55 @@ public class ABMComisiones extends HttpServlet {
 		switch (request.getParameter("modo")) {
 		
 			case "editar-comision":				
-				try {
-					comision.setIdComision(Integer.parseInt(request.getParameter("id_comision")));
-					comision.setIdCurso(Integer.parseInt(request.getParameter("idCurso")));
-					comision.setDiaSemana(request.getParameter("dia"));
-					comision.setCupo(Integer.parseInt(request.getParameter("cupo")));
-					comision.setHoraInicio(request.getParameter("hora-inicio"));
-					comision.setHoraFin(request.getParameter("hora-fin"));
-				
-					if(LocalTime.parse(comision.getHoraInicio()).compareTo(LocalTime.parse(comision.getHoraFin()))<0) {
-			    	
-			    		comL.edit(comision);
-			    		    	
-				    }
-				    else {
-						request.setAttribute("mensaje","El horario de inicio del curso en esa comisión es posterior a su horario de fin.");
-						request.setAttribute("direccion-volver","admin-home?param=admin-comisiones");
-						request.setAttribute("mensaje-volver", "Volver a editar comisiones");
-	
-				    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				comision.setIdComision(Integer.parseInt(request.getParameter("id_comision")));
+				comision.setIdCurso(Integer.parseInt(request.getParameter("idCurso")));
+				comision.setDiaSemana(request.getParameter("dia"));
+				comision.setCupo(Integer.parseInt(request.getParameter("cupo")));
+				comision.setHoraInicio(request.getParameter("hora-inicio"));
+				comision.setHoraFin(request.getParameter("hora-fin"));
 
-				    }
-		    	}
-				catch (Exception e) {
-					
-					request.setAttribute("mensaje","No se ha podido editar la comisión, por favor vuelva a intentarlo mas tarde.");
-					request.setAttribute("direccion-volver","WEB-INF/ABMComisiones.jsp");
-					request.setAttribute("mensaje-volver", "Volver a comisiones");
+				//comL.edit(comision);
+				
+			    if(LocalTime.parse(comision.getHoraInicio()).compareTo(LocalTime.parse(comision.getHoraFin()))<0) {
+			    	comL.edit(comision);
+			    }
+			    else {
+					request.setAttribute("mensaje","El horario de inicio del curso en esa comisión es posterior a su horario de fin.");
+					request.setAttribute("direccion-volver","admin-home?param=admin-comisiones");
+					request.setAttribute("mensaje-volver", "Volver a editar comisiones");
 
 			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				}
+			    }
 				
 				break;
 				
 			case "alta-comision":				
-				try {
-					comision.setIdCurso(Integer.parseInt(request.getParameter("idCurso")));
-					comision.setDiaSemana(request.getParameter("dia"));
-					comision.setCupo(Integer.parseInt(request.getParameter("cupo")));
-					comision.setHoraInicio(request.getParameter("hora-inicio"));
-					comision.setHoraFin(request.getParameter("hora-fin"));
-					
-				    if(LocalTime.parse(comision.getHoraInicio()).compareTo(LocalTime.parse(comision.getHoraFin()))<0) {
-						comL.create(comision);
-				    }
-				    else {
-						request.setAttribute("mensaje","El horario de inicio del curso en esa comisión es posterior a su horario de fin.");
-						request.setAttribute("direccion-volver","admin-home?param=admin-comisiones");
-						request.setAttribute("mensaje-volver", "Volver a alta comisiones");
-	
-				    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				    }
-				}
-				catch (Exception e){
-					
-					request.setAttribute("mensaje","No se ha podido dar de alta la comision, por favor vuelva a intentarlo mas tarde.");
-					request.setAttribute("direccion-volver","WEB-INF/ABMComisiones.jsp");
-					request.setAttribute("mensaje-volver", "Volver a comisiones");
+				comision.setIdCurso(Integer.parseInt(request.getParameter("idCurso")));
+				comision.setDiaSemana(request.getParameter("dia"));
+				comision.setCupo(Integer.parseInt(request.getParameter("cupo")));
+				comision.setHoraInicio(request.getParameter("hora-inicio"));
+				comision.setHoraFin(request.getParameter("hora-fin"));
+			
+				//comL.create(comision);
+				
+			    if(LocalTime.parse(comision.getHoraInicio()).compareTo(LocalTime.parse(comision.getHoraFin()))<0) {
+					comL.create(comision);
+			    }
+			    else {
+					request.setAttribute("mensaje","El horario de inicio del curso en esa comisión es posterior a su horario de fin.");
+					request.setAttribute("direccion-volver","admin-home?param=admin-comisiones");
+					request.setAttribute("mensaje-volver", "Volver a alta comisiones");
 
 			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				}
+			    }
 				
 				break;		
 				
 			case "eliminar-comision":	
-				try {
-					comision.setIdComision(Integer.parseInt(request.getParameter("id_comision")));
-					
-					comL.delete(comision);
-				}
-				catch (Exception e){
-					
-					request.setAttribute("mensaje","No se ha podido eliminar la comision, por favor vuelva a intentarlo mas tarde.");
-					request.setAttribute("direccion-volver","WEB-INF/ABMComisiones.jsp");
-					request.setAttribute("mensaje-volver", "Volver a comisiones");
-
-			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				}
-					
+				comision.setIdComision(Integer.parseInt(request.getParameter("id_comision")));
+				
+				comL.delete(comision);
+				
 				break;	
 				
 			default:

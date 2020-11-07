@@ -233,5 +233,32 @@ public class DataComision {
 		
 		return comisiones;
 	}
+
+	public void updateCupo(int id_comision) throws Exception {
+		
+		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"update comisiones c set cupo = c.cupo -1 where c.id_comision = ?;"
+							);
+			stmt.setInt(1, id_comision);
+			stmt.executeUpdate();
+
+						
+		}  catch (SQLException e) {
+            throw e;
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	throw e;
+            }
+		}
+		
+	}
 	
 }

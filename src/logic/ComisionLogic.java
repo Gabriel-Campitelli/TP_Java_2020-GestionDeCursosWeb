@@ -43,6 +43,10 @@ public class ComisionLogic {
 		
 		return dc.getComisionesByIdPersona(id_persona);
 	}
+	public void updateCupo(int id_comision) throws Exception {
+		dc.updateCupo(id_comision);
+		
+	}
 	
 	
 }

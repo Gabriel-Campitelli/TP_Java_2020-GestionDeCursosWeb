@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Curso;
+import logic.ComisionLogic;
+import logic.CursoLogic;
 import logic.InscripcionLogic;
 import entities.Inscripcion;
 import entities.Persona;
@@ -70,6 +72,7 @@ public class InscripcionServlet extends HttpServlet {
 		request.setAttribute("pageName", "Mis Cursos");
 		InscripcionLogic il = new InscripcionLogic();
 		Inscripcion i = new Inscripcion();
+		ComisionLogic cl = new ComisionLogic();
 		
 		Persona usuario = new Persona();
 		usuario = (Persona)request.getSession().getAttribute("usuario");
@@ -77,6 +80,7 @@ public class InscripcionServlet extends HttpServlet {
 		i.setId_comision(Integer.parseInt(request.getParameter("item")));
 		try {
 			il.addInscripcion(i);
+			cl.updateCupo(i.getId_comision());
 			
 			request.setAttribute("inscripcion","inscripcion");
 			request.getRequestDispatcher("home").forward(request, response);

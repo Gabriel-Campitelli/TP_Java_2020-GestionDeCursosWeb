@@ -29,7 +29,6 @@ function AgregarNav(){
 	          '<li class="nav-item active dropdown">'+
 	            '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</a>'+
 	            '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">'+
-	              '<a class="dropdown-item " href="index.html">Configuracion de cuenta</a>'+
 	              '<a class="dropdown-item" href="index.html">Salir</a>'+
 	            '</div>'+
 	          '</li>'+

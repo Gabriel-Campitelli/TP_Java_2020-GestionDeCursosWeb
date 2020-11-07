@@ -104,8 +104,18 @@ public class CursoDetail extends HttpServlet {
 		 	*/
 		Boolean b = true;
 		
-		request.setAttribute("prueba", comActuales);
 		request.setAttribute("idCurso", cursoActual.getId());
+		
+		//Valido los cupos
+		int cant = comActuales.size();
+		for(int i = 0; i < cant;i++ ) {
+			if (comActuales.get(i).getCupo() == 0) {
+				comActuales.remove(i);
+				cant = cant -1;
+				i= i -2;
+			}
+		}
+
 		for(Curso c : userCursos) {
 			if( 
 					(cursoActual.getFecha_inicio().after(c.getFecha_inicio()) 
@@ -138,44 +148,42 @@ public class CursoDetail extends HttpServlet {
 				
 				for( int i=0; i < comActuales.size();i++) {
 					
-					SimpleDateFormat parser = new SimpleDateFormat("HH:mm:ss");
-																						
-					Date horaInicioComActual;
-					Date horaFinComActual;
-					Date horaInicioCom;
-					Date horaFinCom;
-					try {
-						horaInicioComActual = parser.parse(comActuales.get(i).getHoraInicio());
-						horaFinComActual = parser.parse(comActuales.get(i).getHoraFin());
-						horaInicioCom = parser.parse(com.getHoraInicio());
-						horaFinCom = parser.parse(com.getHoraFin());
-						if( 
-								comActuales.get(i).getDiaSemana().equals(com.getDiaSemana()) && (
-								(
-										horaInicioComActual.after(horaInicioCom) && horaInicioComActual.before(horaFinCom)
-										) 
-								|| (
-										horaInicioComActual.before(horaInicioCom) && horaFinComActual.after(horaInicioCom)
+						SimpleDateFormat parser = new SimpleDateFormat("HH:mm:ss");
+						
+						Date horaInicioComActual;
+						Date horaFinComActual;
+						Date horaInicioCom;
+						Date horaFinCom;
+						try {
+							horaInicioComActual = parser.parse(comActuales.get(i).getHoraInicio());
+							horaFinComActual = parser.parse(comActuales.get(i).getHoraFin());
+							horaInicioCom = parser.parse(com.getHoraInicio());
+							horaFinCom = parser.parse(com.getHoraFin());
+							if( 
+									comActuales.get(i).getDiaSemana().equals(com.getDiaSemana()) && (
+									(
+											horaInicioComActual.after(horaInicioCom) && horaInicioComActual.before(horaFinCom)
+											) 
+									|| (
+											horaInicioComActual.before(horaInicioCom) && horaFinComActual.after(horaInicioCom)
+											
+											) 
+									|| (	
+											horaInicioComActual.equals(horaInicioCom)
+											
+											)
+									) 
+								) {
 										
-										) 
-								|| (	
-										horaInicioComActual.equals(horaInicioCom)
-										
-										)
-								) 
-							) {
-									
+							}
+							else {
+								aux.add(comActuales.get(i));
+							}
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							throw e;
 						}
-						else {
-							aux.add(comActuales.get(i));
-						}
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						throw e;
-					}
-					
-					
-					
+																																			
 				}
 			}
 		}

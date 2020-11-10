@@ -8,10 +8,10 @@ _Cada curso que se dicta en la organización, tiene una fecha de inicio y fecha 
 
 
 ## Funcionalidades del sistema
-###Gestión de Usuarios:
+### Gestión de Usuarios:
 * ABM Usuarios
 * Logueo de cuentas de distintos tipos: usuarios del tipo Cliente y Administrador.
-###Gestión de Cursos:
+### Gestión de Cursos:
 * ABM Cursos
     Cada curso puede dictarse en una o más comisiones:
 * ABM comisiones

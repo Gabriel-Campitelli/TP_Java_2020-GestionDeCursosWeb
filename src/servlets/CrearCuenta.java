@@ -38,9 +38,10 @@ public class CrearCuenta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		try {
 	    //response.getWriter().append((String)request.getAttribute("inputEmailError"));
 
-		request.setAttribute("inputEmailError","false");
+			request.setAttribute("inputEmailError","false");
 		
 			PersonaLogic pL = new PersonaLogic();
 			Persona alumnoBuscar = new Persona();
@@ -48,11 +49,9 @@ public class CrearCuenta extends HttpServlet {
 			alumnoBuscar = pL.getByMail(alumnoBuscar);
 			
 		    //response.getWriter().append(request.getParameter("email"));
-			
 			//response.getWriter().append(alumnoBuscar.toString());
-
 			
-			if(alumnoBuscar.getId_persona() == 0) {
+			if(alumnoBuscar.getDni() == null  ) {
 				request.setAttribute("inputEmailError", "false");
 	
 				Persona alumnoNuevo = new Persona();
@@ -61,6 +60,8 @@ public class CrearCuenta extends HttpServlet {
 				alumnoNuevo.setApellido(request.getParameter("apellido"));
 				alumnoNuevo.setContrasenia(request.getParameter("password"));
 				alumnoNuevo.setEmail(request.getParameter("email"));
+				alumnoNuevo.setUsuario(request.getParameter("usuario"));
+				
 				//los nuevos usuarios siempre van a ser alumnos 
 				alumnoNuevo.setRol(1);
 				
@@ -69,11 +70,20 @@ public class CrearCuenta extends HttpServlet {
 				request.getRequestDispatcher("index.html").forward(request, response);
 			}else {
 				request.setAttribute("inputEmailError", "true");
-				
-				
-				request.getRequestDispatcher("WEB-INF/CrearCuenta.jsp").forward(request, response);
+
+				request.setAttribute("mensaje","Ya existe un usuario registrado con el mail introducido.");
+				request.setAttribute("direccion-volver","index.html");
+				request.setAttribute("mensaje-volver", "Intente con otro email");
+		    	request.getRequestDispatcher("WEB-INF/CrearCuenta.jsp").forward(request, response);	
 			}
-		
+		}
+		catch(Exception e)
+		{
+			request.setAttribute("mensaje","No se ha podido registrar nuevo usuario");
+			request.setAttribute("direccion-volver","index.html");
+			request.setAttribute("mensaje-volver", "Volver a la pagina de inicio");
+	    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 			
 	}
 

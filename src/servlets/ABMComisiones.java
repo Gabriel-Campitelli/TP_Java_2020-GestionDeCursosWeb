@@ -53,8 +53,6 @@ public class ABMComisiones extends HttpServlet {
 					comision.setCupo(Integer.parseInt(request.getParameter("cupo")));
 					comision.setHoraInicio(request.getParameter("hora-inicio"));
 					comision.setHoraFin(request.getParameter("hora-fin"));
-	
-					//comL.edit(comision);
 					
 				    if(LocalTime.parse(comision.getHoraInicio()).compareTo(LocalTime.parse(comision.getHoraFin()))<0) {
 				    	comL.edit(comision);
@@ -83,8 +81,6 @@ public class ABMComisiones extends HttpServlet {
 					comision.setHoraInicio(request.getParameter("hora-inicio"));
 					comision.setHoraFin(request.getParameter("hora-fin"));
 				
-					//comL.create(comision);
-					
 				    if(LocalTime.parse(comision.getHoraInicio()).compareTo(LocalTime.parse(comision.getHoraFin()))<0) {
 						comL.create(comision);
 				    }
@@ -102,8 +98,7 @@ public class ABMComisiones extends HttpServlet {
 					request.setAttribute("mensaje-volver", "Volver al Home");
 			    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 				}
-				
-				
+
 				break;		
 				
 			case "eliminar-comision":	
@@ -124,7 +119,8 @@ public class ABMComisiones extends HttpServlet {
 			default:
 				break;
 		}
-		
+//    	request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
 		response.sendRedirect("admin-home?param=admin-comisiones");
    
 	}	

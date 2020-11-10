@@ -16,7 +16,7 @@ public class PersonaLogic {
 		return dp.getAll();
 	}
 	
-	public Persona getByMail(Persona per) {
+	public Persona getByMail(Persona per) throws Exception {
 		Persona pAux = new Persona();
 		
 		per = dp.getByMail(per);
@@ -36,7 +36,7 @@ public class PersonaLogic {
 		return dp.getByUser(per);
 	}
 	
-	public void addPersona(Persona p) {
+	public void addPersona(Persona p) throws Exception{
 		dp.addPersona(p);
 
 	}

@@ -1,7 +1,5 @@
 package entities;
 
-import java.sql.Time;
-
 public class Comision {
 	private int idComision;
 	private int idCurso;

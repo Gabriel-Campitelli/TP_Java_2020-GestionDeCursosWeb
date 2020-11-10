@@ -70,6 +70,8 @@ public class DataCurso {
 					curso.setFecha_fin(rs.getDate("fecha_fin"));
 					curso.setUrl(rs.getString("url_imagen"));
 					curso.setNombre(rs.getString("nombre"));
+					curso.setLikes(rs.getInt("likes"));
+
 				}
 			} catch (SQLException e) {
 				throw e;

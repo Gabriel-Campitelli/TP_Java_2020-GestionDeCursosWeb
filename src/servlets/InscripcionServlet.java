@@ -3,9 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Curso;
 import logic.ComisionLogic;
-import logic.CursoLogic;
 import logic.InscripcionLogic;
 import entities.Inscripcion;
 import entities.Persona;

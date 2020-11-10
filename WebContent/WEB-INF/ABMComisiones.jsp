@@ -328,7 +328,7 @@
             <tr class="d-flex">
               <th class="col-1"  scope="row"><%= comision.getIdComision() %></th>
               
-              <td class="col-3" ><%= curL.getById(comision.getIdCurso()).getNombre()%></td>                    
+              <td class="col-3" ><%= curL.getById(comision.getIdCurso()).getNombre() %></td>                    
               <td class="col-1" ><%= comision.getCupo() %></td>             
               <td class="col-2" ><%= comision.getDiaSemana() %></td>
               <td class="col-1" ><%= comision.getHoraInicio() %></td>

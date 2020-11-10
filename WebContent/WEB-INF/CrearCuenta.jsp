@@ -184,12 +184,12 @@ body {
                     <input type="text" id="inputApellido" name="apellido" class="form-control" placeholder="Inserte apellido" required>
                     <label for="inputApellido">Apellido</label>
                   </div>
-<!-- 
+ 
                   <div class="form-label-group">
                     <input type="text" id="inputUsuario" name="usuario" class="form-control" placeholder="Inserte usuario" required>
                     <label for="inputUsuario">Usuario</label>
                   </div>
-      -->             
+                   
                   <div class="form-label-group">
                     <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Inserte contraseÃ±a" required>
                     <label for="inputPassword">Contraseña</label>

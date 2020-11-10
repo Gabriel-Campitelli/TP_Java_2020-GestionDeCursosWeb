@@ -87,7 +87,7 @@ public class DataPersona {
 		return p;
 	}
 	
-	public Persona getByMail(Persona per) {
+	public Persona getByMail(Persona per) throws Exception{
 		Persona p=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -109,36 +109,36 @@ public class DataPersona {
 				
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
 		return p;
 	}
 	
-	public void addPersona(Persona p) {
+	public void addPersona(Persona p) throws Exception{
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into gestion_cursos.personas(dni, nombre, apellido , contrasenia, rol, email) values(?,?,?,?,?,?)"
-							, PreparedStatement.RETURN_GENERATED_KEYS
-							);
+							"insert into personas(dni, nombre, apellido , contrasenia, rol, email, usuario) values(?,?,?,?,?,?,?)"
+							, PreparedStatement.RETURN_GENERATED_KEYS);
+			
 			stmt.setString(1, p.getDni());
 			stmt.setString(2, p.getNombre());
 			stmt.setString(3, p.getApellido());
-			//stmt.setString(4, p.getUsuario());
 			stmt.setString(4, p.getContrasenia());
 			stmt.setInt(5, p.getRol());
 			stmt.setString(6, p.getEmail());
+			stmt.setString(7, p.getUsuario());
 
 			stmt.executeUpdate();
 
@@ -149,14 +149,14 @@ public class DataPersona {
 
 			
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
     }

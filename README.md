@@ -38,7 +38,7 @@ Contraseña: usuario
 
 
 ## Casos de uso
-Dirigirse a la documentación [Documentación]https://github.com/Gabriel-Campitelli/TP_Java_2020-GestionDeCursosWeb/blob/master/Documentacion/Trabajo%20Práctico%20Integrador%20Java%20-%20Sistema%20de%20Gestión%20de%20Cursos%20-%20Campitelli%20-%20Moreyra.pdf) para detalles de los casos de uso.
+Dirigirse a la documentación [Documentación](https://github.com/Gabriel-Campitelli/TP_Java_2020-GestionDeCursosWeb/blob/master/Documentacion/Trabajo%20Práctico%20Integrador%20Java%20-%20Sistema%20de%20Gestión%20de%20Cursos%20-%20Campitelli%20-%20Moreyra.pdf) para detalles de los casos de uso.
 
 
 ## Autores ✒️
